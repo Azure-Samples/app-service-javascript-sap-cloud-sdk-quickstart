@@ -36,9 +36,9 @@ Use SAP's [public demo system ES5](https://developers.sap.com/tutorials/gateway-
 There are multiple ways to deploy this project to Azure. In this example we use the [Azure App Service extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice) for VS Code to deploy the project. Learn more about [this process on Microsoft learn](https://learn.microsoft.com/training/modules/create-publish-webapp-app-service-vs-code/5-exercise-publish-app-azure-app-service-vs-code?pivots=nodeexpress)
 
 1. Create an Azure App Service with Node.js 18 LTS and Linux using the [VS Code extension for Azure](https://code.visualstudio.com/docs/azure/extensions) or use below button
-2. Deploy to Web App from VS Code (right click in the explorer on the project folder and select "Deploy to Web App...")
-3. Browse your new app powered by the SAP Cloud SDK (it takes a while the first time)
-4. Maintain environment variables in the Azure App Service configuration
+2. Maintain environment variables in the [Azure App Service configuration](https://learn.microsoft.com/azure/app-service/configure-common?tabs=portal#configure-app-settings)
+3. Deploy to Web App from VS Code (right click in the explorer on the project folder and select "Deploy to Web App...")
+4. Browse your new app powered by the SAP Cloud SDK (it takes a while the first time)
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fapp-service-javascript-sap-cloud-sdk-quickstart%2Fmain%2Ftemplates%2Fazuredeploy.json)
 

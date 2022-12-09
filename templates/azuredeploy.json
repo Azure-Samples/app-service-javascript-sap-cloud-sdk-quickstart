@@ -11,7 +11,7 @@
     "parameters": {
       "webAppName": {
         "type": "string",
-        "defaultValue": "AzureLinuxApp",
+        "defaultValue": "[concat('app-service-sap-cloud-sdk', uniqueString(resourceGroup().id),0,6))]",
         "minLength": 2,
         "metadata": {
           "description": "Base name of the resource such as web app name and app service plan "
@@ -19,14 +19,14 @@
       },
       "sku": {
         "type": "string",
-        "defaultValue": "S1",
+        "defaultValue": "FREE",
         "metadata": {
           "description": "The SKU of App Service Plan "
         }
       },
       "linuxFxVersion": {
         "type": "string",
-        "defaultValue": "php|7.4",
+        "defaultValue": "NODE|18-lts",
         "metadata": {
           "description": "The Runtime stack of current web app"
         }
@@ -77,6 +77,22 @@
         "dependsOn": [
           "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]"
         ]
+      },
+      {
+        "name": "appsettings",
+        "type": "config",
+        "apiVersion": "2016-06-01",
+        "dependsOn": [
+          "[resourceId('Microsoft.Web/sites', variables('webSiteName'))]"
+        ],
+        "tags": {
+          "displayName": "appsettings"
+        },
+        "properties": {
+          "ODATAURL": "https://your-sap-odata-business-partner-service-url",
+          "ODATAUSERNAME": "user",
+          "ODATAUSERPWD": "pwd"
+        }
       }
     ]
   }
