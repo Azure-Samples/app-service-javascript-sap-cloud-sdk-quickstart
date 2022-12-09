@@ -6,6 +6,7 @@ Example project showcasing [SAP Cloud SDK for JavaScript](https://sap.github.io/
 
 This project enables the feature scope of SAP's Cloud SDK for JavaScript with Azure PaaS apps.
 
+> **Note**
 > When deployed on Azure App Services instead of SAP Business Technology Platform, Cloud Foundry specific features like the destination service or xsuaa are not available.
 
 * OData v2 and v4 + entity and client generator
@@ -19,6 +20,7 @@ Follow the [SAP Cloud SDK documentation for JavaScript](https://sap.github.io/cl
 
 Use SAP's [public demo system ES5](https://developers.sap.com/tutorials/gateway-demo-signup.html), [SAP's mock server](https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html) or your own SAP system.
 
+> **Note**
 > Be aware that SAP's mock server is anticipating the S4 Cloud version of the Business Partner API. So, you need to adapt the mock server to your needs.
 
 ### Quickstart
