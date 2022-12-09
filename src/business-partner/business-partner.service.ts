@@ -17,9 +17,9 @@ export class BusinessPartnerService {
         .getAll()
         //.addCustomHeaders({ APIKey: '<YOUR-API-KEY>' })
         .execute({
-          url: (process.env.ODATAURL || this.configService.get<string>('URL')),//MOCKURL
-          username: (process.env.ODATAUSERNAME || this.configService.get<string>('ODATAUSERNAME')),
-          password: (process.env.ODATAUSERPWD || this.configService.get<string>('ODATAUSERPWD'))
+          url: (process.env.ODATA_URL || this.configService.get<string>('URL')),//MOCKURL
+          username: (process.env.ODATA_USERNAME || this.configService.get<string>('ODATA_USERNAME')),
+          password: (process.env.ODATA_USERPWD || this.configService.get<string>('ODATA_USERPWD'))
         });
   }
 }

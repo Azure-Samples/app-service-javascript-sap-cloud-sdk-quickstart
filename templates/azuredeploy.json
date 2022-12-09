@@ -11,7 +11,7 @@
     "parameters": {
       "webAppName": {
         "type": "string",
-        "defaultValue": "[concat('app-service-sap-cloud-sdk', uniqueString(resourceGroup().id),0,6))]",
+        "defaultValue": "[concat('app-service-sap-cloud-sdk', substring(uniqueString(resourceGroup().id),0,6))]",
         "minLength": 2,
         "metadata": {
           "description": "Base name of the resource such as web app name and app service plan "
@@ -67,7 +67,20 @@
           "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]",
           "siteConfig": {
             "linuxFxVersion": "[parameters('linuxFxVersion')]",
-            "ftpsState": "FtpsOnly"
+            "ftpsState": "FtpsOnly",
+            "appSettings": [
+              {
+                "name": "ODATA_URL",
+                "value": "https://"
+              },
+              {
+                "name": "ODATA_USERNAME",
+                "value": "user"
+              },
+              {
+                "name": "ODATA_USERPWD",
+                "value": "pwd"
+              }]
           },
           "httpsOnly": true
         },
@@ -77,22 +90,6 @@
         "dependsOn": [
           "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]"
         ]
-      },
-      {
-        "name": "appsettings",
-        "type": "config",
-        "apiVersion": "2016-06-01",
-        "dependsOn": [
-          "[resourceId('Microsoft.Web/sites', variables('webSiteName'))]"
-        ],
-        "tags": {
-          "displayName": "appsettings"
-        },
-        "properties": {
-          "ODATAURL": "https://your-sap-odata-business-partner-service-url",
-          "ODATAUSERNAME": "user",
-          "ODATAUSERPWD": "pwd"
-        }
       }
     ]
   }
