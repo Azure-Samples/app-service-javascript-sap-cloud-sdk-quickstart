@@ -40,7 +40,7 @@ There are multiple ways to deploy this project to Azure. In this example we use 
 3. Browse your new app powered by the SAP Cloud SDK (it takes a while the first time)
 4. Maintain environment variables in the Azure App Service configuration
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://raw.githubusercontent.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart/main/templates/azuredeploy.json?token=GHSAT0AAAAAABZIKK7TGQ6LUMCIMGOAYE6KY4TDXLQ)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fapp-service-javascript-sap-cloud-sdk-quickstart%2Fmain%2Ftemplates%2Fazuredeploy.json)
 
 ## Resources
 
