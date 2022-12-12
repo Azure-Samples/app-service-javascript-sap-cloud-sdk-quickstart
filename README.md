@@ -27,7 +27,7 @@ Use SAP's [public demo system ES5](https://developers.sap.com/tutorials/gateway-
 > **Note**
 > Be aware that SAP's mock server is anticipating the S4 Cloud version of the Business Partner API. So, you need to adapt the mock server to your needs.
 
-Use GitHub Codespaces to hit the ground running with our tailored image and avoid installing anything on your local machine.
+Use GitHub Codespaces to hit the ground running with our tailored image and avoid installing anything on your local machine. Configure [port forwarding](https://docs.github.com/codespaces/developing-in-codespaces/forwarding-ports-in-your-codespace) to access the app from your local machine.
 
 ### Quickstart 🚀
 
