@@ -4,7 +4,6 @@
 	"name": "Node.js & TypeScript",
 	"image": "mcr.microsoft.com/devcontainers/typescript-node:0-18",
 	"features": {
-		"ghcr.io/devcontainers/features/azure-cli:1": {},
 		"ghcr.io/devcontainers-contrib/features/nestjs-cli:1": {}
 	},
 
