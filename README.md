@@ -1,8 +1,8 @@
-# SAP Cloud SDK on Azure App Service Quickstart
+# SAP Cloud SDK on Azure App Service Quickstart 🚀
 
 Example project showcasing [SAP Cloud SDK for JavaScript](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction) OData consumption running on Azure App Services. It uses the [Business Partner OData API](https://api.sap.com/api/OP_API_BUSINESS_PARTNER_SRV/overview) for SAP S4 as an example.
 
-## Features
+## Features ⚙️
 
 Implementations using the approach described by this repos expand the feature scope of SAP's Cloud SDK for JavaScript to Azure PaaS apps.
 
@@ -16,7 +16,7 @@ Implementations using the approach described by this repos expand the feature sc
 * OData v2 and v4 + entity and client generator managed by SAP
 * OpenAPI + client generator managed by SAP
 
-## Getting Started
+## Getting Started 🛫
 
 ### Prerequisites & Installation
 
@@ -27,7 +27,7 @@ Use SAP's [public demo system ES5](https://developers.sap.com/tutorials/gateway-
 > **Note**
 > Be aware that SAP's mock server is anticipating the S4 Cloud version of the Business Partner API. So, you need to adapt the mock server to your needs.
 
-### Quickstart
+### Quickstart 🚀
 
 0. Familiarize yourself with the [SAP Cloud SDK for JavaScript developer tutorial](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction)
 1. git clone [repository clone url](https://github.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart.git)
@@ -56,7 +56,7 @@ Use SAP's [public demo system ES5](https://developers.sap.com/tutorials/gateway-
 
 Congratulations🥳, you have successfully consumed SAP OData with the SAP Cloud SDK for JavaScript running on Azure App Service!
 
-## Deploy to Azure
+## Deploy to Azure 🪂
 
 There are multiple ways to deploy this project to Azure. In this example we use the [Azure App Service extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice) for VS Code to deploy the project. Learn more about [this process on Microsoft learn](https://learn.microsoft.com/training/modules/create-publish-webapp-app-service-vs-code/5-exercise-publish-app-azure-app-service-vs-code?pivots=nodeexpress)
 
@@ -67,13 +67,13 @@ There are multiple ways to deploy this project to Azure. In this example we use 
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fapp-service-javascript-sap-cloud-sdk-quickstart%2Fmain%2Ftemplates%2Fazuredeploy.json)
 
-## Authentication with Azure AD
+## Authentication with Azure AD 🔐
 
 [Configure](https://learn.microsoft.com/azure/app-service/configure-authentication-provider-aad) your App Service or Azure Functions app to use Azure AD login.
 
 Consider SAP Principal Propagation for your authentication scenario. [Learn more](https://learn.microsoft.com/azure/api-management/sap-api#production-considerations)
 
-## Connectivity to SAP backends and secure virtual network access
+## Connectivity to SAP backends and secure virtual network access 🔌
 
 SAP backends on Azure typically run in fully isolated virtual networks. There are multiple ways to connect to them. Most popular ones are:
 
@@ -83,12 +83,12 @@ SAP backends on Azure typically run in fully isolated virtual networks. There ar
 
 VNet integration enables your app to securely access resources in your VNet, such as your SAP Gateway, but doesn't block public access to your App Service. To achieve full private connectivity for the app service too, look into private endpoints.
 
-## DevOps
+## DevOps 👩🏾‍💻
 
 * Consider activating GitHub Actions for your Azure project for out-of-the-box integrated CI/CD flows. [Learn more](https://docs.microsoft.com/azure/app-service/deploy-github-actions?tabs=applevel)
 * Explore cloud-native zero-downtime deployment styles like "[blue-green](https://learn.microsoft.com/azure/architecture/example-scenario/blue-green-spring/blue-green-spring)" with Azure App Service deployment slots. [Learn more](https://docs.microsoft.com/azure/app-service/deploy-staging-slots)
 
-## Troubleshooting
+## Troubleshooting 🩺
 
 * [Access SAP Gateway logs in /IWFND/ERROR_LOG](https://wiki.scn.sap.com/wiki/display/ABAPConn/SAP+Gateway+Error+Log)
 * [Azure App Service diagnostics](https://docs.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
