@@ -15,7 +15,15 @@
 	 "forwardPorts": [8080],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "npm install"
+	"postCreateCommand": "npm install",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-azuretools.vscode-azureappservice",
+				"ms-vscode.vscode-node-azure-pack"
+			]
+		}
+	}
 
 	// Configure tool-specific properties.
 	// "customizations": {},
