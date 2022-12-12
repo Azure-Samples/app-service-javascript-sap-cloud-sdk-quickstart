@@ -27,6 +27,8 @@ Use SAP's [public demo system ES5](https://developers.sap.com/tutorials/gateway-
 > **Note**
 > Be aware that SAP's mock server is anticipating the S4 Cloud version of the Business Partner API. So, you need to adapt the mock server to your needs.
 
+Use GitHub Codespaces to hit the ground running with our tailored image and avoid installing anything on your local machine.
+
 ### Quickstart 🚀
 
 0. Familiarize yourself with the [SAP Cloud SDK for JavaScript developer tutorial](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction)
