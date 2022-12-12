@@ -1,5 +1,7 @@
 # SAP Cloud SDK on Azure App Service Quickstart 🚀
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=576207479)
+
 Example project showcasing [SAP Cloud SDK for JavaScript](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction) OData consumption running on Azure App Services. It uses the [Business Partner OData API](https://api.sap.com/api/OP_API_BUSINESS_PARTNER_SRV/overview) for SAP S4 as an example.
 
 ## Features ⚙️
@@ -27,7 +29,7 @@ Use SAP's [public demo system ES5](https://developers.sap.com/tutorials/gateway-
 > **Note**
 > Be aware that SAP's mock server is anticipating the S4 Cloud version of the Business Partner API. So, you need to adapt the mock server to your needs.
 
-Use GitHub Codespaces to hit the ground running with our tailored image and avoid installing anything on your local machine. Configure [port forwarding](https://docs.github.com/codespaces/developing-in-codespaces/forwarding-ports-in-your-codespace) to access the app from your local machine.
+Use [![GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=576207479) to hit the ground running with our tailored image and avoid installing anything on your local machine.
 
 ### Quickstart 🚀
 
