@@ -1,16 +1,20 @@
-# Project Name
+# SAP Cloud SDK on Azure App Service Quickstart
 
 Example project showcasing [SAP Cloud SDK for JavaScript](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction) OData consumption running on Azure App Services. It uses the [Business Partner OData API](https://api.sap.com/api/OP_API_BUSINESS_PARTNER_SRV/overview) for SAP S4 as an example.
 
 ## Features
 
-This project enables the feature scope of SAP's Cloud SDK for JavaScript with Azure PaaS apps.
+Implementations using the approach described by this repos expand the feature scope of SAP's Cloud SDK for JavaScript to Azure PaaS apps.
 
 > **Note**
 > When deployed on Azure App Services instead of SAP Business Technology Platform, Cloud Foundry specific features like the destination service or xsuaa are not available.
 
-* OData v2 and v4 + entity and client generator
-* OpenAPI + client generator
+* One code base to run on both Azure App Service and SAP Business Technology Platform
+* Native Azure authentication with Azure AD without any coding effort
+* Native Azure virtual network integration next to the SAP workload
+* Enabled for SAP Private Link and Azure Private Link (depending on wether you use the SAP Business Technology Platform or Azure only)
+* OData v2 and v4 + entity and client generator managed by SAP
+* OpenAPI + client generator managed by SAP
 
 ## Getting Started
 
