@@ -29,7 +29,7 @@ Use SAP's [public demo system ES5](https://developers.sap.com/tutorials/gateway-
 > **Note**
 > Be aware that SAP's mock server is anticipating the S4 Cloud version of the Business Partner API. So, you need to adapt the mock server to your needs.
 
-Use [![GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=576207479) to hit the ground running with our tailored image and avoid installing anything on your local machine.
+[![GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=576207479) to hit the ground running with our tailored image and avoid installing anything on your local machine and continue with step 6.
 
 ### Quickstart 🚀
 
@@ -39,7 +39,7 @@ Use [![GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://gith
 3. `npm install`
 4. `npm run start:dev`
 5. browse to [http://localhost:8080](http://localhost:8080) for your hello world
-6. maintain your SAP OData url with credentials in `.env` file and restart the app if necessary
+6. maintain your SAP OData url with credentials in [.env](templates/.env) file (put in project root) and restart the app if necessary
 7. browse to [http://localhost:8080/business-partners](http://localhost:8080/business-partners) for your first OData call and pick one of the business partners that have no address
 
 > **Note**
