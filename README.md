@@ -25,13 +25,32 @@ Use SAP's [public demo system ES5](https://developers.sap.com/tutorials/gateway-
 
 ### Quickstart
 
+0. Familiarize yourself with the [SAP Cloud SDK for JavaScript developer tutorial](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction)
 1. git clone [repository clone url](https://github.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart.git)
 2. cd app-service-javascript-sap-cloud-sdk-quickstart
 3. npm install
 4. npm run start:dev
 5. browse to [http://localhost:8080](http://localhost:8080) for your hello world
 6. maintain your SAP OData url with credentials in `.env` file and restart the app if necessary
-7. browse to [http://localhost:8080/business-partners](http://localhost:8080/business-partners) for your first OData call
+7. browse to [http://localhost:8080/business-partners](http://localhost:8080/business-partners) for your first OData call and pick one of the business partners that have no address
+
+> **Note**
+> SAP's examples for the business partner API for S4 Cloud mentioned in the tutorial **differ** to the S4 on-premises flavor. Add AddressUsage, otherwise you will see "Internal error when calling operation module BUA_CHECK_ADDRESS_VALIDITY_ALL; a check table is missing". Check SAP KBA's for more details.
+
+8. get that business partner by id: [http://localhost:8080/business-partners/1000020](http://localhost:8080/business-partners/1000020)
+9. add an address to your chosen business partner: [http://localhost:8080/business-partners/1000020/address](http://localhost:8080/business-partners/1000020/address)
+
+![screenshot of successful business partner address creation with request details](img/bupa-create-postman.png)
+
+10. update the address with a house number: [http://localhost:8080/business-partner/1000092/address/33678](http://localhost:8080/business-partner/1000092/address/33678)
+
+![screenshot of business partner address update with request details](img/bupa-update-postman.png)
+
+11. delete the address: [http://localhost:8080/business-partner/1000092/address/33678](http://localhost:8080/business-partner/1000092/address/33678)
+
+![screenshot of business partner address delete](img/bupa-delete-postman.png)
+
+Congratulations🥳, you have successfully consumed SAP OData with the SAP Cloud SDK for JavaScript running on Azure App Service!
 
 ## Deploy to Azure
 
@@ -44,8 +63,25 @@ There are multiple ways to deploy this project to Azure. In this example we use 
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fapp-service-javascript-sap-cloud-sdk-quickstart%2Fmain%2Ftemplates%2Fazuredeploy.json)
 
+## Authentication with Azure AD
+
+[Configure](https://learn.microsoft.com/azure/app-service/configure-authentication-provider-aad) your App Service or Azure Functions app to use Azure AD login.
+
+Consider SAP Principal Propagation for your authentication scenario. [Learn more](https://learn.microsoft.com/azure/api-management/sap-api#production-considerations)
+
+## Connectivity to SAP backends and secure virtual network access
+
+SAP backends on Azure typically run in fully isolated virtual networks. There are multiple ways to connect to them. Most popular ones are:
+
+* Integrate your App Service with an Azure virtual network (VNet). [Learn more](https://learn.microsoft.com/azure/app-service/configure-vnet-integration-enable).
+* Private Endpoints for Azure App Service. [Learn more](https://learn.microsoft.com/azure/app-service/networking/private-endpoint?source=recommendations)
+
+VNet integration enables your app to securely access resources in your VNet, such as your SAP Gateway, but doesn't block public access to your App Service. To achieve full private connectivity for the app service too, look into private endpoints.
+
 ## Resources
 
 * [SAP Cloud SDK documentation for JavaScript](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction)
 
 * [.NET speaks OData too – how to implement Azure App Service with SAP Gateway](https://github.com/MartinPankraz/AzureSAPODataReader)
+
+* [Azure API Management policy for SAP Principal Propagation](https://github.com/Azure/api-management-policy-snippets/blob/master/examples/Request%20OAuth2%20access%20token%20from%20SAP%20using%20AAD%20JWT%20token.xml)
