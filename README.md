@@ -32,8 +32,8 @@ Use SAP's [public demo system ES5](https://developers.sap.com/tutorials/gateway-
 0. Familiarize yourself with the [SAP Cloud SDK for JavaScript developer tutorial](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction)
 1. git clone [repository clone url](https://github.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart.git)
 2. cd app-service-javascript-sap-cloud-sdk-quickstart
-3. npm install
-4. npm run start:dev
+3. `npm install`
+4. `npm run start:dev`
 5. browse to [http://localhost:8080](http://localhost:8080) for your hello world
 6. maintain your SAP OData url with credentials in `.env` file and restart the app if necessary
 7. browse to [http://localhost:8080/business-partners](http://localhost:8080/business-partners) for your first OData call and pick one of the business partners that have no address
