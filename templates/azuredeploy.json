@@ -11,7 +11,7 @@
     "parameters": {
       "webAppName": {
         "type": "string",
-        "defaultValue": "[concat('app-service-sap-cloud-sdk', substring(uniqueString(resourceGroup().id),0,6))]",
+        "defaultValue": "[concat('sap-cloud-sdk-', substring(uniqueString(resourceGroup().id),0,6))]",
         "minLength": 2,
         "metadata": {
           "description": "Base name of the resource such as web app name and app service plan "
