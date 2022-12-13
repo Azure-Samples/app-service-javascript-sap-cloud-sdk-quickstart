@@ -86,7 +86,7 @@ There are multiple ways to deploy this project to Azure. In this example we use 
 
 [Configure](https://learn.microsoft.com/azure/app-service/configure-authentication-provider-aad) your App Service or Azure Functions app to use Azure AD login. Use standard variable `X-MS-TOKEN-AAD-ACCESS-TOKEN` to retrieve the access token from the request header. [Learn more](https://learn.microsoft.com/azure/app-service/configure-authentication-oauth-tokens#retrieve-tokens-in-app-code)
 
-Consider SAP Principal Propagation for your authentication scenario. [Learn more](https://learn.microsoft.com/azure/api-management/sap-api#production-considerations)
+Consider SAP Principal Propagation for your authentication scenario handled by [Azure API Management](https://learn.microsoft.com/azure/api-management/sap-api#production-considerations). [Learn more](https://github.com/Azure/api-management-policy-snippets/blob/master/examples/Request%20OAuth2%20access%20token%20from%20SAP%20using%20AAD%20JWT%20token.xml)
 
 ## Connectivity to SAP backends and secure virtual network access 🔌
 
