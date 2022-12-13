@@ -27,10 +27,15 @@ Implementations using the approach described by this repos expand the [feature s
 
 Follow the [SAP Cloud SDK documentation for JavaScript](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction) for your project setup.
 
-Use SAP's [public demo system ES5](https://developers.sap.com/tutorials/gateway-demo-signup.html), [SAP's mock server](https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html) or your own SAP system.
+Use either
+
+* SAP's [mock server](https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html),
+* SAP's [public demo system ES5](https://developers.sap.com/tutorials/gateway-demo-signup.html),
+* [SAP Cloud Appliance Library](https://cal.sap.com/) or
+* your own available SAP system.
 
 > **Note**
-> Be aware that SAP's mock server is anticipating the S4 Cloud version of the Business Partner API. So, you need to adapt the mock server to your needs.
+> Be aware that SAP's mock server is anticipating the S4 Cloud version of the Business Partner API. So, you might need to adapt the mock server to your needs. During our testing at the time of release there were no discrepancies discovered.
 
 [![GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=576207479) to hit the ground running with our tailored image and avoid installing anything on your local machine and continue with step 6.
 
@@ -41,25 +46,28 @@ Use SAP's [public demo system ES5](https://developers.sap.com/tutorials/gateway-
 2. cd app-service-javascript-sap-cloud-sdk-quickstart
 3. `npm install`
 4. `npm run start:dev`
-5. browse to [http://localhost:8080](http://localhost:8080) for your hello world
+5. browse to [http://localhost:8080](http://localhost:8080) for your "hello world"
 6. maintain your SAP OData url with credentials in [.env](templates/.env) file (put in project root) and restart the app if necessary
-7. browse to [http://localhost:8080/business-partners](http://localhost:8080/business-partners) for your first OData call and pick one of the business partners that have no address
+7. browse to [http://localhost:8080/business-partner](http://localhost:8080/business-partner) for your first OData call and pick one of the business partners (examples below use ids from SAP mock server)
 
 > **Note**
 > SAP's examples for the business partner API for S4 Cloud mentioned in the tutorial **differ** to the S4 on-premises flavor. Add AddressUsage, otherwise you will see "Internal error when calling operation module BUA_CHECK_ADDRESS_VALIDITY_ALL; a check table is missing". Check SAP KBA's for more details.
 
-8. get that business partner by id: [http://localhost:8080/business-partners/1000020](http://localhost:8080/business-partners/1000020)
-9. add an address to your chosen business partner: [http://localhost:8080/business-partners/1000020/address](http://localhost:8080/business-partners/1000020/address)
+8. get that business partner by id: [http://localhost:8080/business-partner/1003764](http://localhost:8080/business-partner/1003764)
 
-![screenshot of successful business partner address creation with request details](img/bupa-create-postman.png)
+![screenshot of successful business partner retrieval by id](img/bupa-get-postman.png)
 
-10. update the address with a house number: [http://localhost:8080/business-partner/1000092/address/33678](http://localhost:8080/business-partner/1000092/address/33678)
+9. update the address with a house number: [http://localhost:8080/business-partner/1003764/address/28238](http://localhost:8080/business-partner/1003764/address/28238)
 
 ![screenshot of business partner address update with request details](img/bupa-update-postman.png)
 
-11. delete the address: [http://localhost:8080/business-partner/1000092/address/33678](http://localhost:8080/business-partner/1000092/address/33678)
+10. delete the address: [http://localhost:8080/business-partner/1003764/address/28238](http://localhost:8080/business-partner/1003764/address/28238)
 
 ![screenshot of business partner address delete](img/bupa-delete-postman.png)
+
+11. add an address to your chosen business partner: [http://localhost:8080/business-partner/1003764/address](http://localhost:8080/business-partner/1003764/address)
+
+![screenshot of successful business partner address creation with request details](img/bupa-create-postman.png)
 
 Congratulations🥳, you have successfully consumed SAP OData with the SAP Cloud SDK for JavaScript running on Azure App Service!
 
@@ -99,7 +107,7 @@ VNet integration enables your app to securely access resources in your VNet, suc
 
 * [Access SAP Gateway logs in /IWFND/ERROR_LOG](https://wiki.scn.sap.com/wiki/display/ABAPConn/SAP+Gateway+Error+Log)
 * [Azure App Service diagnostics](https://docs.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
-* Use Kudu SSH console from VNet integrated App Service to check connectivity to SAP Gateway with `curl https://<your domain>:<your https port>/sap/opu/odata/sap/API_BUSINESS_PARTNER -u "<user>:<password>"`
+* Use [Kudu SSH console](https://learn.microsoft.com/azure/app-service/resources-kudu) from VNet integrated App Service to check connectivity to SAP Gateway with `curl https://<your domain>:<your https port>/sap/opu/odata/sap/API_BUSINESS_PARTNER -u "<user>:<password>"`
 * [Azure API Management Request tracing](https://learn.microsoft.com/azure/api-management/api-management-howto-api-inspector)
 * [Azure API Management Gateway logs](https://learn.microsoft.com/azure/api-management/api-management-howto-use-azure-monitor#view-diagnostic-data-in-azure-monitor)
 
