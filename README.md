@@ -4,17 +4,20 @@
 
 Example project showcasing [SAP Cloud SDK for JavaScript](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction) OData consumption running on Azure App Services. It uses the [Business Partner OData API](https://api.sap.com/api/OP_API_BUSINESS_PARTNER_SRV/overview) for SAP S4 as an example.
 
+See [SAP open-source license](https://sap.github.io/cloud-sdk/docs/overview/overview-cloud-sdk#license) for this SDK for your reference.
+
 ## Features ⚙️
 
-Implementations using the approach described by this repos expand the feature scope of SAP's Cloud SDK for JavaScript to Azure PaaS apps.
+Implementations using the approach described by this repos expand the [feature scope](https://sap.github.io/cloud-sdk/docs/overview/cloud-sdk-feature-matrix) of SAP's Cloud SDK for JavaScript to Azure PaaS apps.
 
 > **Note**
 > When deployed on Azure App Services instead of SAP Business Technology Platform, Cloud Foundry specific features like the destination service or xsuaa are not available.
 
 * One code base to run on both Azure App Service and SAP Business Technology Platform
-* Native Azure authentication with Azure AD without any coding effort
-* Native Azure virtual network integration next to the SAP workload
-* Enabled for SAP Private Link and Azure Private Link (depending on wether you use the SAP Business Technology Platform or Azure only)
+* Built in [resiliency](https://learn.microsoft.com/azure/architecture/reference-architectures/app-service-web-app/multi-region) and [caching patterns](https://learn.microsoft.com/azure/architecture/reference-architectures/app-service-web-app/scalable-web-app)
+* Native [Azure authentication and token handling](https://learn.microsoft.com/azure/app-service/configure-authentication-provider-aad) with Azure AD without any coding effort
+* Native [Azure virtual network integration](https://learn.microsoft.com/azure/app-service/configure-vnet-integration-enable) next to the SAP workload
+* Enabled for [SAP Private Link](https://help.sap.com/docs/PRIVATE_LINK/42acd88cb4134ba2a7d3e0e62c9fe6cf/e9cc67716a3a41c9885862661e6c4234.html) and [Azure Private Link / Private Endpoint](https://learn.microsoft.com/azure/app-service/networking/private-endpoint?source=recommendations) (depending on wether you use the SAP Business Technology Platform or Azure only)
 * OData v2 and v4 + entity and client generator managed by SAP
 * OpenAPI + client generator managed by SAP
 
@@ -104,6 +107,24 @@ VNet integration enables your app to securely access resources in your VNet, suc
 
 * [SAP Cloud SDK documentation for JavaScript](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction)
 
+* [SAP Cloud SDK repos for JavaScript](https://github.com/SAP/cloud-sdk-js)
+
+* [SAP Cloud SDK for JavaScript API documentation](https://sap.github.io/cloud-sdk/api/2.10.0/)
+
 * [.NET speaks OData too – how to implement Azure App Service with SAP Gateway](https://github.com/MartinPankraz/AzureSAPODataReader)
 
 * [Azure API Management policy for SAP Principal Propagation](https://github.com/Azure/api-management-policy-snippets/blob/master/examples/Request%20OAuth2%20access%20token%20from%20SAP%20using%20AAD%20JWT%20token.xml)
+
+## Contributing 👩🏼‍🤝‍👨🏽
+
+This project welcomes contributions and suggestions. Please use [GitHub Issues](https://github.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart/issues) to report errors or request new features. For conceptual conversations, please use [GitHub Discussions](https://github.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart/discussions/categories/ideas)
+
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
+contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+## Trademarks™
+
+This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft trademarks or logos is subject to and must follow [Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/legal/intellectualproperty/trademarks/usage/general).
+Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
+Any use of third-party trademarks or logos are subject to those third-party's policies.
