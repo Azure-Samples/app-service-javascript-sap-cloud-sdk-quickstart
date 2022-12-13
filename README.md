@@ -57,7 +57,7 @@ Use either
 
 ![screenshot of successful business partner retrieval by id](img/bupa-get-postman.png)
 
-9. update the address with a house number: [http://localhost:8080/business-partner/1003764/address/28238](http://localhost:8080/business-partner/1003764/address/28238)
+9. update the address with a house number: [http://localhost:8080/business-partner/1003764/address/28238](http://localhost:8080/business-partner/1003764/address/28238). For your convenience I left a [Postman collection](templates/SAP-Cloud-SDK-on-Azure-App-Service-Quickstart.postman_collection.json) with the requests in the repository.
 
 ![screenshot of business partner address update with request details](img/bupa-update-postman.png)
 
