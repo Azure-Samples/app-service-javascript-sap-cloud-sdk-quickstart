@@ -14,27 +14,34 @@ export class BusinessPartnerService {
    * Gets a list of all business partners.
    * @returns List of business partner.
    */
-  async getAllBusinessPartners(): Promise<BusinessPartner[]> {
-    return await businessPartnerApi
-        .requestBuilder()
-        .getAll()
-        .select(
-          businessPartnerApi.schema.BUSINESS_PARTNER,
-          businessPartnerApi.schema.FIRST_NAME,
-          businessPartnerApi.schema.LAST_NAME,
-          businessPartnerApi.schema.TO_BUSINESS_PARTNER_ADDRESS.select(
-            businessPartnerAddressApi.schema.BUSINESS_PARTNER,
-            businessPartnerAddressApi.schema.ADDRESS_ID
-          )
-        )
-        .top(10)
-        .filter(businessPartnerApi.schema.BUSINESS_PARTNER_CATEGORY.equals('1'))
-        //.addCustomHeaders({ APIKey: '<YOUR-API-KEY>' })
-        .execute({
-          url: (process.env.ODATA_URL),//MOCKURL
-          username: (process.env.ODATA_USERNAME),
-          password: (process.env.ODATA_USERPWD)
-        });
+  async getAllBusinessPartners(token: string): Promise<BusinessPartner[]> {
+    var config;
+          
+    var req = businessPartnerApi
+                .requestBuilder()
+                .getAll()
+                .select(
+                  businessPartnerApi.schema.BUSINESS_PARTNER,
+                  businessPartnerApi.schema.FIRST_NAME,
+                  businessPartnerApi.schema.LAST_NAME,
+                  businessPartnerApi.schema.TO_BUSINESS_PARTNER_ADDRESS.select(
+                    businessPartnerAddressApi.schema.BUSINESS_PARTNER,
+                    businessPartnerAddressApi.schema.ADDRESS_ID
+                  )
+                )
+                .top(10)
+                .filter(businessPartnerApi.schema.BUSINESS_PARTNER_CATEGORY.equals('1'));
+                //in case AAD token is available
+    if(token){
+      req.addCustomHeaders({ Authorization: 'Bearer ' + token });
+      //in case AAD token is available
+      config = {url: (process.env.ODATA_URL)};
+    }else{
+      //in case basic auth shall be used
+      config = {url: (process.env.ODATA_URL),username: (process.env.ODATA_USERNAME),password: (process.env.ODATA_USERPWD)};
+    }
+    
+    return await req.execute(config);
   }
 
   /**
@@ -60,7 +67,7 @@ export class BusinessPartnerService {
         )
       )
       .execute({
-        url: (process.env.ODATA_URL),//MOCKURL
+        url: (process.env.ODATA_URL),
         username: (process.env.ODATA_USERNAME),
         password: (process.env.ODATA_USERPWD)
       });
@@ -84,7 +91,7 @@ export class BusinessPartnerService {
       .requestBuilder()
       .create(businessPartnerAddress)
       .execute({
-        url: (process.env.ODATA_URL),//MOCKURL
+        url: (process.env.ODATA_URL),
         username: (process.env.ODATA_USERNAME),
         password: (process.env.ODATA_USERPWD)
       });
@@ -110,7 +117,7 @@ export class BusinessPartnerService {
       .requestBuilder()
       .update(businessPartnerAddress)
       .execute({
-        url: (process.env.ODATA_URL),//MOCKURL
+        url: (process.env.ODATA_URL),
         username: (process.env.ODATA_USERNAME),
         password: (process.env.ODATA_USERPWD)
       });
@@ -127,7 +134,7 @@ export class BusinessPartnerService {
       .requestBuilder()
       .delete(businessPartner, addressId)
       .execute({
-        url: (process.env.ODATA_URL),//MOCKURL
+        url: (process.env.ODATA_URL),
         username: (process.env.ODATA_USERNAME),
         password: (process.env.ODATA_USERPWD)
       });

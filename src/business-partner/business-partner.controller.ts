@@ -1,5 +1,5 @@
 import {
-  Controller, Body, Get, HttpException, Param, Delete, HttpCode, Post, Put
+  Controller, Body, Get, HttpException, Param, Delete, HttpCode, Post, Put, Headers 
 } from '@nestjs/common';
 import { BusinessPartner, BusinessPartnerAddress } from '../../services/business-partner-service-1';
 import { BusinessPartnerService } from './business-partner.service';
@@ -9,9 +9,11 @@ export class BusinessPartnerController {
   constructor(private businessPartnerService: BusinessPartnerService) {}
 
   @Get()
-  async getBusinessPartners(): Promise<BusinessPartner[]> {
+  async getBusinessPartners(@Headers() headers): Promise<BusinessPartner[]> {
+    //retrieve X-MS-TOKEN-AAD-ACCESS-TOKEN token from request header
+    const token = headers['x-ms-token-aad-access-token'];
     return await this.businessPartnerService
-      .getAllBusinessPartners()
+      .getAllBusinessPartners(token)
       .catch(error => {
         throw new HttpException(
           `Failed to get business partners - ${error.message}`,

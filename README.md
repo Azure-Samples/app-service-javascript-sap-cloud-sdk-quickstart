@@ -21,6 +21,8 @@ Implementations using the approach described by this repos expand the [feature s
 * OData v2 and v4 + entity and client generator managed by SAP
 * OpenAPI + client generator managed by SAP
 
+Example uses [pug engine](https://pugjs.org/api/getting-started.html) for rendering the UI. Learn more about template engines [here](https://docs.nestjs.com/techniques/mvc).
+
 ## Getting Started 🛫
 
 ### Prerequisites & Installation

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello World!';
+  async getHello(): Promise<object> {
+    return { title: 'SAP Cloud SDK on Azure', message: 'Hello Azure! Greetings from the'};
   }
 }
