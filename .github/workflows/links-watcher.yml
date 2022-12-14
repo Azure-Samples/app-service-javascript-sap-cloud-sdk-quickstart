@@ -1,0 +1,24 @@
+name: Periodic Link Checker
+
+on:
+  schedule:
+    - cron: '0 23 * * *'
+  workflow_dispatch:
+
+permissions:
+    contents: read
+
+jobs:
+    link-checker:
+        runs-on: ubuntu-latest
+        steps:
+            - name: 'Checkout source code'
+              uses: actions/checkout@v3
+            - name: Link Checker
+              id: lychee
+              uses: lycheeverse/lychee-action@v1.5.4
+              with:
+                fail: true
+                args: --verbose --no-progress --exclude-mail --exclude-loopback .
+              env:
+                GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
