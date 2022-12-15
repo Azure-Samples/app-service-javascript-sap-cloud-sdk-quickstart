@@ -18,3 +18,9 @@ footer {
 a:link { text-decoration: none; }
 
 a:hover { text-decoration: underline; }
+
+p.mynote {
+    font-size: small;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: grey;
+}

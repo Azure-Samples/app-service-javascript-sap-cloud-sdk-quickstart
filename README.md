@@ -2,7 +2,7 @@
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=576207479)[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fapp-service-javascript-sap-cloud-sdk-quickstart%2Fmain%2Ftemplates%2Fazuredeploy.json)
 
-Example "address data maintenance" project showcasing [SAP Cloud SDK for JavaScript](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction) OData consumption running on Azure App Services. It uses the [Business Partner OData API](https://api.sap.com/api/OP_API_BUSINESS_PARTNER_SRV/overview) for SAP S4 as an example.
+Example "address data maintenance" project showcasing [SAP Cloud SDK for JavaScript](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction) OData consumption running on [Azure App Services](https://learn.microsoft.com/azure/app-service/overview). It uses the [Business Partner OData API](https://api.sap.com/api/OP_API_BUSINESS_PARTNER_SRV/overview) for SAP S4 as an example.
 
 See [SAP open-source license](https://sap.github.io/cloud-sdk/docs/overview/overview-cloud-sdk#license) for this SDK for your reference.
 
@@ -104,6 +104,14 @@ SAP backends on Azure typically run in fully isolated virtual networks. There ar
 * User Azure API Management for OData with SAP Principal Propagation. [Learn more](https://learn.microsoft.com/azure/api-management/sap-api#production-considerations)
 
 VNet integration enables your app to securely access resources in your VNet, such as your SAP Gateway, but doesn't block public access to your App Service. To achieve full private connectivity for the app service too, look into private endpoints.
+
+## Frontend 📱
+
+You may consider SAP OpenUI5 for a seamless look and feel of your app when integrated with other SAP apps like [Fiori Launchpad](https://experience.sap.com/fiori-design-web/launchpad/) or similar. [Learn more](https://openui5.hana.ondemand.com/)
+
+Alternatively frameworks like React, Angular, Pug or Vue.js are popular options to build a frontend for your app.
+
+Another option would be hosting the frontend on SAP Business Technology Platform (BTP) and connect to your Azure App Service via [SAP Private Link](https://help.sap.com/docs/PRIVATE_LINK/42acd88cb4134ba2a7d3e0e62c9fe6cf/e9cc67716a3a41c9885862661e6c4234.html) or SAP Cloud Connector. When the Azure App Service is VNet integrated you may also use a public route if you wish. We would recommend fronting the app service with a web application firewall in such a case. [Azure Front Door](https://learn.microsoft.com/azure/frontdoor/quickstart-create-front-door) or [Azure Application Gateway](https://learn.microsoft.com/azure/app-service/networking/app-gateway-with-service-endpoints) are popular options.
 
 ## DevOps 👩🏾‍💻
 
