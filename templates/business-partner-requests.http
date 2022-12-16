@@ -1,0 +1,43 @@
+GET http://localhost:8080/business-partner HTTP/1.1
+content-type: application/json
+x-ms-token-aad-access-token: your-access-token-if-any
+
+###
+
+GET http://localhost:8080/business-partner/1003764 HTTP/1.1
+content-type: application/json
+
+###
+
+PUT http://localhost:8080/business-partner/1003764/address/28238 HTTP/1.1
+content-type: application/json
+
+{
+    "houseNumber": "1"
+}
+
+###
+
+DELETE http://localhost:8080/business-partner/1003764/address/28238 HTTP/1.1
+content-type: application/json
+
+###
+
+POST http://localhost:8080/business-partner/1003764/address HTTP/1.1
+content-type: application/json
+
+{
+    "businessPartner": "1003764",
+    "cityName": "Bangalore",
+    "country": "IN",
+    "houseNumber": "",
+    "postalCode": "560066",
+    "streetName": "123",
+    "toAddressUsage": 
+        [
+            {
+                "addressUsage": "XXDEFAULT",
+                "standardUsage": true
+            }
+        ]
+}
