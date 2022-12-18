@@ -41,7 +41,7 @@
 	"forwardPorts": [
 		8080
 	],
-	"postCreateCommand": "npm install",
+	"postCreateCommand": "cd src/api && npm install && cd ../..",
 	"remoteUser": "vscode",
 	"hostRequirements": {
 		"memory": "8gb"
