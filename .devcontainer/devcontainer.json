@@ -1,32 +1,49 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
+// For format details, see https://aka.ms/devcontainer.json.
 {
-	"name": "Node.js & TypeScript",
-	"image": "mcr.microsoft.com/devcontainers/typescript-node:0-18",
-	"features": {
-		"ghcr.io/devcontainers-contrib/features/nestjs-cli:1": {}
-	},
-
-	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
-
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	 "forwardPorts": [8080],
-
-	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "npm install",
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"ms-azuretools.vscode-azureappservice",
-				"ms-vscode.vscode-node-azure-pack"
-			]
+	"name": "Azure Developer CLI",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			"VARIANT": "bullseye"
 		}
+	},
+	"features": {
+		"ghcr.io/devcontainers-contrib/features/nestjs-cli:1": {},
+		"ghcr.io/devcontainers/features/azure-cli:1": {
+			"version": "2.38"
+		},
+		"ghcr.io/devcontainers/features/docker-from-docker:1": {
+			"version": "20.10"
+		},
+		"ghcr.io/devcontainers/features/github-cli:1": {
+			"version": "2"
+		},
+		"ghcr.io/devcontainers/features/node:1": {
+			"version": "18",
+			"nodeGypDependencies": false
+		},
+		"ghcr.io/devcontainers/features/python:1": {
+			"version": "os-provided"
+		}
+	},
+	"extensions": [
+		"ms-azuretools.vscode-azureappservice",
+		"ms-vscode.vscode-node-azure-pack",
+		"ms-azuretools.azure-dev",
+		"ms-azuretools.vscode-bicep",
+		"ms-azuretools.vscode-docker",
+		"ms-vscode.vscode-node-azure-pack",
+		"ms-vscode.js-debug",
+		"esbenp.prettier-vscode",
+		"eg2.vscode-npm-script",
+		"dbaeumer.vscode-eslint"
+	],
+	"forwardPorts": [
+		8080
+	],
+	"postCreateCommand": "npm install",
+	"remoteUser": "vscode",
+	"hostRequirements": {
+		"memory": "8gb"
 	}
-
-	// Configure tool-specific properties.
-	// "customizations": {},
-
-	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
 }
