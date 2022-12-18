@@ -57,22 +57,22 @@ Use either
 
 8. get that business partner by id: [http://localhost:8080/business-partner/1003764](http://localhost:8080/business-partner/1003764)
 
-![screenshot of successful business partner retrieval by id](img/bupa-get-vsc-rest.png)
+![screenshot of successful business partner retrieval by id](assets/bupa-get-vsc-rest.png)
 
 9. update the address with a house number: [http://localhost:8080/business-partner/1003764/address/28238](http://localhost:8080/business-partner/1003764/address/28238).
 
 > **Note**
 > For your convenience I left a [collection of REST calls](/templates/business-partner-requests.http) in the repos. Execute them with the [VS Code REST client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client).
 
-![screenshot of business partner address update with request details](img/bupa-update-vsc-rest.png)
+![screenshot of business partner address update with request details](assets/bupa-update-vsc-rest.png)
 
 10. delete the address: [http://localhost:8080/business-partner/1003764/address/28238](http://localhost:8080/business-partner/1003764/address/28238)
 
-![screenshot of business partner address delete](img/bupa-delete-vsc-rest.png)
+![screenshot of business partner address delete](assets/bupa-delete-vsc-rest.png)
 
 11. add an address to your chosen business partner: [http://localhost:8080/business-partner/1003764/address](http://localhost:8080/business-partner/1003764/address)
 
-![screenshot of successful business partner address creation with request details](img/bupa-create-vsc-rest.png)
+![screenshot of successful business partner address creation with request details](assets/bupa-create-vsc-rest.png)
 
 Congratulations🥳, you have successfully consumed SAP OData with the SAP Cloud SDK for JavaScript running on Azure App Service!
 
