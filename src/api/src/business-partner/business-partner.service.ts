@@ -1,47 +1,46 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common'
 import {
   businessPartnerService1,
   BusinessPartner,
   BusinessPartnerAddress
-} from '../../services/business-partner-service-1';
+} from '../../services/business-partner-service-1'
 
-const { businessPartnerApi, businessPartnerAddressApi  } = businessPartnerService1();
+const { businessPartnerApi, businessPartnerAddressApi } = businessPartnerService1()
 
 @Injectable()
 export class BusinessPartnerService {
-
   /**
    * Gets a list of all business partners.
    * @returns List of business partner.
    */
-  async getAllBusinessPartners(token: string): Promise<BusinessPartner[]> {
-    var config;
-          
-    var req = businessPartnerApi
-                .requestBuilder()
-                .getAll()
-                .select(
-                  businessPartnerApi.schema.BUSINESS_PARTNER,
-                  businessPartnerApi.schema.FIRST_NAME,
-                  businessPartnerApi.schema.LAST_NAME,
-                  businessPartnerApi.schema.TO_BUSINESS_PARTNER_ADDRESS.select(
-                    businessPartnerAddressApi.schema.BUSINESS_PARTNER,
-                    businessPartnerAddressApi.schema.ADDRESS_ID
-                  )
-                )
-                .top(10)
-                .filter(businessPartnerApi.schema.BUSINESS_PARTNER_CATEGORY.equals('1'));
-                //in case AAD token is available
-    if(token){
-      req.addCustomHeaders({ Authorization: 'Bearer ' + token });
-      //in case AAD token is available
-      config = {url: (process.env.ODATA_URL)};
-    }else{
-      //in case basic auth shall be used
-      config = {url: (process.env.ODATA_URL),username: (process.env.ODATA_USERNAME),password: (process.env.ODATA_USERPWD)};
+  async getAllBusinessPartners (token: string): Promise<BusinessPartner[]> {
+    let config
+
+    const req = businessPartnerApi
+      .requestBuilder()
+      .getAll()
+      .select(
+        businessPartnerApi.schema.BUSINESS_PARTNER,
+        businessPartnerApi.schema.FIRST_NAME,
+        businessPartnerApi.schema.LAST_NAME,
+        businessPartnerApi.schema.TO_BUSINESS_PARTNER_ADDRESS.select(
+          businessPartnerAddressApi.schema.BUSINESS_PARTNER,
+          businessPartnerAddressApi.schema.ADDRESS_ID
+        )
+      )
+      .top(10)
+      .filter(businessPartnerApi.schema.BUSINESS_PARTNER_CATEGORY.equals('1'))
+    // in case AAD token is available
+    if (token) {
+      req.addCustomHeaders({ Authorization: 'Bearer ' + token })
+      // in case AAD token is available
+      config = { url: (process.env.ODATA_URL) }
+    } else {
+      // in case basic auth shall be used
+      config = { url: (process.env.ODATA_URL), username: (process.env.ODATA_USERNAME), password: (process.env.ODATA_USERPWD) }
     }
-    
-    return await req.execute(config);
+
+    return await req.execute(config)
   }
 
   /**
@@ -49,7 +48,7 @@ export class BusinessPartnerService {
    * @param id - ID of the business partner to be returned.
    * @returns The business partner with the given ID.
    */
-  async getBusinessPartnerById(id: string): Promise<BusinessPartner> {
+  async getBusinessPartnerById (id: string): Promise<BusinessPartner> {
     return await businessPartnerApi
       .requestBuilder()
       .getByKey(id)
@@ -70,7 +69,7 @@ export class BusinessPartnerService {
         url: (process.env.ODATA_URL),
         username: (process.env.ODATA_USERNAME),
         password: (process.env.ODATA_USERPWD)
-      });
+      })
   }
 
   /**
@@ -79,13 +78,13 @@ export class BusinessPartnerService {
    * @param id - ID of the business partner.
    * @returns The address which was created.
    */
-  async createAddress(
+  async createAddress (
     address: Record<string, any>,
     id: string
   ): Promise<BusinessPartnerAddress> {
     const businessPartnerAddress = businessPartnerAddressApi
       .entityBuilder()
-      .fromJson({ businessPartner: id, ...address });
+      .fromJson({ businessPartner: id, ...address })
 
     return await businessPartnerAddressApi
       .requestBuilder()
@@ -94,7 +93,7 @@ export class BusinessPartnerService {
         url: (process.env.ODATA_URL),
         username: (process.env.ODATA_USERNAME),
         password: (process.env.ODATA_USERPWD)
-      });
+      })
   }
 
   /**
@@ -104,23 +103,23 @@ export class BusinessPartnerService {
    * @param addressId - ID of address which is updated.
    * @returns - The address after update.
    */
-  updateAddress(
+  async updateAddress (
     address: Record<string, any>,
     businessPartner: string,
     addressId: string
   ): Promise<BusinessPartnerAddress> {
     const businessPartnerAddress = businessPartnerAddressApi
       .entityBuilder()
-      .fromJson({ businessPartner, addressId, ...address });
+      .fromJson({ businessPartner, addressId, ...address })
 
-    return businessPartnerAddressApi
+    return await businessPartnerAddressApi
       .requestBuilder()
       .update(businessPartnerAddress)
       .execute({
         url: (process.env.ODATA_URL),
         username: (process.env.ODATA_USERNAME),
         password: (process.env.ODATA_USERPWD)
-      });
+      })
   }
 
   /**
@@ -129,14 +128,14 @@ export class BusinessPartnerService {
    * @param addressId - ID of address to be deleted.
    * @returns - Void.
    */
-  deleteAddress(businessPartner: string, addressId: string): Promise<void> {
-    return businessPartnerAddressApi
+  async deleteAddress (businessPartner: string, addressId: string): Promise<void> {
+    return await businessPartnerAddressApi
       .requestBuilder()
       .delete(businessPartner, addressId)
       .execute({
         url: (process.env.ODATA_URL),
         username: (process.env.ODATA_USERNAME),
         password: (process.env.ODATA_USERPWD)
-      });
+      })
   }
 }
