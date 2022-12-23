@@ -68,8 +68,8 @@
   "ts-standard": {
     "ignore": [
       "dist",
-      "src/api/service-specifications/**/*",
-      "src/api/services/**/*"
+      "service-specifications",
+      "services/business-partner-service-1"
     ]
   }
 }
