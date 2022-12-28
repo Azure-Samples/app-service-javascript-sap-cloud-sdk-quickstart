@@ -29,6 +29,9 @@ jobs:
           AZURE_ENV_NAME: ${{ secrets.AZURE_ENV_NAME }}
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
           AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          ODATA_URL: ${{ secrets.ODATA_URL }}
+          ODATA_USERNAME: ${{ secrets.ODATA_USERNAME }}
+          ODATA_USERPWD: ${{ secrets.ODATA_USERPWD }}
 
       - name: Azure Dev Deploy
         run: azd deploy --no-prompt
