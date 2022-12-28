@@ -24,6 +24,14 @@ param resourceGroupName string = ''
 @description('Id of the user or app to assign application roles')
 param principalId string = ''
 
+@description('SAP OData service URL')
+param oDataUrl string = 'https://your-sap-odata-business-partner-service-url'
+@description('SAP OData user name')
+param oDataUsername string = 'user'
+@description('SAP OData user password')
+@secure()
+param oDataUserpwd string = ''
+
 var abbrs = loadJsonContent('./abbreviations.json')
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 var tags = { 'azd-env-name': environmentName }
@@ -47,6 +55,9 @@ module api './app/api.bicep' = {
     appServicePlanId: appServicePlan.outputs.id
     keyVaultName: keyVault.outputs.name
     appSettings: {
+      ODATA_URL: oDataUrl
+      ODATA_USERNAME: oDataUsername 
+      ODATA_USERPWD:  '@Microsoft.KeyVault(SecretUri=${keyVault.outputs.endpoint}secrets/${abbrs.keyVaultVaults}-secret-odata-password)'
     }
   }
 }
@@ -85,6 +96,18 @@ module keyVault './core/security/keyvault.bicep' = {
     location: location
     tags: tags
     principalId: principalId
+  }
+}
+
+// Store Odata Password in KeyVault
+module oDataPassword './core/security/keyvault-secret.bicep' = {
+  name : 'odatapassword'
+  scope: rg
+  params: {
+    name: '${abbrs.keyVaultVaults}-secret-odata-password'
+    keyVaultName: keyVault.outputs.name
+    tags: tags
+    secretValue: oDataUserpwd
   }
 }
 
