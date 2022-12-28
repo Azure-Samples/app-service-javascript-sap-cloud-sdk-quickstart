@@ -2,9 +2,13 @@
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=576207479)[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fapp-service-javascript-sap-cloud-sdk-quickstart%2Fmain%2Ftemplates%2Fazuredeploy.json)
 
-Example "address data maintenance" project showcasing [SAP Cloud SDK for JavaScript](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction) OData consumption running on [Azure App Services](https://learn.microsoft.com/azure/app-service/overview). It uses the [Business Partner OData API](https://api.sap.com/api/OP_API_BUSINESS_PARTNER_SRV/overview) for SAP S4 as an example.
+This repos serves as quickstart project showcasing [SAP Cloud SDK for JavaScript](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction) OData consumption running on [Azure App Services](https://learn.microsoft.com/azure/app-service/overview). It uses the [Business Partner OData API](https://api.sap.com/api/OP_API_BUSINESS_PARTNER_SRV/overview) for SAP S4 as an example.
 
-See [SAP open-source license](https://sap.github.io/cloud-sdk/docs/overview/overview-cloud-sdk#license) for this SDK for your reference.
+> **Warning**
+> Verify latest [SAP's open-source license](https://sap.github.io/cloud-sdk/docs/overview/overview-cloud-sdk#license) for the Cloud SDK for your reference.
+
+> **Note**
+> In case you prefer an implementation without 3rd party library dependencies, have a look at [this sister project](https://github.com/Azure/azure-sdk-for-sap-odata) deploying to Azure Functions.
 
 ## Features ⚙️
 
@@ -137,6 +141,20 @@ Another option would be hosting the frontend on SAP Business Technology Platform
 * [.NET speaks OData too – how to implement Azure App Service with SAP Gateway](https://github.com/MartinPankraz/AzureSAPODataReader)
 
 * [Azure API Management policy for SAP Principal Propagation](https://github.com/Azure/api-management-policy-snippets/blob/master/examples/Request%20OAuth2%20access%20token%20from%20SAP%20using%20AAD%20JWT%20token.xml)
+
+## Related efforts and repos🖇️
+
+* [Azure SDK for SAP OData](https://github.com/Azure/azure-sdk-for-sap-odata)
+
+* [Visual Studio extension for generating client code for OData Services](https://learn.microsoft.com/odata/connectedservice/getting-started)
+
+* [OData CLI](https://learn.microsoft.com/odata/odatacli/getting-started)
+
+* [.NET project showcasing integration of Azure AD with Azure API Management for SAP OData consumption leveraging Principal Propagation](https://github.com/MartinPankraz/AzureSAPODataReader)
+
+* [OData to OpenAPI converter](https://aka.ms/ODataOpenAPI)
+
+* [SAP ABAP OpenAPI UI](https://blogs.sap.com/2022/03/31/abap-openapi-ui-v2-a-long-overdue-update/)
 
 ## Contributing 👩🏼‍🤝‍👨🏽
 
