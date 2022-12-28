@@ -10,15 +10,6 @@
     },
     "principalId": {
       "value": "${AZURE_PRINCIPAL_ID}"
-    },
-    "oDataUrl": {
-      "value": "${AZURE_ODATA_URL}"
-    },
-    "oDataUsername": {
-      "value": "${AZURE_ODATA_USERNAME}"
-    },
-    "oDataUserpwd": {
-      "value": "${AZURE_ODATA_USERPWD}"
     }
   }
 }

@@ -26,11 +26,13 @@ param principalId string = ''
 
 @description('SAP OData service URL')
 param oDataUrl string = 'https://your-sap-odata-business-partner-service-url'
+
 @description('SAP OData user name')
 param oDataUsername string = 'user'
+
 @description('SAP OData user password')
 @secure()
-param oDataUserpwd string = ''
+param oDataUserpwd string = 'test-pwd'
 
 var abbrs = loadJsonContent('./abbreviations.json')
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
@@ -57,7 +59,7 @@ module api './app/api.bicep' = {
     appSettings: {
       ODATA_URL: oDataUrl
       ODATA_USERNAME: oDataUsername 
-      ODATA_USERPWD:  '@Microsoft.KeyVault(SecretUri=${keyVault.outputs.endpoint}secrets/${abbrs.keyVaultVaults}-secret-odata-password)'
+      ODATA_USERPWD:  '@Microsoft.KeyVault(SecretUri=${keyVault.outputs.endpoint}secrets/${abbrs.keyVaultVaults}secret-odata-password)'
     }
   }
 }
@@ -104,7 +106,7 @@ module oDataPassword './core/security/keyvault-secret.bicep' = {
   name : 'odatapassword'
   scope: rg
   params: {
-    name: '${abbrs.keyVaultVaults}-secret-odata-password'
+    name: '${abbrs.keyVaultVaults}secret-odata-password'
     keyVaultName: keyVault.outputs.name
     tags: tags
     secretValue: oDataUserpwd
