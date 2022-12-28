@@ -19,7 +19,8 @@
 		"vscode": {
 			"extensions": [
 				"ms-azuretools.vscode-azureappservice",
-				"ms-vscode.vscode-node-azure-pack"
+				"ms-vscode.vscode-node-azure-pack",
+				"humao.rest-client"
 			]
 		}
 	}
