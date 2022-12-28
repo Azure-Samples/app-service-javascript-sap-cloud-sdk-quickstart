@@ -24,6 +24,7 @@ param resourceGroupName string = ''
 @description('Id of the user or app to assign application roles')
 param principalId string = ''
 
+// App specific parameters - provide the values via the main.parameters.json referencing e.g. environment parameters
 @description('SAP OData service URL')
 param oDataUrl string = 'https://your-sap-odata-business-partner-service-url'
 
@@ -32,7 +33,7 @@ param oDataUsername string = 'user'
 
 @description('SAP OData user password')
 @secure()
-param oDataUserpwd string = 'test-pwd'
+param oDataUserpwd string = ''
 
 var abbrs = loadJsonContent('./abbreviations.json')
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
