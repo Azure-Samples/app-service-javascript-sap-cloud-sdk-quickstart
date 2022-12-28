@@ -8,7 +8,7 @@ param applicationInsightsName string = ''
 param appServicePlanId string
 param appSettings object = {}
 param keyVaultName string
-param serviceName string = 'api'
+param serviceName string = 'sap-cloud-sdk-api'
 
 module api '../core/host/appservice.bicep' = {
   name: '${name}-app-module'

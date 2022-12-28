@@ -4,7 +4,7 @@ name: app-service-javascript-sap-cloud-sdk-quickstart
 metadata:
   template: app-service-javascript-sap-cloud-sdk-quickstart
 services:
-  api:
+  sap-cloud-sdk-api:
     project: ./src/api
     language: ts
     host: appservice
