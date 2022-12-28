@@ -29,6 +29,7 @@
 	"extensions": [
 		"ms-azuretools.vscode-azureappservice",
 		"ms-vscode.vscode-node-azure-pack",
+		"humao.rest-client",
 		"ms-azuretools.azure-dev",
 		"ms-azuretools.vscode-bicep",
 		"ms-azuretools.vscode-docker",
