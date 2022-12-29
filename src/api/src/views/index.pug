@@ -1,0 +1,27 @@
+html
+  head
+    title= title
+    link(rel='stylesheet' href='/stylesheets/style.css')
+  body(class='background')
+    nav
+      navbar-default
+        div
+          h1= message
+          img(src='/sap-cloud-sdk-logo.svg' alt='SAP Cloud SDK Logo' style='width:150px;')
+          ul 
+            li
+              a(href='/') 🛋️Home
+            li
+              a(href='/business-partner') 🤝Business-Partners
+            li
+              a(href='http://localhost:3000/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BusinessPartner?$top=10') 🧪mock-server* (API_BUSINESS_PARTNER)
+          br
+          a(href='https://raw.githubusercontent.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart/main/sample-http-requests/SAP-Cloud-SDK-on-Azure-App-Service-Quickstart.postman_collection.json') 📌Postman collection
+          br
+          a(href='https://raw.githubusercontent.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart/main/sample-http-requests/business-partner-requests.http') 📔VSCode REST Client sample requests
+          br
+          p(class='mynote') *mock-server is a separate service provided by SAP as sample running on port 3000 by default. Learn more 
+            a(href='https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html') here.
+    footer(class='footer')
+      a(href='https://github.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart')
+        img(src='/github-logo.svg' alt='GitHub Logo' style='width:30px;padding-left:10px;padding-bottom:5px;')

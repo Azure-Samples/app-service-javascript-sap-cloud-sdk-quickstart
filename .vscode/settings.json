@@ -1,0 +1,10 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}",
+        "img{,/**}",
+        "templates{,/**}",
+        ".env"
+    ],
+    "appService.deploySubpath": "src/api"
+}
