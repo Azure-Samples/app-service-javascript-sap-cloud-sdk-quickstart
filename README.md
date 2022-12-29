@@ -2,7 +2,7 @@
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=576207479)[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fapp-service-javascript-sap-cloud-sdk-quickstart%2Fmain%2Ftemplates%2Fazuredeploy.json)
 
-This repos serves as quickstart project showcasing [SAP Cloud SDK for JavaScript](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction) OData consumption running on [Azure App Services](https://learn.microsoft.com/azure/app-service/overview). It uses the [Business Partner OData API](https://api.sap.com/api/OP_API_BUSINESS_PARTNER_SRV/overview) for SAP S/4HANA as an example.
+This repos serves as quick-start project showcasing [SAP Cloud SDK for JavaScript](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction) OData consumption running on [Azure App Services](https://learn.microsoft.com/azure/app-service/overview). It uses the [Business Partner OData API](https://api.sap.com/api/OP_API_BUSINESS_PARTNER_SRV/overview) for SAP S/4HANA as an example.
 
 > ⚠ **Warning** - Verify latest [SAP's open-source license](https://sap.github.io/cloud-sdk/docs/overview/overview-cloud-sdk#license) for the Cloud SDK for your reference.
 
@@ -30,14 +30,15 @@ Example uses [pug engine](https://pugjs.org/api/getting-started.html) for render
 
 Follow the [SAP Cloud SDK documentation for JavaScript](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction) for your project setup.
 
-Use either
+Use any OData enabled SAP system:
 
 * SAP's [mock server](https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html),
-* SAP's [public demo system ES5](https://developers.sap.com/tutorials/gateway-demo-signup.html),
-* [SAP Cloud Appliance Library](https://cal.sap.com/) or
-* your own available SAP system.
+* SAP API Business Hub [S/4HANA Cloud sandbox with APIKey](https://api.sap.com/api/API_BUSINESS_PARTNER/tryout)
+* SAP's [public demo system ES5](https://developers.sap.com/tutorials/gateway-demo-signup.html) (⚠️Business Partner API not activated!),
+* S/4HANA Fully-Activated Appliance from [SAP Cloud Appliance Library](https://cal.sap.com/) or
+* your own available in-house SAP system.
 
-> 🔎 **Note** - Be aware that SAP's mock server is anticipating the S4 Cloud version of the Business Partner API. So, you might need to adapt the mock server to your needs. During our testing at the time of release there were no discrepancies discovered.
+> 🔎 **Note** - Be aware that SAP's mock server is anticipating the S4 Cloud version of the Business Partner API. So, you might need to adapt the mock server to your needs. During our testing at the time of release there were no discrepancies discovered. You may expose the mock server running locally for testing with the cloud services to the internet using [ngrok](https://ngrok.com/) or similar tools.
 
 [![GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=576207479) to hit the ground running with our tailored image and avoid installing anything on your local machine and continue with step 6.
 
@@ -49,7 +50,7 @@ Use either
 3. `npm install`
 4. `npm run start:dev`
 5. browse to [http://localhost:8080](http://localhost:8080) for your "hello world"
-6. maintain your SAP OData url with credentials in [.env](templates/.env) file (put in project root) and restart the app if necessary
+6. maintain your SAP OData url with credentials in [.env](templates/.env) file (put in project root `app-service-javascript-sap-cloud-sdk-quickstart/src/api`) and restart the app if necessary
 7. browse to [http://localhost:8080/business-partner](http://localhost:8080/business-partner) for your first OData call and pick one of the business partners (examples below use ids from SAP mock server)
 
 > 🔎 **Note** - SAP's examples for the business partner API for SAP S/4HANA Cloud mentioned in the tutorial **differ** to the SAP S/4HANA on-premises flavor. Add AddressUsage, otherwise you will see "Internal error when calling operation module BUA_CHECK_ADDRESS_VALIDITY_ALL; a check table is missing". Check SAP KBA's for more details.
@@ -79,7 +80,7 @@ Use either
 There are multiple ways to deploy this project to Azure. We provide two options in this repository:
 
 1. via template deployment and VS Code extension - more information is available [here](documentation/DEPLOYMENT-VSCODE.md)
-2. via [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview)  - more information is available [here](documentation/DEPLOYMENT-AZD.md)
+2. via [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview) using `azd up`  - more information is available [here](documentation/DEPLOYMENT-AZD.md)
 
 ## What's next?
 
@@ -97,7 +98,7 @@ Sometimes things do not work as expected. Here are some resources that support y
 
 ## Additional resources
 
-We collected additional resources and related efforts and projects [here](documentation/ADDITIONAL-RESOURCES.md). 
+We collected additional resources and related efforts and projects [here](documentation/ADDITIONAL-RESOURCES.md).
 
 ## Contributing 👩🏼‍🤝‍👨🏽
 
