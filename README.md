@@ -13,7 +13,7 @@ This repos serves as quick-start project showcasing [SAP Cloud SDK for JavaScrip
 
 Implementations using the approach described by this repos expand the [feature scope](https://sap.github.io/cloud-sdk/docs/overview/cloud-sdk-feature-matrix) of SAP's Cloud SDK for JavaScript to Azure PaaS apps.
 
-> 🔎 **Note** - When deployed on Azure App Services instead of SAP Business Technology Platform, Cloud Foundry specific features like the destination service or XSUAA are not available.
+> **Note** - When deployed on Azure App Services instead of SAP Business Technology Platform, Cloud Foundry specific features like the destination service or XSUAA are not available.
 
 * One code base to run on both Azure App Service and SAP Business Technology Platform
 * Built in [resiliency](https://learn.microsoft.com/azure/architecture/reference-architectures/app-service-web-app/multi-region) and [caching patterns](https://learn.microsoft.com/azure/architecture/reference-architectures/app-service-web-app/scalable-web-app)
@@ -39,7 +39,7 @@ Use any OData enabled SAP system:
 * S/4HANA Fully-Activated Appliance from [SAP Cloud Appliance Library](https://cal.sap.com/) or
 * your own available in-house SAP system.
 
-> 🔎 **Note** - Be aware that SAP's mock server is anticipating the S4 Cloud version of the Business Partner API. So, you might need to adapt the mock server to your needs. During our testing at the time of release there were no discrepancies discovered. You may expose the mock server running locally for testing with the cloud services to the internet using [ngrok](https://ngrok.com/) or similar tools.
+> **Note** - Be aware that SAP's mock server is anticipating the S4 Cloud version of the Business Partner API. So, you might need to adapt the mock server to your needs. During our testing at the time of release there were no discrepancies discovered. You may expose the mock server running locally for testing with the cloud services to the internet using [ngrok](https://ngrok.com/) or similar tools.
 
 [![GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=576207479) to hit the ground running with our tailored image and avoid installing anything on your local machine and continue with step 6.
 
@@ -54,7 +54,7 @@ Use any OData enabled SAP system:
 6. maintain your SAP OData url with credentials in [.env](templates/.env) file (put in project root `app-service-javascript-sap-cloud-sdk-quickstart/src/api`) and restart the app if necessary
 7. browse to [http://localhost:8080/business-partner](http://localhost:8080/business-partner) for your first OData call and pick one of the business partners (examples below use ids from SAP mock server)
 
-> 🔎 **Note** - SAP's examples for the business partner API for SAP S/4HANA Cloud mentioned in the tutorial **differ** to the SAP S/4HANA on-premises flavor. Add AddressUsage, otherwise you will see "Internal error when calling operation module BUA_CHECK_ADDRESS_VALIDITY_ALL; a check table is missing". Check SAP KBA's for more details.
+> **Note** - SAP's examples for the business partner API for SAP S/4HANA Cloud mentioned in the tutorial **differ** to the SAP S/4HANA on-premises flavor. Add AddressUsage, otherwise you will see "Internal error when calling operation module BUA_CHECK_ADDRESS_VALIDITY_ALL; a check table is missing". Check SAP KBA's for more details.
 
 8. get that business partner by id: [http://localhost:8080/business-partner/1003764](http://localhost:8080/business-partner/1003764)
 
@@ -62,7 +62,7 @@ Use any OData enabled SAP system:
 
 9. update the address with a house number: [http://localhost:8080/business-partner/1003764/address/28238](http://localhost:8080/business-partner/1003764/address/28238).
 
-> 🔎 **Note** - For your convenience we provide a [collection of REST calls](/templates/business-partner-requests.http) in the repos. Execute them with the [VS Code REST client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client).
+> **Note** - For your convenience we provide a [collection of REST calls](/templates/business-partner-requests.http) in the repos. Execute them with the [VS Code REST client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client).
 
 ![screenshot of business partner address update with request details](assets/bupa-update-vsc-rest.png)
 
