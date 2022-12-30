@@ -2,7 +2,11 @@
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=576207479)[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fapp-service-javascript-sap-cloud-sdk-quickstart%2Fmain%2Ftemplates%2Fazuredeploy.json)
 
-This repos serves as quick-start project showcasing [SAP Cloud SDK for JavaScript](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction) OData consumption running on [Azure App Services](https://learn.microsoft.com/azure/app-service/overview). It uses the [Business Partner OData API](https://api.sap.com/api/OP_API_BUSINESS_PARTNER_SRV/overview) for SAP S/4HANA as an example.
+This repos serves as quick-start project showcasing [SAP Cloud SDK for JavaScript](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction) OData consumption running on [Azure App Services](https://learn.microsoft.com/azure/app-service/overview). Its primary purpose is to set you up for success for your SAP extension project on Azure and reduce the lead time to your first successful deployment as much as possible with developer friendly commands.
+
+It uses the [Business Partner OData API](https://api.sap.com/api/OP_API_BUSINESS_PARTNER_SRV/overview) for SAP S/4HANA as an example.
+
+The project is setup as per the best practices advocated by the [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview).
 
 ![Illustration of app setup in Azure](assets/project-overview-azd-style.png)
 
