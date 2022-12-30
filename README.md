@@ -4,6 +4,8 @@
 
 This repos serves as quick-start project showcasing [SAP Cloud SDK for JavaScript](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction) OData consumption running on [Azure App Services](https://learn.microsoft.com/azure/app-service/overview). It uses the [Business Partner OData API](https://api.sap.com/api/OP_API_BUSINESS_PARTNER_SRV/overview) for SAP S/4HANA as an example.
 
+![Illustration of app setup in Azure](assets/project-overview-azd-style.png)
+
 > **Warning** - Verify latest [SAP's open-source license](https://sap.github.io/cloud-sdk/docs/overview/overview-cloud-sdk#license) for the Cloud SDK for your reference.
 
 > **Note**
