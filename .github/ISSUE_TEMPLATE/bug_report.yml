@@ -2,7 +2,7 @@ name: 🐞 Bug report
 description: File a bug/issue to help us improve
 title: "[BUG]"
 labels: [bug]
-assignees: MartinPankraz
+assignees: [MartinPankraz]
 body:
 - type: checkboxes
   attributes:
