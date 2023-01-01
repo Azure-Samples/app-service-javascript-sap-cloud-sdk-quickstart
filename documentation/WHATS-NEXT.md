@@ -31,7 +31,9 @@ Another option would be hosting the frontend on SAP Business Technology Platform
 * Consider activating GitHub Actions for your Azure project for out-of-the-box integrated CI/CD flows. [Learn more](https://docs.microsoft.com/azure/app-service/deploy-github-actions?tabs=applevel)
 * Explore cloud-native zero-downtime deployment styles like "[blue-green](https://learn.microsoft.com/azure/architecture/example-scenario/blue-green-spring/blue-green-spring)" with Azure App Service deployment slots. [Learn more](https://docs.microsoft.com/azure/app-service/deploy-staging-slots)
 
-If you are using the Azure Developer CLI you can setup a prconfigured CI/CD pipeline for:
+If you are using the Azure Developer CLI the repository contains all necessary building blocks to setup a preconfigured CI/CD pipeline for:
 
-* GitHub Actions via `azd pipeline config`. You find more information on `azd` and GitHub Actions [here](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline?tabs=GitHub).
-* Azure DevOps which needs some additional configuration. You find more information on `azd` and Azure DevOps [here](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline?tabs=azdo).
+* GitHub Actions
+* Azure DevOps
+
+You find more information about the options [here](AZD-CICD-SETUP.md).
