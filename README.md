@@ -12,8 +12,7 @@ The project is setup as per the best practices advocated by the [Azure Developer
 
 > **Warning** - Verify latest [SAP's open-source license](https://sap.github.io/cloud-sdk/docs/overview/overview-cloud-sdk#license) for the Cloud SDK for your reference.
 
-> **Note**
-> In case you prefer an implementation without 3rd party library dependencies, have a look at [this sister project](https://github.com/Azure/azure-sdk-for-sap-odata) deploying to Azure Functions.
+> **Note** - In case you prefer an implementation without 3rd party library dependencies, have a look at [this sister project](https://github.com/Azure/azure-sdk-for-sap-odata) deploying to Azure Functions.
 
 ## Features ⚙️
 
@@ -86,8 +85,8 @@ Use any OData enabled SAP system:
 
 There are multiple ways to deploy this project to Azure. We provide two options in this repository:
 
-1. via template deployment and VS Code extension - more information is available [here](documentation/DEPLOYMENT-VSCODE.md)
-2. via [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview) using `azd up`  - more information is available [here](documentation/DEPLOYMENT-AZD.md)
+1. via template deployment and VS Code extension. This approach allows an quick deployment to Azure but does not necessarily reflect the best practices. You find more information on this option [here](documentation/DEPLOYMENT-VSCODE.md).
+2. via [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview) using `azd up`. This approach enbales a quick and easy deployment and already contains best practices. It serves as a perfect starting point for a production grade setup. You find more information on this option [here](documentation/DEPLOYMENT-AZD.md).
 
 ## What's next?
 
