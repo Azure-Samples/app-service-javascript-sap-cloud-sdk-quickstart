@@ -6,7 +6,7 @@ In this example we use the [Azure Developer CLI](https://github.com/Azure/azure-
 
 To use the Azure Developer CLI (`azd`) you need to have it available in your setup. If you are using the devcontainer defined in this repository or opened the repository via GitHub Codespaces you are ready to go.
 
-If you yre not using one of these option you need to install the `azd` locally on "bare metal". You find the necessary steps you to execute in the documentation i.e., in the section ["Install the Azure Developer CLI"](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd?tabs=baremetal%2Cwindows).
+If you are not using one of these option you need to install the `azd` locally on "bare metal". You find the necessary steps you to execute in the documentation i.e., in the section ["Install the Azure Developer CLI"](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd?tabs=baremetal%2Cwindows).
 
 ## Deployment
 
