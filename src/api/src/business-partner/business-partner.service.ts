@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common'
+import { DestinationOrFetchOptions } from '@sap-cloud-sdk/connectivity';
 import {
   businessPartnerService1,
   BusinessPartner,
@@ -14,8 +15,6 @@ export class BusinessPartnerService {
    * @returns List of business partner.
    */
   async getAllBusinessPartners (token: string): Promise<BusinessPartner[]> {
-    let config
-
     const req = businessPartnerApi
       .requestBuilder()
       .getAll()
@@ -29,18 +28,9 @@ export class BusinessPartnerService {
         )
       )
       .top(10)
-      .filter(businessPartnerApi.schema.BUSINESS_PARTNER_CATEGORY.equals('1'))
-    // in case AAD token is available
-    if (token) {
-      req.addCustomHeaders({ Authorization: 'Bearer ' + token })
-      // in case AAD token is available
-      config = { url: (process.env.ODATA_URL) }
-    } else {
-      // in case basic auth shall be used
-      config = { url: (process.env.ODATA_URL), username: (process.env.ODATA_USERNAME), password: (process.env.ODATA_USERPWD) }
-    }
+      .filter(businessPartnerApi.schema.BUSINESS_PARTNER_CATEGORY.equals('1'));
 
-    return await req.execute(config)
+    return await req.execute(this.setupConfig(req,token))
   }
 
   /**
@@ -48,8 +38,8 @@ export class BusinessPartnerService {
    * @param id - ID of the business partner to be returned.
    * @returns The business partner with the given ID.
    */
-  async getBusinessPartnerById (id: string): Promise<BusinessPartner> {
-    return await businessPartnerApi
+  async getBusinessPartnerById (id: string, token: string): Promise<BusinessPartner> {
+    const req = businessPartnerApi
       .requestBuilder()
       .getByKey(id)
       .select(
@@ -65,11 +55,8 @@ export class BusinessPartnerService {
           businessPartnerAddressApi.schema.HOUSE_NUMBER
         )
       )
-      .execute({
-        url: (process.env.ODATA_URL),
-        username: (process.env.ODATA_USERNAME),
-        password: (process.env.ODATA_USERPWD)
-      })
+
+      return await req.execute(this.setupConfig(req,token))
   }
 
   /**
@@ -80,20 +67,18 @@ export class BusinessPartnerService {
    */
   async createAddress (
     address: Record<string, any>,
-    id: string
+    id: string,
+    token: string
   ): Promise<BusinessPartnerAddress> {
     const businessPartnerAddress = businessPartnerAddressApi
       .entityBuilder()
       .fromJson({ businessPartner: id, ...address })
 
-    return await businessPartnerAddressApi
+    const req = businessPartnerAddressApi
       .requestBuilder()
       .create(businessPartnerAddress)
-      .execute({
-        url: (process.env.ODATA_URL),
-        username: (process.env.ODATA_USERNAME),
-        password: (process.env.ODATA_USERPWD)
-      })
+
+    return await req.execute(this.setupConfig(req,token))
   }
 
   /**
@@ -106,20 +91,18 @@ export class BusinessPartnerService {
   async updateAddress (
     address: Record<string, any>,
     businessPartner: string,
-    addressId: string
+    addressId: string,
+    token: string
   ): Promise<BusinessPartnerAddress> {
     const businessPartnerAddress = businessPartnerAddressApi
       .entityBuilder()
       .fromJson({ businessPartner, addressId, ...address })
 
-    return await businessPartnerAddressApi
+    const req = businessPartnerAddressApi
       .requestBuilder()
       .update(businessPartnerAddress)
-      .execute({
-        url: (process.env.ODATA_URL),
-        username: (process.env.ODATA_USERNAME),
-        password: (process.env.ODATA_USERPWD)
-      })
+
+      return await req.execute(this.setupConfig(req,token))
   }
 
   /**
@@ -128,14 +111,60 @@ export class BusinessPartnerService {
    * @param addressId - ID of address to be deleted.
    * @returns - Void.
    */
-  async deleteAddress (businessPartner: string, addressId: string): Promise<void> {
-    return await businessPartnerAddressApi
+  async deleteAddress (businessPartner: string, addressId: string, token: string): Promise<void> {
+    const req = await businessPartnerAddressApi
       .requestBuilder()
       .delete(businessPartner, addressId)
-      .execute({
-        url: (process.env.ODATA_URL),
-        username: (process.env.ODATA_USERNAME),
-        password: (process.env.ODATA_USERPWD)
-      })
+
+      return await req.execute(this.setupConfig(req,token))
   }
+
+  /**
+   * Setup config for the request.
+   * @param req - Request.
+   * @param token - AAD token.
+   * @returns - Destination Config for the request.
+   */
+  private setupConfig (req ,token: string): DestinationOrFetchOptions {
+    let config
+    // in case API key shall be used
+    if (this.isValidString(process.env.APIKEY) && this.isValidString(process.env.APIKEY_HEADERNAME)) {  
+      const keyHeaderName = process.env.APIKEY_HEADERNAME;
+      const APIKey = process.env.APIKEY;
+      req.addCustomHeaders({ [keyHeaderName]: APIKey })
+    }
+    // in case API trace header configured
+    if (this.isValidString(process.env.API_TRACE_ACTIVE) && this.isValidString(process.env.API_TRACE_HEADERNAME)) {  
+      const apiTraceHeaderName = process.env.API_TRACE_HEADERNAME;
+      const activate = process.env.API_TRACE_ACTIVE.toLowerCase() == 'true' ? true : false;
+      req.addCustomHeaders({ [apiTraceHeaderName]: activate })
+    }
+    // in case AAD token is available
+    if (this.isValidString(token)) {
+      req.addCustomHeaders({ Authorization: 'Bearer ' + token })
+      config = { url: (process.env.ODATA_URL) }
+    }// in case basic auth shall be used 
+    else if(this.isValidString(process.env.ODATA_USERNAME) && this.isValidString(process.env.ODATA_USERPWD)) {
+      config = { url: (process.env.ODATA_URL), username: (process.env.ODATA_USERNAME), password: (process.env.ODATA_USERPWD) }
+    }// in case only API keys shall be used
+    else {
+      config = { url: (process.env.ODATA_URL)}
+    }
+
+    return config;
+  }
+
+  /**
+   * Check string validity.
+   * @param str - String to be checked.
+   * @returns - True if string is valid, false otherwise.
+   * @private
+   * @hidden
+   * @internal
+   * 
+   */
+  private isValidString (str: string): boolean {
+    return str != undefined && str != null && str != ''
+  }
+  
 }
