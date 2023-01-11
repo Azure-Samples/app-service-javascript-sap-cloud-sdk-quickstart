@@ -1,5 +1,11 @@
 # What's next?
 
+## Adapt OData service to your needs 🛠
+
+Clear `service-specifications` folder and maintain `service-mapping.json`.
+
+[Learn more](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/execute-an-odata-request#generate-service-entities) about how to create OData service entities based on your metadata on the SAP Cloud SDK docs.
+
 ## Authentication with Azure AD 🔐
 
 [Configure](https://learn.microsoft.com/azure/app-service/configure-authentication-provider-aad) your App Service or Azure Functions app to use Azure AD login. Use standard variable `X-MS-TOKEN-AAD-ACCESS-TOKEN` to retrieve the access token from the request header. [Learn more](https://learn.microsoft.com/azure/app-service/configure-authentication-oauth-tokens#retrieve-tokens-in-app-code)
