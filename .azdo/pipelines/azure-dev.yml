@@ -7,6 +7,10 @@ pool:
 container: mcr.microsoft.com/azure-dev-cli-apps:latest
 
 steps:
+  - pwsh: |
+      azd config set auth.useAzCliAuth "true"
+    displayName: Configure azd to Use az CLI Authentication.
+  
   - task: AzureCLI@2
     displayName: Azure Dev Provision
     inputs:

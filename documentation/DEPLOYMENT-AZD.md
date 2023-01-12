@@ -1,5 +1,7 @@
 # Deployment via Azure Developer CLI
 
+> **Note** - The repository is compliant with version [0.5.0-beta.1](https://github.com/Azure/azure-dev/releases/tag/azure-dev-cli_0.5.0-beta.1) of the Azure Developer CLI. Make sure that you are using the same version to avoid incompatibilities due to different versions.
+
 In this example we use the [Azure Developer CLI](https://github.com/Azure/azure-dev) to deploy the project. Learn more about [this tool on Microsoft learn](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview)
 
 ## Prerequisite
@@ -26,7 +28,7 @@ The `azd` CLI will ask you to provide the following information:
 - Which Azure subscription should be used for the deployment?
 - Which region should be used for the deployment?
 
-> **Note** - In case you are not logged into an Azure account, you also need to execute the login.
+> **Note** - In case you are not logged into an Azure account, you also need to execute the login via `azd login`.
 
 > **Note** - The parameters around the OData service are contained in the `.bicep` template i.e., in the `infra/main.bicep` file. You can provide them in different ways. The easiest way is to add them to the `infra/main.parameters.json` as references to environment variables in analogy to the already existing parameters available in the file. You can also add them after the deployment in the Azure Portal as we have defaulted them in the templates.  
 
