@@ -54,6 +54,8 @@ jobs:
           ODATA_URL: ${{ secrets.ODATA_URL }}
           ODATA_USERNAME: ${{ secrets.ODATA_USERNAME }}
           ODATA_USERPWD: ${{ secrets.ODATA_USERPWD }}
+          APIKEY: ${{ secrets.APIKEY }}
+          APIKEY_HEADERNAME: ${{ secrets.APIKEY_HEADERNAME }}
 
       - name: Azure Dev Deploy
         run: azd deploy --no-prompt
@@ -64,9 +66,11 @@ jobs:
           ODATA_URL: ${{ secrets.ODATA_URL }}
           ODATA_USERNAME: ${{ secrets.ODATA_USERNAME }}
           ODATA_USERPWD: ${{ secrets.ODATA_USERPWD }}
+          APIKEY: ${{ secrets.APIKEY }}
+          APIKEY_HEADERNAME: ${{ secrets.APIKEY_HEADERNAME }}
 ```
 
-Before you can run the action you must provide the `ODATA_URL`, the `ODATA_USERNAME` and the `ODATA_USERPWD` as secrets in your repository. You find more information about the procedure [here](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository).
+Before you can run the action you must provide the `ODATA_URL` and authentication info (`ODATA_USERNAME`, `ODATA_USERPWD`, `APIKEY`) as secrets in your repository. You find more information about the procedure [here](https://docs.github.com/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository).
 The values for the `AZURE_ENV_NAME`, the `AZURE_LOCATION` and the `AZURE_SUBSCRIPTION_ID` are automatically provided from your `azd` configuration you made when manually deploying the application e.g., via `azd up`.
 
 We safeguarded the GitHub Action template with respect to the potential triggers of the workflow. By default you can only manually trigger the workflow due to the section:

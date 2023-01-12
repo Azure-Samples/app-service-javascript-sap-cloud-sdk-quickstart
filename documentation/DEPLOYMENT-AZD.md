@@ -91,6 +91,8 @@ module api './app/api.bicep' = {
       ODATA_URL: oDataUrl
       ODATA_USERNAME: oDataUsername 
       ODATA_USERPWD:  '@Microsoft.KeyVault(SecretUri=${keyVault.outputs.endpoint}secrets/${abbrs.keyVaultVaults}secret-odata-password)'
+      APIKEY:  '@Microsoft.KeyVault(SecretUri=${keyVault.outputs.endpoint}secrets/${abbrs.keyVaultVaults}secret-apikey)'
+      APIKEY_HEADERNAME: ApiKeyHeaderName 
     }
   }
 }

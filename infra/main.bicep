@@ -26,14 +26,21 @@ param principalId string = ''
 
 // App specific parameters - provide the values via the main.parameters.json referencing e.g. environment parameters
 @description('SAP OData service URL')
-param oDataUrl string = 'https://your-sap-odata-business-partner-service-url'
+param oDataUrl string = 'https://sandbox.api.sap.com/s4hanacloud'
 
 @description('SAP OData user name')
-param oDataUsername string = 'user'
+param oDataUsername string = ''
 
 @description('SAP OData user password')
 @secure()
 param oDataUserpwd string = ''
+
+@description('API Key')
+@secure()
+param _APIKey string = ''
+
+@description('API Key Header Name')
+param ApiKeyHeaderName string = 'headername'
 
 var abbrs = loadJsonContent('./abbreviations.json')
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
@@ -61,6 +68,8 @@ module api './app/api.bicep' = {
       ODATA_URL: oDataUrl
       ODATA_USERNAME: oDataUsername 
       ODATA_USERPWD:  '@Microsoft.KeyVault(SecretUri=${keyVault.outputs.endpoint}secrets/${abbrs.keyVaultVaults}secret-odata-password)'
+      APIKEY:  '@Microsoft.KeyVault(SecretUri=${keyVault.outputs.endpoint}secrets/${abbrs.keyVaultVaults}secret-apikey)'
+      APIKEY_HEADERNAME: ApiKeyHeaderName 
     }
   }
 }
@@ -74,7 +83,6 @@ module apiKeyVaultAccess './core/security/keyvault-access.bicep' = {
     principalId: api.outputs.SERVICE_API_IDENTITY_PRINCIPAL_ID
   }
 }
-
 
 // Create an App Service Plan to group applications under the same payment plan and SKU
 module appServicePlan './core/host/appserviceplan.bicep' = {
@@ -111,6 +119,18 @@ module oDataPassword './core/security/keyvault-secret.bicep' = {
     keyVaultName: keyVault.outputs.name
     tags: tags
     secretValue: oDataUserpwd
+  }
+}
+
+// Store API key in KeyVault
+module ApiKey './core/security/keyvault-secret.bicep' = {
+  name : 'apikey'
+  scope: rg
+  params: {
+    name: '${abbrs.keyVaultVaults}secret-apikey'
+    keyVaultName: keyVault.outputs.name
+    tags: tags
+    secretValue: _APIKey
   }
 }
 

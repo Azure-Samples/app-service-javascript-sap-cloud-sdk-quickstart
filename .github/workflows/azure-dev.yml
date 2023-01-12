@@ -32,6 +32,8 @@ jobs:
           ODATA_URL: ${{ secrets.ODATA_URL }}
           ODATA_USERNAME: ${{ secrets.ODATA_USERNAME }}
           ODATA_USERPWD: ${{ secrets.ODATA_USERPWD }}
+          APIKEY: ${{ secrets.APIKEY }}
+          APIKEY_HEADERNAME: ${{ secrets.APIKEY_HEADERNAME }}
 
       - name: Azure Dev Deploy
         run: azd deploy --no-prompt
@@ -42,3 +44,5 @@ jobs:
           ODATA_URL: ${{ secrets.ODATA_URL }}
           ODATA_USERNAME: ${{ secrets.ODATA_USERNAME }}
           ODATA_USERPWD: ${{ secrets.ODATA_USERPWD }}
+          APIKEY: ${{ secrets.APIKEY }}
+          APIKEY_HEADERNAME: ${{ secrets.APIKEY_HEADERNAME }}

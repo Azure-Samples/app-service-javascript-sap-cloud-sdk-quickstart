@@ -80,6 +80,14 @@
               {
                 "name": "ODATA_USERPWD",
                 "value": "pwd"
+              },
+              {
+                "name": "APIKEY",
+                "value": "key"
+              },
+              {
+                "name": "APIKEY_HEADERNAME",
+                "value": "headername"
               }]
           },
           "httpsOnly": true
