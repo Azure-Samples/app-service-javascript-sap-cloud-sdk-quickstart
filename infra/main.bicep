@@ -40,7 +40,7 @@ param oDataUserpwd string = ''
 param _APIKey string = ''
 
 @description('API Key Header Name')
-param ApiKeyHeaderName string = 'headername'
+param ApiKeyHeaderName string = 'APIKey'
 
 var abbrs = loadJsonContent('./abbreviations.json')
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
@@ -93,7 +93,7 @@ module appServicePlan './core/host/appserviceplan.bicep' = {
     location: location
     tags: tags
     sku: {
-      name: 'F1'
+      name: 'B1'
     }
   }
 }
