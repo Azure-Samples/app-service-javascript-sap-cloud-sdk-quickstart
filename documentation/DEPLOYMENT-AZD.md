@@ -1,6 +1,6 @@
 # Deployment via Azure Developer CLI
 
-> **Note** - The repository is compliant with version [0.5.0-beta.1](https://github.com/Azure/azure-dev/releases/tag/azure-dev-cli_0.5.0-beta.1) of the Azure Developer CLI. Make sure that you are using the same version to avoid incompatibilities due to different versions.
+> **Note** - The repository is compatible with version [0.5.0-beta.2](https://github.com/Azure/azure-dev/releases/tag/azure-dev-cli_0.5.0-beta.2) of the Azure Developer CLI. Make sure that you are using the same version to avoid incompatibilities due to different versions.
 
 In this example we use the [Azure Developer CLI](https://github.com/Azure/azure-dev) to deploy the project. Learn more about [this tool on Microsoft learn](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview)
 
