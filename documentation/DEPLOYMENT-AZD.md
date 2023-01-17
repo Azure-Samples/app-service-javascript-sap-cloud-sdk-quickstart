@@ -1,6 +1,9 @@
 # Deployment via Azure Developer CLI
 
-> **Note** - The repository is compatible with version [0.5.0-beta.2](https://github.com/Azure/azure-dev/releases/tag/azure-dev-cli_0.5.0-beta.2) of the Azure Developer CLI. Make sure that you are using the same version to avoid incompatibilities due to different versions.
+> **Note** - The repository is compatible with version [0.5.0-beta.3](https://github.com/Azure/azure-dev/releases/tag/azure-dev-cli_0.5.0-beta.3) of the Azure Developer CLI. Make sure that you are using the same version to avoid incompatibilities due to different versions.
+
+> ⚠ **Attention** - if you are using a personal Azure account, the new logon flow provided by `azd` is not yet fully functional, see issue [1398](https://github.com/Azure/azure-dev/issues/1398) in the `azd` repository. You must use the fallback to the Azure CLI logon flow via `azd config set auth.useAzCliAuth true`. If you are usinf the `devcontainer` or GitHub Codespaces, then make sure to add the Azure CLI feature in the `devcontainer.json` file. We provide the corresponding template as [/templates/devcontainer.json.fallback](../templates/devcontainer.json.fallback) in this repository.
+
 
 In this example we use the [Azure Developer CLI](https://github.com/Azure/azure-dev) to deploy the project. Learn more about [this tool on Microsoft learn](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview)
 
