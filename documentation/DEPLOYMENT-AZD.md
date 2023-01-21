@@ -4,7 +4,6 @@
 
 > **Warning** - if you are using a **personal Azure account**, the new logon flow provided by `azd` is not yet fully functional, see issue [1398](https://github.com/Azure/azure-dev/issues/1398) in the `azd` repository. You must use the fallback to the Azure CLI logon flow via `azd config set auth.useAzCliAuth true`. If you are using the `devcontainer` or GitHub Codespaces, then make sure to add the Azure CLI feature in the `devcontainer.json` file. We provide the corresponding template as [/templates/devcontainer.json.fallback](../templates/devcontainer.json.fallback) in this repository.
 
-
 In this example we use the [Azure Developer CLI](https://github.com/Azure/azure-dev) to deploy the project. Learn more about [this tool on Microsoft learn](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview)
 
 ## Prerequisite
@@ -175,9 +174,9 @@ As you can see from the first line of the file, the manifest is backed by a lang
 
 ## Infrastructure as Code - alternatives
 
-In our sample project we used `Bicep` to describe the Infrastructure as code. This is a convenient way when dealing with Azure resources. You find more about `Bicep` in the [official documentation](https://learn.microsoft.com/azure/azure-resource-manager/bicep/).
+We use `Bicep` as default option to describe the Infrastructure as code. This is a convenient way when dealing with Azure resources. You find more about `Bicep` in the [official documentation](https://learn.microsoft.com/azure/azure-resource-manager/bicep/).
 
-Besides `Bicep` the `azd` also supports the definition of the infrastructure via [Terraform](https://www.terraform.io/). This is not reflected in our sample repository but feel free to explore it as described [here](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
+Besides `Bicep` the `azd` also supports the definition of the infrastructure via [Terraform](https://www.terraform.io/). If you want to use this option for the deployment we got you covered. You find the instructions [here](./DEPLOYMENT-AZD-TERRAFORM.md)
 
 ## Cleanup
 
