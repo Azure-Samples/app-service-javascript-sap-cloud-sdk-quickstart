@@ -29,7 +29,7 @@ resource "azurerm_linux_web_app" "web" {
   tags                = var.tags
 
   site_config {
-    always_on        = true
+    always_on        = var.always_on
     ftps_state       = "FtpsOnly"
     app_command_line = var.app_command_line
     application_stack {

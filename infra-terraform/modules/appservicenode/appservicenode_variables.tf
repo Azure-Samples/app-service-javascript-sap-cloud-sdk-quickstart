@@ -49,3 +49,9 @@ variable "node_version" {
   type        = string
   default     = "16-lts"
 }
+
+variable "always_on" {
+  description = "The always on setting for the app service."
+  type        = bool
+  default     = true
+}

@@ -89,8 +89,8 @@ module "api" {
   rg_name        = azurerm_resource_group.rg.name
   resource_token = local.resource_token
 
-  tags               = merge(local.tags, { "azd-service-name" : "api" })
-  service_name       = "${local.abbrWebSitesAppService}api-${local.resource_token}"
+  tags               = merge(local.tags, { "azd-service-name" : "sap-cloud-sdk-api" })
+  service_name       = "sap-cloud-sdk-api"
   appservice_plan_id = module.appserviceplan.APPSERVICE_PLAN_ID
   app_settings = {
     "SCM_DO_BUILD_DURING_DEPLOYMENT"        = "true"
@@ -105,6 +105,7 @@ module "api" {
 
   app_command_line = ""
 
+  always_on = false
   identity = [{
     type = "SystemAssigned"
   }]
