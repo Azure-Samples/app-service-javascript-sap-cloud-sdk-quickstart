@@ -14,8 +14,35 @@ variable "principal_id" {
   default     = ""
 }
 
-variable "useAPIM" {
-  description = "Flag to use Azure API Management to mediate the calls between the Web frontend and the backend API."
-  type        = bool
-  default     = false
+// App specific parameters - provide the values via the main.parameters.json referencing e.g. environment parameters
+variable "oDataUrl" {
+  description = "SAP OData service URL"
+  type        = string
+  ddefault    = "https://sandbox.api.sap.com/s4hanacloud"
+}
+
+variable "oDataUsername" {
+  description = "SAP OData user name"
+  type        = string
+  default     = ""
+}
+
+variable "oDataUserpwd" {
+  description = "SAP OData user password"
+  type        = string
+  default     = ""
+  sensitive   = true
+}
+
+variable "_APIKey" {
+  description = "API Key"
+  type        = string
+  default     = ""
+  sensitive   = true
+}
+
+variable "ApiKeyHeaderName" {
+  description = "API Key Header Name"
+  type        = string
+  default     = "APIKey"
 }
