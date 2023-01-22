@@ -1,3 +1,4 @@
 .azure
 node_modules
 dist
+infra-terraform/.terraform.lock.hcl

@@ -1,0 +1,15 @@
+{
+    "folders": [
+        {
+            "path": "../",
+            "name": "SAP Cloud SDK on Azure App Service Quickstart - Bicep"
+        }
+    ],
+    "settings": {
+        "files.exclude": {
+            "infra-terraform": true,
+            "workspaces": true
+        },
+        "debug.internalConsoleOptions": "neverOpen"
+    }
+}

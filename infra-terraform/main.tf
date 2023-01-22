@@ -77,6 +77,7 @@ module "appserviceplan" {
   rg_name        = azurerm_resource_group.rg.name
   tags           = azurerm_resource_group.rg.tags
   resource_token = local.resource_token
+  sku_name       = "F1"
 }
 
 # ------------------------------------------------------------------------------------------------------
@@ -89,7 +90,7 @@ module "api" {
   resource_token = local.resource_token
 
   tags               = merge(local.tags, { "azd-service-name" : "api" })
-  service_name       = "${local.abbrWebSitesAppService}api-${resourceToken}"
+  service_name       = "${local.abbrWebSitesAppService}api-${local.resource_token}"
   appservice_plan_id = module.appserviceplan.APPSERVICE_PLAN_ID
   app_settings = {
     "SCM_DO_BUILD_DURING_DEPLOYMENT"        = "true"

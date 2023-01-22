@@ -18,7 +18,7 @@ variable "principal_id" {
 variable "oDataUrl" {
   description = "SAP OData service URL"
   type        = string
-  ddefault    = "https://sandbox.api.sap.com/s4hanacloud"
+  default     = "https://sandbox.api.sap.com/s4hanacloud"
 }
 
 variable "oDataUsername" {
