@@ -6,7 +6,7 @@
 
 * [SAP Cloud SDK repos for JavaScript](https://github.com/SAP/cloud-sdk-js)
 
-* [SAP Cloud SDK for JavaScript API documentation](https://sap.github.io/cloud-sdk/api/2.10.0/)
+* [SAP Cloud SDK for JavaScript API documentation](https://sap.github.io/cloud-sdk/api/v2/index.html)
 
 * [.NET speaks OData too – how to implement Azure App Service with SAP Gateway](https://github.com/MartinPankraz/AzureSAPODataReader)
 
