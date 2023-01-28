@@ -1,11 +1,19 @@
 # Infrastructure Deployment via Azure Developer CLI for Terraform
 
-The basic steps of using `azd` to setup remain unchanged as described [here](./DEPLOYMENT-AZD.md). There are only two spots that differ from a technical perspective, namely:
+The basic steps of using `azd` to setup remain unchanged as described [here](./DEPLOYMENT-AZD.md). There are three spots that differ from a technical perspective, namely:
 
+* The login flow via Azure CLI
 * The specification of Terraform as IaC in the `azure.yaml` manifest.
 * The definition of the infrastructure via Terraform files and modules
 
 In the following sections describe the points that need to be taken in to account if you want to use Terraform.
+
+## The login flow
+
+To deploy the infrastructure via Terraform `azd` uses the [Azure Terraform Provider](https://github.com/hashicorp/terraform-provider-azurerm) under the hood. This provider (not `azd`) is using the Azure CLI login flow. As a consequence when using Terraform you must enforce `azd` to make use of this flow:
+
+* Configure `azd` to make use of the Azure CLI via the command `azd config set auth.useAzCliAuth true`.
+* If you are using the `devcontainer` or GitHub Codespaces, make sure to add the Azure CLI feature in the `devcontainer.json` file. We provide the corresponding template as [/templates/devcontainer.json.azcli](../templates/devcontainer.json.azcli) in this repository.
 
 ## Adjustment of manifest
 
@@ -81,7 +89,7 @@ As you can see we use the variables defined in the `variables.tf` file to config
 
 ## Mind the differences
 
-The Terraform-based setup in the `azd` was introduced a later than the òne using Bicep. Due to that and due to the differences between them, some things work differently. Here are two things that we think are worth to mention.
+The Terraform-based setup in the `azd` was introduced a later than the one using Bicep. Due to that and due to the differences between them, some things work differently. Here are two things that we think are worth to mention.
 
 ### Purging of Azure Key Vault
 

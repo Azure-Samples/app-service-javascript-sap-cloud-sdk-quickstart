@@ -2,7 +2,7 @@
 
 > **Note** - The repository is compatible with version [0.5.0-beta.3](https://github.com/Azure/azure-dev/releases/tag/azure-dev-cli_0.5.0-beta.3) of the Azure Developer CLI. Make sure that you are using the same version to avoid incompatibilities due to different versions.
 
-> **Warning** - if you are using a **personal Azure account**, the new logon flow provided by `azd` is not yet fully functional, see issue [1398](https://github.com/Azure/azure-dev/issues/1398) in the `azd` repository. You must use the fallback to the Azure CLI logon flow via `azd config set auth.useAzCliAuth true`. If you are using the `devcontainer` or GitHub Codespaces, then make sure to add the Azure CLI feature in the `devcontainer.json` file. We provide the corresponding template as [/templates/devcontainer.json.fallback](../templates/devcontainer.json.fallback) in this repository.
+> **Warning** - if you are using a **personal Azure account**, the new login flow provided by `azd` is not yet fully functional, see issue [1398](https://github.com/Azure/azure-dev/issues/1398) in the `azd` repository. You must use the fallback to the Azure CLI login flow via `azd config set auth.useAzCliAuth true`. If you are using the `devcontainer` or GitHub Codespaces, then make sure to add the Azure CLI feature in the `devcontainer.json` file. We provide the corresponding template as [/templates/devcontainer.json.azcli](../templates/devcontainer.json.azcli) in this repository.
 
 In this example we use the [Azure Developer CLI](https://github.com/Azure/azure-dev) to deploy the project. Learn more about [this tool on Microsoft learn](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview)
 
@@ -172,11 +172,11 @@ As you can see from the first line of the file, the manifest is backed by a lang
 
  Our setup follows those defaults and there no explicit configuration is necessary.
 
-## Infrastructure as Code - alternatives
+## Infrastructure as Code
 
 We use `Bicep` as default option to describe the Infrastructure as code. This is a convenient way when dealing with Azure resources. You find more about `Bicep` in the [official documentation](https://learn.microsoft.com/azure/azure-resource-manager/bicep/).
 
-Besides `Bicep` the `azd` also supports the definition of the infrastructure via [Terraform](https://www.terraform.io/). If you want to use this option for the deployment we got you covered. You find the instructions [here](./DEPLOYMENT-AZD-TERRAFORM.md)
+Besides `Bicep` the `azd` CLI also supports the definition of the infrastructure via [Terraform](https://www.terraform.io/). To give you the freedom of choice this repository also contains the infrastructure definition via Terraform modules. You find the instructions [here](./DEPLOYMENT-AZD-TERRAFORM.md)
 
 ## Cleanup
 
