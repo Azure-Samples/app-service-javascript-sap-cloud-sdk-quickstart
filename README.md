@@ -6,7 +6,7 @@ This repos serves as quick-start project showcasing [SAP Cloud SDK for JavaScrip
 
 It uses the [Business Partner OData API](https://api.sap.com/api/OP_API_BUSINESS_PARTNER_SRV/overview) for SAP S/4HANA as an example.
 
-The project is setup as per the best practices advocated by the [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview).
+The project is setup as per the best practices advocated by the [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview) and referenced as [official awesome azd template](https://azure.github.io/awesome-azd/?tags=sapcloudsdk).
 
 ![Illustration of app setup in Azure](assets/project-overview-azd-style.png)
 
@@ -51,7 +51,7 @@ Use any OData enabled SAP system:
 ### Quickstart 🚀
 
 0. familiarize yourself with the [SAP Cloud SDK for JavaScript developer tutorial](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction)
-1. git clone [repository clone url](https://github.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart.git)
+1. git clone [with repository url](https://github.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart.git) or use Azure Developer CLI `azd up --template app-service-javascript-sap-cloud-sdk-quickstart`
 2. `cd app-service-javascript-sap-cloud-sdk-quickstart/src/api`
 3. `npm install`
 4. `npm run start:dev`
@@ -90,7 +90,7 @@ There are multiple ways to deploy this project to Azure. We provide two options 
 
 ## What's next?
 
-You can do a lot more once the app is deployed. Curious? We go you covered with some more information [here](documentation/WHATS-NEXT.md)
+You can do a lot more once the app is deployed. Curious? We go you covered with some more information [here](documentation/WHATS-NEXT.md).
 
 ## Troubleshooting 🩺
 
