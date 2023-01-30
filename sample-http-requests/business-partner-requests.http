@@ -1,3 +1,8 @@
+GET http://localhost:8080/health HTTP/1.1
+content-type: application/json
+
+###
+
 GET http://localhost:8080/business-partner HTTP/1.1
 content-type: application/json
 x-ms-token-aad-access-token: your-access-token-if-any
