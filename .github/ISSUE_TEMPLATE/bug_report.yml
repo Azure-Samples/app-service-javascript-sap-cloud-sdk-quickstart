@@ -11,15 +11,17 @@ body:
       options:
         - label: I have searched the existing issues
           required: true
-  - type: checkboxes
+  - type: dropdown
+    id: area
     attributes:
       label: What type of issue are you facing
       description: What type of issue are you facing?
       options:
-        - label: bug report
-        - label: documentation issue or request
-        - label: regression (a behavior that used to work and stopped in a new version)
-          required: true
+        - bug report
+        - documentation issue or request
+        - regression (a behavior that used to work and stopped in a new version)
+    validations:
+      required: true
   - type: textarea
     attributes:
       label: Describe the bug
