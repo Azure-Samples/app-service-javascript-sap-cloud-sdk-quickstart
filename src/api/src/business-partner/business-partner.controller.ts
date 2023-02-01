@@ -9,6 +9,7 @@ import {
 	Post,
 	Put,
 	Headers,
+	Render
 } from "@nestjs/common";
 import {
 	BusinessPartner,
@@ -23,10 +24,11 @@ export class BusinessPartnerController {
 	) {}
 
 	@Get()
-	async getBusinessPartners(@Headers() headers): Promise<BusinessPartner[]> {
+	@Render('bupa')
+	async getBusinessPartners(@Headers() headers): Promise<object> {
 		// retrieve X-MS-TOKEN-AAD-ACCESS-TOKEN token from request header
 		const token = headers["x-ms-token-aad-access-token"];
-		return await this.businessPartnerService
+		let businessPartners = await this.businessPartnerService
 			.getAllBusinessPartners(token)
 			.catch((error) => {
 				throw this.createHttpException(
@@ -34,6 +36,8 @@ export class BusinessPartnerController {
 					error,
 				);
 			});
+			//console.log(JSON.stringify(businessPartners));
+		return { title: 'SAP Business Partners', bupas: businessPartners };
 	}
 
 	@Get('/:id')

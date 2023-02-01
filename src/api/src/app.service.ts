@@ -29,6 +29,6 @@ export class AppService {
           fetchCsrfToken: false
         }
       );
-      return response;
+      return {code: response.status, message: response.statusText};
     }
 }

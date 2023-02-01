@@ -12,7 +12,6 @@ export class AppController {
   }
 
   @Get('/health')
-  @Render('index')
   async getHealthStatus (): Promise<object> {
     return await this.appService.checkServiceAvailability()
   }

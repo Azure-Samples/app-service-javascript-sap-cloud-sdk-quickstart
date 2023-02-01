@@ -28,7 +28,7 @@ export class BusinessPartnerService {
 					businessPartnerAddressApi.schema.ADDRESS_ID,
 				),
 			)
-			.top(10)
+			.top(20)
 			.filter(businessPartnerApi.schema.BUSINESS_PARTNER_CATEGORY.equals("1"));
 
 		return await req.execute(this.setupConfig(req, token));
