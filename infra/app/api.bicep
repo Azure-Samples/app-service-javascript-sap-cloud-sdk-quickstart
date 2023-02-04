@@ -9,8 +9,9 @@ param appServicePlanId string
 param appSettings object = {}
 param keyVaultName string
 param serviceName string = 'sap-cloud-sdk-api'
+param healthCheckPath string = '/health'
 
-module api '../core/host/appservice.bicep' = {
+module api '../core_local/host/appservice.bicep' = {
   name: '${name}-app-module'
   params: {
     name: name
@@ -25,6 +26,7 @@ module api '../core/host/appservice.bicep' = {
     runtimeName: 'node'
     runtimeVersion: '16'
     scmDoBuildDuringDeployment: true
+    healthCheckPath: healthCheckPath
   }
 }
 
