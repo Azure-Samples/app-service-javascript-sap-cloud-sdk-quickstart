@@ -10,6 +10,10 @@ param appSettings object = {}
 param keyVaultName string
 param serviceName string = 'sap-cloud-sdk-api'
 param healthCheckPath string = '/health'
+//Set this parameter to true im main.bicep if you want to use the free plan that does not support 64 bit workers
+param use32BitWorkerProcess bool = false
+
+param alwaysOn bool = true
 
 module api '../core_local/host/appservice.bicep' = {
   name: '${name}-app-module'
@@ -27,6 +31,8 @@ module api '../core_local/host/appservice.bicep' = {
     runtimeVersion: '16'
     scmDoBuildDuringDeployment: true
     healthCheckPath: healthCheckPath
+    use32BitWorkerProcess: use32BitWorkerProcess
+    alwaysOn: alwaysOn
   }
 }
 
