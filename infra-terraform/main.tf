@@ -1,9 +1,10 @@
 locals {
-  tags                   = { azd-env-name : var.environment_name }
-  sha                    = base64encode(sha256("${var.environment_name}${var.location}${data.azurerm_client_config.current.subscription_id}"))
-  resource_token         = substr(replace(lower(local.sha), "[^A-Za-z0-9_]", ""), 0, 13)
-  abbrKeyVaultVaults     = "kv-"
-  abbrWebSitesAppService = "app-"
+  tags                  = { azd-env-name : var.environment_name }
+  sha                   = base64encode(sha256("${var.environment_name}${var.location}${data.azurerm_client_config.current.subscription_id}"))
+  resource_token        = substr(replace(lower(local.sha), "[^A-Za-z0-9_]", ""), 0, 13)
+  abbr_key_vault_vaults = "kv-"
+  always_on             = var.sku_name == "F1" || var.sku_name == "FREE" || var.sku_name == "SHARED" ? false : true
+  use_32_bit_worker     = var.sku_name == "F1" || var.sku_name == "FREE" || var.sku_name == "SHARED" ? true : false
 }
 # ------------------------------------------------------------------------------------------------------
 # Deploy resource Group
@@ -58,11 +59,11 @@ module "keyvault" {
   access_policy_object_ids = [module.api.IDENTITY_PRINCIPAL_ID]
   secrets = [
     {
-      name  = "${local.abbrKeyVaultVaults}secret-odata-password"
+      name  = "${local.abbr_key_vault_vaults}secret-odata-password"
       value = var.oDataUserpwd
     },
     {
-      name  = "${local.abbrKeyVaultVaults}secret-apikey"
+      name  = "${local.abbr_key_vault_vaults}secret-apikey"
       value = var._APIKey
     }
   ]
@@ -77,14 +78,14 @@ module "appserviceplan" {
   rg_name        = azurerm_resource_group.rg.name
   tags           = azurerm_resource_group.rg.tags
   resource_token = local.resource_token
-  sku_name       = "F1"
+  sku_name       = var.sku_name
 }
 
 # ------------------------------------------------------------------------------------------------------
 # Deploy app service api
 # ------------------------------------------------------------------------------------------------------
 module "api" {
-  source         = "./modules/appservicenode"
+  source         = "./modules_local/appservicenode"
   location       = var.location
   rg_name        = azurerm_resource_group.rg.name
   resource_token = local.resource_token
@@ -98,14 +99,15 @@ module "api" {
     "APPLICATIONINSIGHTS_CONNECTION_STRING" = module.applicationinsights.APPLICATIONINSIGHTS_CONNECTION_STRING
     "ODATA_URL"                             = var.oDataUrl
     "ODATA_USERNAME"                        = var.oDataUsername
-    "ODATA_USERPWD"                         = "@Microsoft.KeyVault(SecretUri=${module.keyvault.AZURE_KEY_VAULT_ENDPOINT}secrets/${local.abbrKeyVaultVaults}secret-odata-password)"
-    "APIKEY"                                = "@Microsoft.KeyVault(SecretUri=${module.keyvault.AZURE_KEY_VAULT_ENDPOINT}secrets/${local.abbrKeyVaultVaults}secret-apikey)"
+    "ODATA_USERPWD"                         = "@Microsoft.KeyVault(SecretUri=${module.keyvault.AZURE_KEY_VAULT_ENDPOINT}secrets/${local.abbr_key_vault_vaults}secret-odata-password)"
+    "APIKEY"                                = "@Microsoft.KeyVault(SecretUri=${module.keyvault.AZURE_KEY_VAULT_ENDPOINT}secrets/${local.abbr_key_vault_vaults}secret-apikey)"
     "APIKEY_HEADERNAME"                     = var.ApiKeyHeaderName
   }
 
-  app_command_line = ""
-
-  always_on = false
+  app_command_line  = ""
+  health_check_path = var.health_check_path
+  always_on         = local.always_on
+  use_32_bit_worker = local.use_32_bit_worker
   identity = [{
     type = "SystemAssigned"
   }]

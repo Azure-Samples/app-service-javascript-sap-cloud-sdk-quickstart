@@ -15,6 +15,19 @@ variable "principal_id" {
 }
 
 // App specific parameters - provide the values via the main.parameters.json referencing e.g. environment parameters
+variable "sku_name" {
+  description = "The name of the SKU used to create the key vault"
+  type        = string
+  default     = "F1"
+}
+
+variable "health_check_path" {
+  description = "The path to the health check endpoint"
+  type        = string
+  default     = "/health"
+}
+
+
 variable "oDataUrl" {
   description = "SAP OData service URL"
   type        = string
