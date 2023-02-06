@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { executeHttpRequestWithOrigin } from '@sap-cloud-sdk/http-client';
+import { executeHttpRequestWithOrigin, HttpResponse } from '@sap-cloud-sdk/http-client';
 
 @Injectable()
 export class AppService {
@@ -15,20 +15,30 @@ export class AppService {
    * https://sap.github.io/cloud-sdk/api/v2/functions/sap_cloud_sdk_http_client.executeHttpRequest.html
    */
     async checkServiceAvailability (): Promise<object> {
-      const response = await executeHttpRequestWithOrigin(
-        {
-          url: process.env.ODATA_URL + '/sap/opu/odata/sap/API_BUSINESS_PARTNER'
-        },
-        {
-          method: 'head',
-          headers: {
-            custom: { apiKey: process.env.APIKEY }
+      var response: HttpResponse;
+      var result: object;
+      try {
+        response = await executeHttpRequestWithOrigin(
+          {
+            url: `${process.env.ODATA_URL}/sap/opu/odata/sap/API_BUSINESS_PARTNER`
+          },
+          {
+            method: 'head',
+            headers: {
+              custom: { apiKey: process.env.APIKEY }
+            }
+          },
+          {
+            fetchCsrfToken: false
           }
-        },
-        {
-          fetchCsrfToken: false
-        }
-      );
-      return {code: response.status, message: response.statusText};
+        )
+        result = {code: response.status, message: response.statusText};
+
+      } catch (err) {
+        //console.log(err);
+        result = {message: err.message};
+      }
+
+      return result;
     }
 }

@@ -6,6 +6,12 @@ Clear `service-specifications` folder and maintain `service-mapping.json`.
 
 [Learn more](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/execute-an-odata-request#generate-service-entities) about how to create OData service entities based on your metadata on the SAP Cloud SDK docs.
 
+## Configure health checks
+
+This repos automatically sets up the Azure App Service health endpoint pinging your target OData service every minute using HEAD operation. [Learn more](https://learn.microsoft.com/azure/app-service/monitor-instances-health-check?tabs=dotnet#configuration) how to fine tune it to your needs on the Microsoft docs.
+
+> **Warning** - Be aware that the trial instance of the [Business Partner API](https://api.sap.com/api/API_BUSINESS_PARTNER/overview) throttles easily.
+
 ## Authentication with Azure AD 🔐
 
 [Configure](https://learn.microsoft.com/azure/app-service/configure-authentication-provider-aad) your App Service or Azure Functions app to use Azure AD login. Use standard variable `X-MS-TOKEN-AAD-ACCESS-TOKEN` to retrieve the access token from the request header. [Learn more](https://learn.microsoft.com/azure/app-service/configure-authentication-oauth-tokens#retrieve-tokens-in-app-code)
