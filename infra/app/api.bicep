@@ -9,8 +9,12 @@ param appServicePlanId string
 param appSettings object = {}
 param keyVaultName string
 param serviceName string = 'sap-cloud-sdk-api'
+param healthCheckPath string = '/health'
+param use32BitWorkerProcess bool = false
 
-module api '../core/host/appservice.bicep' = {
+param alwaysOn bool = true
+
+module api '../core_local/host/appservice.bicep' = {
   name: '${name}-app-module'
   params: {
     name: name
@@ -25,6 +29,9 @@ module api '../core/host/appservice.bicep' = {
     runtimeName: 'node'
     runtimeVersion: '16'
     scmDoBuildDuringDeployment: true
+    healthCheckPath: healthCheckPath
+    use32BitWorkerProcess: use32BitWorkerProcess
+    alwaysOn: alwaysOn
   }
 }
 

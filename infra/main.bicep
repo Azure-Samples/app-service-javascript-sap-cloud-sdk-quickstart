@@ -21,6 +21,10 @@ param keyVaultName string = ''
 param logAnalyticsName string = ''
 param resourceGroupName string = ''
 
+// Name of the SKU; default is F1 (Free)
+@description('Name of the SKU of the App Service Plan')
+param skuName string = 'F1'
+
 @description('Id of the user or app to assign application roles')
 param principalId string = ''
 
@@ -66,11 +70,13 @@ module api './app/api.bicep' = {
     keyVaultName: keyVault.outputs.name
     appSettings: {
       ODATA_URL: oDataUrl
-      ODATA_USERNAME: oDataUsername 
-      ODATA_USERPWD:  '@Microsoft.KeyVault(SecretUri=${keyVault.outputs.endpoint}secrets/${abbrs.keyVaultVaults}secret-odata-password)'
-      APIKEY:  '@Microsoft.KeyVault(SecretUri=${keyVault.outputs.endpoint}secrets/${abbrs.keyVaultVaults}secret-apikey)'
-      APIKEY_HEADERNAME: ApiKeyHeaderName 
+      ODATA_USERNAME: oDataUsername
+      ODATA_USERPWD: '@Microsoft.KeyVault(SecretUri=${keyVault.outputs.endpoint}secrets/${abbrs.keyVaultVaults}secret-odata-password)'
+      APIKEY: '@Microsoft.KeyVault(SecretUri=${keyVault.outputs.endpoint}secrets/${abbrs.keyVaultVaults}secret-apikey)'
+      APIKEY_HEADERNAME: ApiKeyHeaderName
     }
+    use32BitWorkerProcess: skuName == 'F1' || skuName == 'FREE' || skuName == 'SHARED' ? true : false
+    alwaysOn: skuName == 'F1' || skuName == 'FREE' || skuName == 'SHARED' ? false : true
   }
 }
 
@@ -93,7 +99,7 @@ module appServicePlan './core/host/appserviceplan.bicep' = {
     location: location
     tags: tags
     sku: {
-      name: 'F1'
+      name: skuName
     }
   }
 }
@@ -112,7 +118,7 @@ module keyVault './core/security/keyvault.bicep' = {
 
 // Store Odata Password in KeyVault
 module oDataPassword './core/security/keyvault-secret.bicep' = {
-  name : 'odatapassword'
+  name: 'odatapassword'
   scope: rg
   params: {
     name: '${abbrs.keyVaultVaults}secret-odata-password'
@@ -124,7 +130,7 @@ module oDataPassword './core/security/keyvault-secret.bicep' = {
 
 // Store API key in KeyVault
 module ApiKey './core/security/keyvault-secret.bicep' = {
-  name : 'apikey'
+  name: 'apikey'
   scope: rg
   params: {
     name: '${abbrs.keyVaultVaults}secret-apikey'
@@ -146,7 +152,6 @@ module monitoring './core/monitor/monitoring.bicep' = {
     applicationInsightsDashboardName: !empty(applicationInsightsDashboardName) ? applicationInsightsDashboardName : '${abbrs.portalDashboards}${resourceToken}'
   }
 }
-
 
 // App outputs
 output APPLICATIONINSIGHTS_CONNECTION_STRING string = monitoring.outputs.applicationInsightsConnectionString
