@@ -88,6 +88,8 @@ There are multiple ways to deploy this project to Azure. We provide two options 
 1. via template deployment and VS Code extension. This approach allows an quick deployment to Azure but does not necessarily reflect the best practices. You find more information on this option [here](documentation/DEPLOYMENT-VSCODE.md).
 2. via [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview) using `azd up`. This approach enables a quick and easy deployment and already contains best practices. It serves as a perfect starting point for a production grade setup. You find more information on this option [here](documentation/DEPLOYMENT-AZD.md).
 
+> **Note** - If you choose to deploy to Azure via `azd` we provide two options to define the infrastructure as code, namely `Bicep` and `Terraform`. To make your life easier we provide two distinct [workspaces](https://code.visualstudio.com/docs/editor/workspaces#_multiroot-workspaces) for that to show you the relevant files and folders. If you want to go for `Bicep` you can open the workspace `workspaces/azd-bicep.code-workspace`, for Terraform go for the workspace `workspaces/azd-terraform.code-workspace`.
+
 ## What's next?
 
 You can do a lot more once the app is deployed. Curious? We go you covered with some more information [here](documentation/WHATS-NEXT.md).

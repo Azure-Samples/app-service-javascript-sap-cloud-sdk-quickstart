@@ -8,3 +8,7 @@ services:
     project: ./src/api
     language: ts
     host: appservice
+# Remove the comments from the lines below to enable the deployment of the infrastructure via Terraform
+#infra:
+#  provider: terraform
+#  path: ./infra-terraform
