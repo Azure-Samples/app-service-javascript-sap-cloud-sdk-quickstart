@@ -1,5 +1,7 @@
 # Infrastructure Deployment via Azure Developer CLI for Terraform
 
+> **Note** - there are known issues when using the Terraform provider in combination with GitHub Codespaces i.e., the login flow via the Azure CLI gets stuck in the callback. You find the details in this [issue](https://github.com/Azure/azure-dev/pull/1497) of the `azd` repository as well as in this [issue](https://github.com/Azure/azure-dev/pull/1496) in the Azure CLI repository. The described workaround in the second issue did not do the trick for us. Hence, we currently cannot support GitHub Codespaces in this type of infrastructure setup.
+
 The basic steps of using `azd` to setup remain unchanged as described [here](./DEPLOYMENT-AZD.md). There are three spots that differ from a technical perspective, namely:
 
 * The login flow via Azure CLI
