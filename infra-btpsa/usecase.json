@@ -1,0 +1,85 @@
+{
+    "$schema": "https://raw.githubusercontent.com/SAP-samples/btp-setup-automator/main/libs/btpsa-usecase.json",
+    "aboutThisUseCase": {
+        "name": "SAP Cloud SDK Quickstart",
+        "description": "This usecase provides all necessary information to create and deploy a SAP Cloud SDK based Node.js app a SAP BTP account to Cloud Foundry.",
+        "author": "christian.lechner@sap.com",
+        "testStatus": "tested successfully",
+        "usageStatus": "READY TO BE USED",
+        "relatedLinks": [
+            "https://github.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart"
+        ]
+    },
+    "services": [
+        {
+            "name": "cloudfoundry",
+            "plan": "free",
+            "category": "ENVIRONMENT"
+        },
+        {
+            "name": "xsuaa",
+            "plan": "application",
+            "category": "SERVICE"
+        },
+        {
+            "name": "destination",
+            "plan": "lite",
+            "category": "SERVICE",
+            "parameters": {
+                "HTML5Runtime_enabled": "true",
+                "init_data": {
+                    "subaccount": {
+                        "existing_destinations_policy": "fail",
+                        "destinations": [
+                            {
+                                "Name": "S/4HANA API Hub Sandbox",
+                                "Type": "HTTP",
+                                "URL": "https://sandbox.api.sap.com/s4hanacloud",
+                                "Authentication": "BasicAuthentication",
+                                "ProxyType": "Internet",
+                                "User": "ODATA_USERNAME",
+                                "Password": "ODATA_USERPWD"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "category": "SERVICE",
+            "name": "privatelink",
+            "plan": "standard",
+            "entitleonly": true
+        }
+    ],
+    "executeBeforeAccountSetup": [
+        {
+            "description": "Delete quickstart folder in case it already exists (e.g. from a previous script call)",
+            "command": "rm -rf quickstart/"
+        }
+    ],
+    "executeAfterAccountSetup": [
+        {
+            "description": "Get the quickstart code",
+            "command": "git clone https://github.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart /home/user/quickstart"
+        },
+        {
+            "description": "Building multi target application assets",
+            "command": "cd quickstart/ && mbt build -t ./ "
+        },
+        {
+            "description": "Deploying the built multi target application",
+            "command": "cd quickstart/ && cf deploy cloudsdkapp_1.0.0.mtar"
+        },
+        {
+            "description": "YOUR MANUAL TODO 1 (Configuration)",
+            "command": "echo '- Create service instance for Private Link service'"
+        }
+    ],
+    "executeToPruneUseCase": [
+        {
+            "description": "undeploy the CAP app",
+            "command": "cf undeploy cloudsdkapp --delete-service-brokers --delete-service-keys --delete-services -f"
+        }
+    ]
+}
