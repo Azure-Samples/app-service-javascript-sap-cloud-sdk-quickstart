@@ -90,6 +90,10 @@ There are multiple ways to deploy this project to Azure. We provide two options 
 
 > **Note** - If you choose to deploy to Azure via `azd` we provide two options to define the infrastructure as code, namely `Bicep` and `Terraform`. To make your life easier we provide two distinct [workspaces](https://code.visualstudio.com/docs/editor/workspaces#_multiroot-workspaces) for that to show you the relevant files and folders. If you want to go for `Bicep` you can open the workspace `workspaces/azd-bicep.code-workspace`, for Terraform go for the workspace `workspaces/azd-terraform.code-workspace`.
 
+## Deploy to SAP BTP 🪂
+
+We provide the necessary configurations for the deployment to SAP BTP leveraging the open source project [btp setup automator](https://github.com/SAP-samples/btp-setup-automator). The configuration comprises the infrastructure as well as the mta build and the deployment to Cloud Foundry. You find more information [here](./documentation/DEPLOYMENT-BTPSA.md).
+
 ## What's next?
 
 You can do a lot more once the app is deployed. Curious? We go you covered with some more information [here](documentation/WHATS-NEXT.md).

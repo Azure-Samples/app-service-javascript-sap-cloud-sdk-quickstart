@@ -2,7 +2,7 @@
     "folders": [
         {
             "path": "../",
-            "name": "SAP Cloud SDK on Azure App Service Quickstart - Terraform"
+            "name": "SAP Cloud SDK Quickstart - SAP BTP"
         }
     ],
     "settings": {

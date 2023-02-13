@@ -4,7 +4,6 @@
     "region": "eu20",
     "globalaccount": "ID of your Global Account",
     "myemail": "Enter your email address here",
-    "mypassword": "Enter your password here",
     "loginmethod": "basicAuthentication",
     "subaccountname": "SAP-Cloud-SDK-Quickstart",
     "cfspacename": "development",
