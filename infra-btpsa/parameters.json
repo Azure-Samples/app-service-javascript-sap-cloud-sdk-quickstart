@@ -1,8 +1,8 @@
 {
     "$schema": "https://raw.githubusercontent.com/SAP-samples/btp-setup-automator/main/libs/btpsa-parameters.json",
     "usecasefile": "usecase.json",
-    "region": "us10",
-    "globalaccount": "Example Global Account",
+    "region": "eu20",
+    "globalaccount": "ID of your Global Account",
     "myemail": "Enter your email address here",
     "mypassword": "Enter your password here",
     "loginmethod": "basicAuthentication",

@@ -1,0 +1,19 @@
+{
+    "folders": [
+        {
+            "path": "../",
+            "name": "SAP Cloud SDK on Azure App Service Quickstart - Terraform"
+        }
+    ],
+    "settings": {
+        "files.exclude": {
+            "infra": true,
+            "infra-terraform":true,
+            "workspaces": true,
+            "azure.yaml": true,
+            ".azdo": true,
+            ".github": true
+        },
+        "debug.internalConsoleOptions": "neverOpen"
+    }
+}

@@ -23,18 +23,22 @@
 			"version": "os-provided"
 		}
 	},
-	"extensions": [
-		"ms-azuretools.vscode-azureappservice",
-		"ms-vscode.vscode-node-azure-pack",
-		"humao.rest-client",
-		"ms-azuretools.azure-dev",
-		"ms-azuretools.vscode-bicep",
-		"ms-azuretools.vscode-docker",
-		"ms-vscode.vscode-node-azure-pack",
-		"ms-vscode.js-debug",
-		"eg2.vscode-npm-script",
-		"rome.rome"
-	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-azuretools.vscode-azureappservice",
+				"ms-vscode.vscode-node-azure-pack",
+				"humao.rest-client",
+				"ms-azuretools.azure-dev",
+				"ms-azuretools.vscode-bicep",
+				"ms-azuretools.vscode-docker",
+				"ms-vscode.vscode-node-azure-pack",
+				"ms-vscode.js-debug",
+				"eg2.vscode-npm-script",
+				"rome.rome"
+			]
+		}
+	},
 	"forwardPorts": [
 		8080
 	],
