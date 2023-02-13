@@ -32,7 +32,8 @@
                         "existing_destinations_policy": "fail",
                         "destinations": [
                             {
-                                "Name": "S/4HANA API Hub Sandbox",
+                                "Name": "S4HANACloudSandbox",
+                                "Description": "SAP S/4HANA Cloud Sandbox",
                                 "Type": "HTTP",
                                 "URL": "https://sandbox.api.sap.com/s4hanacloud",
                                 "Authentication": "BasicAuthentication",
