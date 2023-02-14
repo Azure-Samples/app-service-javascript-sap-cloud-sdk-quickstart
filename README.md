@@ -51,7 +51,8 @@ Use any OData enabled SAP system:
 ### Quickstart 🚀
 
 0. familiarize yourself with the [SAP Cloud SDK for JavaScript developer tutorial](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction)
-1. git clone [with repository url](https://github.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart.git) or use Azure Developer CLI `azd up --template app-service-javascript-sap-cloud-sdk-quickstart`
+1. git clone [with repository url](https://github.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart.git) or use Azure Developer CLI template `azd up --template app-service-javascript-sap-cloud-sdk-quickstart`
+2. Select suitable [VS Code workspace](https://code.visualstudio.com/docs/editor/workspaces). We suggest [bicep](workspaces/azd-bicep.code-workspace) as it is the default for Azure Developer CLI.
 2. `cd app-service-javascript-sap-cloud-sdk-quickstart/src/api`
 3. `npm install`
 4. `npm run start:dev`
