@@ -1,45 +1,28 @@
 # Deployment via the btp setup automator
 
-> **Note** - We provide the workspace "workspaces/btpsa.code-workspace" for you to focus on the files and folders relevant for the SAP BTP setup.
+## Prerequisite
+
+We provide the workspace `workspaces/btpsa.code-workspace` for you to focus on the files and folders relevant for the SAP BTP setup. To make your flow as smooth as possible we also provide a dev container that spins up the `btp setup automator` (`btpsa`). The dev container is named "BTP Setup Automator (Stable)". You can also use the configuration for a GitHub Codespace. 
+
+> **Note** - Be aware that depending on your login flow there might be issues when it comes to [forwarded ports](https://docs.github.com/en/codespaces/managing-codespaces-for-your-organization/restricting-the-visibility-of-forwarded-ports) depending on your organizational settings.
 
 ## Setup
 
-There are different options to start the *btp setup automator* (btpsa). For this quickstarter we assume that you are using VS Code and have a Docker daemon up and running locally.
+We assume you are using either the dev container or GitHub Codespaces to get things going. There are further options to start the `btpsa` but we will not go into the details of them here. You find more information in the `btpsa` documentation [here](https://github.com/SAP-samples/btp-setup-automator/blob/main/docs/BASIC_SETUP.md).
 
-> **Note** - The provided Docker image of the btpsa can not be integrated into GitHub Codespaces or devcontainers without a bigger refactoring. We therefore focus on the local setup.
+### Configuration
 
-To use the *btp setup automator* (btpsa) you must spin up the Docker image provided in the [btpsa repository](https://github.com/SAP-samples/btp-setup-automator). Make sure that Docker is running and execute the following steps:
-
-1. Clone the repository in a folder of your choice:
-
-   ```bash
-   git clone https://github.com/SAP-samples/btp-setup-automator.git <your target folder>
-   ```
-
-2. Switch into the folder with the cloned sources and start the Docker Image of the btpsa with the following command:
-
-   - MacOs/Linux: `./run RunReleaseFromRegistry`
-   - Windows (PowerShell): `.\run.ps1 -RunReleaseFromRegistry $True`
-
-3. Check that the Docker container is up and running. Switch to VS Code, open the command palette (Windows: Ctrl+Shift+P ; Mac: Cmd+Shift+P) and select the Remote Containers: Attach to Running Container... command
-4. Select the `btp-setup-automator` container
-5. A new VS Code Window opens inside the btpsa Docker container and ready to setup the infrastructure on and deploy your app to SAP BTP.
-
-## Configuration
-
-### Filling the gaps
-
-We provide the necessary configuration for the btpsa in the folder `infra-btpsa` of the *quickstarter repository*. You find two files in this folder:
+We provide the necessary configuration for the `btpsa` via two files:
 
 - The `parameters.json` file containing the basic configuration of the setup like ID of the global account
 - The `usecase.json` file containing the scenario specific configuration like which services should be instantiated on SAP BTP.
 
-> **Note** - You do not need to care about entitling the services and apps to the subaccount, this is done automatically by the btpsa.
+> **Note** - You find these files also in the folder `infra-btpsa` of the *quickstarter repository*
 
 To make the setup work you must fill in your account information into the `parameters.json` file:
 
-- Id of your SAP BTP global account as value for the key `"globalaccount"`
-- The Email of your user as value for the key `"myemail"`
+- ID of your SAP BTP global account as value for the key `"globalaccount"`
+- The email of your user as value for the key `"myemail"`
 
 You have different options to authenticate defined via the ke `"loginmethod"` in the `parameters.json` file:
 
@@ -51,21 +34,17 @@ When choosing basic authentication you can provide the password either in the `p
 
 If you are using environment variables make sure that a environment variables for the keys `mykeys` and `mypassword` are set **in the container**.
 
-### Copying the data
+> **Note** - You do not need to care about entitling the services and apps to the subaccount, this is done automatically by the btpsa.
 
-We need the configuration in the Docker container. The easiest way is to copy the `parameters.json` and the `usecase.json` file to the root directory in the btpsa container using the copy&paste functionality of VS Code.
-
-With that you are ready to go to start the setup.
+With this information you are ready to go.
 
 ### Start the btpsa
 
-Open a terminal in the container by opening one in the VS Code that is attached to the running container. Enter the following command:
+Open a terminal in the container and enter the following command:
 
-```zsh
+```ash
 ./btpsa
 ```
-
-> **Note** - If you started from Windows make sure that the end of line sequence of the file `btpsa` is set to `LF`.
 
 The script will now setup your account and deploy the app
 

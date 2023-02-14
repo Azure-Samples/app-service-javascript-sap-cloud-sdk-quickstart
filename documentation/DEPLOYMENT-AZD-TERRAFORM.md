@@ -2,6 +2,12 @@
 
 > **Note** - there are known issues when using the Terraform provider in combination with GitHub Codespaces i.e., the login flow via the Azure CLI gets stuck in the callback. You find the details in this [issue](https://github.com/Azure/azure-dev/pull/1497) of the `azd` repository as well as in this [issue](https://github.com/Azure/azure-dev/pull/1496) in the Azure CLI repository. The described workaround in the second issue did not do the trick for us. Hence, we currently cannot support GitHub Codespaces in this type of infrastructure setup.
 
+## Prerequisite
+
+To use the Azure Developer CLI (`azd`) you need to have it available in your setup. If you are using the dev container "Azure Developer CLI (Terraform)" defined in this repository or opened the repository via GitHub Codespaces you are ready to go.
+
+## Deployment with Terraform
+
 The basic steps of using `azd` to setup remain unchanged as described [here](./DEPLOYMENT-AZD.md). There are three spots that differ from a technical perspective, namely:
 
 * The login flow via Azure CLI
@@ -10,14 +16,14 @@ The basic steps of using `azd` to setup remain unchanged as described [here](./D
 
 In the following sections describe the points that need to be taken in to account if you want to use Terraform.
 
-## The login flow
+### The login flow
 
 To deploy the infrastructure via Terraform `azd` uses the [Azure Terraform Provider](https://github.com/hashicorp/terraform-provider-azurerm) under the hood. This provider (not `azd`) is using the Azure CLI login flow. As a consequence when using Terraform you must enforce `azd` to make use of this flow:
 
 * Configure `azd` to make use of the Azure CLI via the command `azd config set auth.useAzCliAuth true`.
 * If you are using the `devcontainer` or GitHub Codespaces, make sure to add the Azure CLI feature in the `devcontainer.json` file. We provide the corresponding template as [/templates/devcontainer.json.azcli](../templates/devcontainer.json.azcli) in this repository.
 
-## Adjustment of manifest
+### Adjustment of manifest
 
 The main file configuring the behavior of `azd` is the `azure.yml` file in the root repository. In order to make use of Terraform we must change it to use it for the infrastructure deployment as the default is bicep. To achieve this add the following section to the file to specify the infrastructure *provider* as well as the *path* to the Terraform files:
 
@@ -29,31 +35,31 @@ infra:
 
 > **Note** - The default path is `infra`. As we already have our `.bicep` resources defined there, we use a different path that we have to explicitly specify in the manifest.
 
-## Infrastructure setup
+### Infrastructure setup
 
 The Terraform files are located in the `infra-terraform` folder. As you can see the structure contains the modules provided by the `azd` team containing the Terraform modules that represent the core building blocks of your application. These modules are use in the `main.tf` file to define the setup of our app.
 
 In the following section we present the single files of the Terraform-based setup:
 
-### The "provider.tf" file
+#### The "provider.tf" file
 
 This files defines what Terraform provider should be usd in order to do the setup. In addition the provider features for how to handle the purging of an Azure Key Vault as well as how deal with non-empty Resource Groups are defined in this file.
 
-### The "variables.tf" file
+#### The "variables.tf" file
 
 This files defines the input variables for the `main.tf` file. They can be seen like function arguments and are used in the setup of the infrastructure to e.g., provide the value for a specific resource configuration.
 
 Here we also placed our quickstarter specific variables that define the access to SAP system's OData services.
 
-### The "output.tf" file
+#### The "output.tf" file
 
 This file defines the output of the provisioning e.g., the URL endpoint of the application. The values correspond to function return values. They will be displayed in the CLI output when the provisioning was successfully executed.
 
-### The "main.tfvars.json" file
+#### The "main.tfvars.json" file
 
 This files is the so called **variable definitions**  file. This is one way to set the input variables defined in the `variables.tf`.
 
-### The "main.tf" file
+#### The "main.tf" file
 
 This file is the core of the Terraform infrastructure configuration. Here we define the infrastructure setup of our application by combining the different building blocks provided via the Terraform modules. One example is the configuration of the module to provision the Azure App Service:
 
