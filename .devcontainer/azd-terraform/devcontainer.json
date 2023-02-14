@@ -1,6 +1,6 @@
 // For format details, see https://aka.ms/devcontainer.json.
 {
-	"name": "Azure Developer CLI",
+	"name": "Azure Developer CLI (Terraform)",
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
@@ -8,9 +8,8 @@
 		}
 	},
 	"features": {
-		"ghcr.io/devcontainers-contrib/features/nestjs-cli:1": {
-        },
-        "ghcr.io/devcontainers/features/azure-cli:1": {
+		"ghcr.io/devcontainers-contrib/features/nestjs-cli:1": {},
+		"ghcr.io/devcontainers/features/azure-cli:1": {
 			"version": "2.38"
 		},
 		"ghcr.io/devcontainers/features/docker-from-docker:1": {
@@ -27,22 +26,25 @@
 			"version": "os-provided"
 		},
 		"ghcr.io/devcontainers/features/terraform:1": {
-            "version": "latest"
-        }
+			"version": "latest"
+		}
 	},
-	"extensions": [
-		"ms-azuretools.vscode-azureappservice",
-		"ms-vscode.vscode-node-azure-pack",
-		"humao.rest-client",
-		"ms-azuretools.azure-dev",
-		"ms-azuretools.vscode-bicep",
-		"ms-azuretools.vscode-docker",
-		"ms-vscode.vscode-node-azure-pack",
-		"ms-vscode.js-debug",
-		"esbenp.prettier-vscode",
-		"eg2.vscode-npm-script",
-		"dbaeumer.vscode-eslint"
-	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-azuretools.vscode-azureappservice",
+				"ms-vscode.vscode-node-azure-pack",
+				"humao.rest-client",
+				"ms-azuretools.azure-dev",
+				"ms-azuretools.vscode-bicep",
+				"ms-azuretools.vscode-docker",
+				"ms-vscode.vscode-node-azure-pack",
+				"ms-vscode.js-debug",
+				"eg2.vscode-npm-script",
+				"rome.rome"
+			]
+		}
+	},
 	"forwardPorts": [
 		8080
 	],

@@ -1,6 +1,6 @@
 // For format details, see https://aka.ms/devcontainer.json.
 {
-	"name": "Azure Developer CLI",
+	"name": "Azure Developer CLI (Bicep)",
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
