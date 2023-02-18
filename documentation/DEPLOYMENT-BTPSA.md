@@ -2,7 +2,7 @@
 
 ## Prerequisite
 
-We provide the workspace `workspaces/btpsa.code-workspace` for you to focus on the files and folders relevant for the SAP BTP setup. To make your flow as smooth as possible we also provide a dev container that spins up the `btp setup automator` (`btpsa`). The dev container is named "BTP Setup Automator (Stable)". You can also use the configuration for a GitHub Codespace. 
+We provide the workspace `workspaces/btpsa.code-workspace` for you to focus on the files and folders relevant for the SAP BTP setup. To make your flow as smooth as possible we also provide a dev container that spins up the `btp setup automator` (`btpsa`). The dev container is named "BTP Setup Automator (Stable)". You can also use the configuration for a GitHub Codespace.
 
 > **Note** - Be aware that depending on your login flow there might be issues when it comes to [forwarded ports](https://docs.github.com/en/codespaces/managing-codespaces-for-your-organization/restricting-the-visibility-of-forwarded-ports) depending on your organizational settings.
 
@@ -35,6 +35,8 @@ When choosing basic authentication you can provide the password either in the `p
 If you are using environment variables make sure that a environment variables for the keys `mykeys` and `mypassword` are set **in the container**.
 
 > **Note** - You do not need to care about entitling the services and apps to the subaccount, this is done automatically by the btpsa.
+
+> **Note** - In case you want to work with already existing subaccounts and/or service instances, you must adjust the corresponding names in the `parameters.json` and/or `usecase.json` files to match the existing ones. `btpsa` will consider these and not create or recreate them.
 
 With this information you are ready to go.
 
