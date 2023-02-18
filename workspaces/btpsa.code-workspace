@@ -8,11 +8,13 @@
     "settings": {
         "files.exclude": {
             "infra": true,
-            "infra-terraform":true,
+            "infra-terraform": true,
             "workspaces": true,
             "azure.yaml": true,
             ".azdo": true,
-            ".github": true
+            ".github": true,
+            ".devcontainer/azd-bicep": true,
+            ".devcontainer/azd-terraform": true
         },
         "debug.internalConsoleOptions": "neverOpen"
     }

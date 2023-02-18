@@ -8,7 +8,9 @@
     "settings": {
         "files.exclude": {
             "infra": true,
-            "workspaces": true
+            "workspaces": true,
+            ".devcontainer/azd-bicep": true,
+            ".devcontainer/btpsa": true
         },
         "debug.internalConsoleOptions": "neverOpen"
     }

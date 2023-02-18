@@ -8,7 +8,9 @@
     "settings": {
         "files.exclude": {
             "infra-terraform": true,
-            "workspaces": true
+            "workspaces": true,
+            ".devcontainer/btpsa": true,
+            ".devcontainer/azd-terraform": true
         },
         "debug.internalConsoleOptions": "neverOpen"
     }
