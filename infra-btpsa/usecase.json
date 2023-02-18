@@ -61,16 +61,12 @@
     ],
     "executeAfterAccountSetup": [
         {
-            "description": "Get the quickstart code",
-            "command": "git clone https://github.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart /home/user/quickstart"
-        },
-        {
             "description": "Building multi target application assets",
-            "command": "cd quickstart/ && mbt build -t ./ "
+            "command": "/workspaces/app-service-javascript-sap-cloud-sdk-quickstart/ && mbt build -t ./ "
         },
         {
             "description": "Deploying the built multi target application",
-            "command": "cd quickstart/ && cf deploy cloudsdkapp_1.0.0.mtar"
+            "command": "cd /workspaces/app-service-javascript-sap-cloud-sdk-quickstart/ && cf deploy cloudsdkapp_1.0.0.mtar"
         },
         {
             "description": "YOUR MANUAL TODO 1 (Configuration)",
