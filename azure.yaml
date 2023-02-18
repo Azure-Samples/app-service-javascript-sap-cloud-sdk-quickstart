@@ -8,6 +8,18 @@ services:
     project: ./src/api
     language: ts
     host: appservice
+    hooks:
+      predeploy:
+        posix:
+          shell: sh
+          run: npm run test; test $? -eq 0 || { printf '%s\n' "Failed running tests" >&2; exit 1; }
+          continueOnError: false
+          interactive: true
+        windows:
+          shell: pwsh
+          run: npm run test; if ($LASTEXITCODE -ne 0) { throw 'Failed running tests' }
+          continueOnError: false
+          interactive: true
 # Remove the comments from the lines below to enable the deployment of the infrastructure via Terraform
 #infra:
 #  provider: terraform
