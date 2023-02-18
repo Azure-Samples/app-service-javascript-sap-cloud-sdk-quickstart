@@ -41,4 +41,7 @@ export class AppService {
 
       return result;
     }
+    getHelloWorld (): string {
+      return "Hello World!";
+    }  
 }

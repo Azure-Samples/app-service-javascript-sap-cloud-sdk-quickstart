@@ -14,9 +14,11 @@ describe("AppController", () => {
 		appController = app.get<AppController>(AppController);
 	});
 
+	let result: object = { title: "SAP Cloud SDK on Azure", message: "Hello Azure! Greetings from the" };
+
 	describe("root", () => {
-		it('should return "Hello World!"', () => {
-			expect(appController.getHello()).toBe("Hello World!");
+		it('should return result object', async () => {
+			expect(await appController.getHello()).toMatchObject(result);
 		});
 	});
 });
