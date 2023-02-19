@@ -18,11 +18,13 @@
         },
         {
             "name": "xsuaa",
+            "instancename": "xsuaaquickstart",
             "plan": "application",
             "category": "SERVICE"
         },
         {
             "name": "destination",
+            "instancename": "destinationquickstart",
             "plan": "lite",
             "category": "SERVICE",
             "parameters": {
@@ -51,12 +53,6 @@
             "name": "privatelink",
             "plan": "standard",
             "entitleonly": true
-        }
-    ],
-    "executeBeforeAccountSetup": [
-        {
-            "description": "Delete quickstart folder in case it already exists (e.g. from a previous script call)",
-            "command": "rm -rf quickstart/"
         }
     ],
     "executeAfterAccountSetup": [

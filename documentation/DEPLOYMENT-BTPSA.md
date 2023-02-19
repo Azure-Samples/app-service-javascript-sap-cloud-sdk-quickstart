@@ -1,5 +1,7 @@
 # Deployment via the btp setup automator
 
+> **Note** - The `btpsa` does not support SAP BTP Trial.
+
 ## Prerequisite
 
 We provide the workspace `workspaces/btpsa.code-workspace` for you to focus on the files and folders relevant for the SAP BTP setup. To make your flow as smooth as possible we also provide a dev container that spins up the `btp setup automator` (`btpsa`). The dev container is named "BTP Setup Automator (Stable)". You can also use the configuration for a GitHub Codespace.
