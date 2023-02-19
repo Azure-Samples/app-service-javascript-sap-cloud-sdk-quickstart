@@ -20,3 +20,5 @@ resources:
     type: org.cloudfoundry.existing-service
   - name: destinationquickstart
     type: org.cloudfoundry.existing-service
+    requires:
+      - name: cloudsdkapp-srv
