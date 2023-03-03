@@ -18,11 +18,13 @@
         },
         {
             "name": "xsuaa",
+            "instancename": "xsuaaquickstart",
             "plan": "application",
             "category": "SERVICE"
         },
         {
             "name": "destination",
+            "instancename": "destinationquickstart",
             "plan": "lite",
             "category": "SERVICE",
             "parameters": {
@@ -53,24 +55,14 @@
             "entitleonly": true
         }
     ],
-    "executeBeforeAccountSetup": [
-        {
-            "description": "Delete quickstart folder in case it already exists (e.g. from a previous script call)",
-            "command": "rm -rf quickstart/"
-        }
-    ],
     "executeAfterAccountSetup": [
         {
-            "description": "Get the quickstart code",
-            "command": "git clone https://github.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart /home/user/quickstart"
-        },
-        {
             "description": "Building multi target application assets",
-            "command": "cd quickstart/ && mbt build -t ./ "
+            "command": "/workspaces/app-service-javascript-sap-cloud-sdk-quickstart/ && mbt build -t ./ "
         },
         {
             "description": "Deploying the built multi target application",
-            "command": "cd quickstart/ && cf deploy cloudsdkapp_1.0.0.mtar"
+            "command": "cd /workspaces/app-service-javascript-sap-cloud-sdk-quickstart/ && cf deploy cloudsdkapp_1.0.0.mtar"
         },
         {
             "description": "YOUR MANUAL TODO 1 (Configuration)",
