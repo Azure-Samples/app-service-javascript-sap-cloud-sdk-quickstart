@@ -57,22 +57,22 @@
     ],
     "executeAfterAccountSetup": [
         {
-            "description": "Building multi target application assets",
-            "command": "/workspaces/app-service-javascript-sap-cloud-sdk-quickstart/ && mbt build -t ./ "
+            "description": "Building application assets",
+            "command": "cd /workspaces/app-service-javascript-sap-cloud-sdk-quickstart/ && npm ci && npm run build "
         },
         {
-            "description": "Deploying the built multi target application",
-            "command": "cd /workspaces/app-service-javascript-sap-cloud-sdk-quickstart/ && cf deploy cloudsdkapp_1.0.0.mtar"
+            "description": "Deploying the application",
+            "command": "cd /workspaces/app-service-javascript-sap-cloud-sdk-quickstart/ && cf push cloudsdkapp"
         },
         {
-            "description": "YOUR MANUAL TODO 1 (Configuration)",
+            "description": "YOUR MANUAL TODO (Private Link Configuration)",
             "command": "echo '- Create service instance for Private Link service'"
         }
     ],
     "executeToPruneUseCase": [
         {
-            "description": "undeploy the CAP app",
-            "command": "cf undeploy cloudsdkapp --delete-service-brokers --delete-service-keys --delete-services -f"
+            "description": "Delete the application",
+            "command": "cf delete cloudsdkapp -r -f"
         }
     ]
 }
