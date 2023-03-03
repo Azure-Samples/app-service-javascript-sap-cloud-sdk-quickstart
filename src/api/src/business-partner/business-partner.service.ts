@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { DestinationOrFetchOptions } from "@sap-cloud-sdk/connectivity";
+import { Destination } from "@sap-cloud-sdk/connectivity";
 import {
 	businessPartnerService1,
 	BusinessPartner,
@@ -133,7 +133,7 @@ export class BusinessPartnerService {
 	 * @param token - AAD token.
 	 * @returns - Destination Config for the request.
 	 */
-	private setupConfig(req, token: string): DestinationOrFetchOptions {
+	private setupConfig(req, token: string): Destination {
 		let config;
 		// in case API key shall be used
 		if (
@@ -164,6 +164,7 @@ export class BusinessPartnerService {
 			this.isValidString(process.env.ODATA_USERPWD)
 		) {
 			config = {
+				destinationName: 'MY_ODATA_DESTINATION',
 				url: process.env.ODATA_URL,
 				username: process.env.ODATA_USERNAME,
 				password: process.env.ODATA_USERPWD,

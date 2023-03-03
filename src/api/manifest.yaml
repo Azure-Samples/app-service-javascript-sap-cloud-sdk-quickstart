@@ -4,6 +4,9 @@ applications:
     buildpacks:
       - nodejs_buildpack
     memory: 1G
-    health-check-timeout: 120
-    command: npm run start:dev
+    command: npm run start:prod
     random-route: true
+    build-parameters:
+      builder: custom
+      commands:
+        - npm run build
