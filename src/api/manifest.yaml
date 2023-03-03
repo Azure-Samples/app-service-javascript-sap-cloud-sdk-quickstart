@@ -1,0 +1,9 @@
+applications:
+  - name: cloudsdkapp
+    path: .
+    buildpacks:
+      - nodejs_buildpack
+    memory: 1G
+    health-check-timeout: 120
+    command: npm run start:dev
+    random-route: true
