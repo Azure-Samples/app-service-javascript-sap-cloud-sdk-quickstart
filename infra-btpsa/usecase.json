@@ -58,11 +58,11 @@
     "executeAfterAccountSetup": [
         {
             "description": "Building application assets",
-            "command": "cd /workspaces/app-service-javascript-sap-cloud-sdk-quickstart/stc/api && npm ci && npm run build "
+            "command": "cd /workspaces/app-service-javascript-sap-cloud-sdk-quickstart/src/api && npm ci && npm run build "
         },
         {
             "description": "Deploying the application",
-            "command": "cd /workspaces/app-service-javascript-sap-cloud-sdk-quickstart/stc/api && cf push cloudsdkapp"
+            "command": "cd /workspaces/app-service-javascript-sap-cloud-sdk-quickstart/src/api && cf push cloudsdkapp"
         },
         {
             "description": "YOUR MANUAL TODO (Private Link Configuration)",
