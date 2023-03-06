@@ -61,8 +61,8 @@ The provided btpsa configuration executes the following steps defined in the `us
 3. The Cloud Foundry environment including the space as well as the services are created
 4. After a successful setup fo the services, btpsa executes the scripted steps in the section `executeAfterAccountSetup"` of the `usecase.json` file:
    - Clone the quickstarter GitHub repository into the Container
-   - Executing the mta-build of the project (yes you do not need to install any further tools locally)
-   - Deploying the built `mtar` file into the Cloud Foundry space 
+   - Executing the nest-build of the project (yes you do not need to install any further tools locally)
+   - Deploying the app via ´cf push´ into the Cloud Foundry space 
 
 > **Note** - Not everything can be setup fully automatically, like the Private Link Service. To lower the entry barrier we entitle the service, so you already have a decent starting point.
 
