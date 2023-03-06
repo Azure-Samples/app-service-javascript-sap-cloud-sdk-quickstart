@@ -1,0 +1,11 @@
+{
+    "$schema": "https://raw.githubusercontent.com/SAP-samples/btp-setup-automator/main/libs/btpsa-parameters.json",
+    "usecasefile": "usecase.json",
+    "region": "eu20",
+    "globalaccount": "ID of your Global Account",
+    "myemail": "Enter your email address here",
+    "loginmethod": "basicAuthentication",
+    "subaccountname": "SAP-Cloud-SDK-Quickstart",
+    "cfspacename": "development",
+    "prunesubaccount": false
+}

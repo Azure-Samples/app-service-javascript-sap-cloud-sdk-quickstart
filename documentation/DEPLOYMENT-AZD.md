@@ -1,20 +1,18 @@
 # Deployment via Azure Developer CLI
 
-> **Note** - The repository is compatible with version [0.5.0-beta.3](https://github.com/Azure/azure-dev/releases/tag/azure-dev-cli_0.5.0-beta.3) of the Azure Developer CLI. Make sure that you are using the same version to avoid incompatibilities due to different versions.
-
-> **Warning** - if you are using a **personal Azure account**, the new login flow provided by `azd` is not yet fully functional, see issue [1398](https://github.com/Azure/azure-dev/issues/1398) in the `azd` repository. You must use the fallback to the Azure CLI login flow via `azd config set auth.useAzCliAuth true`. If you are using the `devcontainer` or GitHub Codespaces, then make sure to add the Azure CLI feature in the `devcontainer.json` file. We provide the corresponding template as [/templates/devcontainer.json.azcli](../templates/devcontainer.json.azcli) in this repository.
+> **Note** - The repository is compatible with version [0.6.0-beta.2](https://github.com/Azure/azure-dev/releases/tag/azure-dev-cli_0.6.0-beta.2) of the Azure Developer CLI. Make sure that you are using the same version to avoid incompatibilities due to different versions.
 
 In this example we use the [Azure Developer CLI](https://github.com/Azure/azure-dev) to deploy the project. Learn more about [this tool on Microsoft learn](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview)
 
 ## Prerequisite
 
-To use the Azure Developer CLI (`azd`) you need to have it available in your setup. If you are using the devcontainer defined in this repository or opened the repository via GitHub Codespaces you are ready to go.
+To use the Azure Developer CLI (`azd`) you need to have it available in your setup. If you are using the dev container "Azure Developer CLI (Bicep)" defined in this repository or opened the repository via GitHub Codespaces you are ready to go.
 
 If you are not using one of these option you need to install the `azd` locally on "bare metal". You find the necessary steps you to execute in the documentation i.e., in the section ["Install the Azure Developer CLI"](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd?tabs=baremetal%2Cwindows).
 
 ## Deployment
 
-> **Note** - To follow along your local experience, the following steps assume that you access the OData API of the S/4HANA system via user name and password. This assumption is reflected in the parameterization of the infrastructure. While this is a valid approach to get things started, we discourage to use this setup in a productive scenario. Instead you should switch to a SAP Principal Propagation for your authentication scenario (see also ["What's next?"](./WHATS-NEXT.md))
+> **Note** - To follow along your local experience, the following steps assume that you access the OData API of the SAP S/4HANA system via user name and password. This assumption is reflected in the parameterization of the infrastructure. While this is a valid approach to get things started, we discourage to use this setup in a productive scenario. Instead you should switch to a SAP Principal Propagation for your authentication scenario (see also ["What's next?"](./WHATS-NEXT.md))
 
 ### The easy way
 
@@ -182,4 +180,4 @@ Besides `Bicep` the `azd` CLI also supports the definition of the infrastructure
 
 If you want to clean up your deployment execute the command `azd down` which will delete your deployment and your resources.
 
-> **Note** - The CLI will ask for your confirmation to purge the key vault. You should do so if you want to permanently remove the Azure Key Vault.
+> **Note** - The CLI will ask for your confirmation to purge the Azure Key Vault. You should do so if you want to permanently remove it.

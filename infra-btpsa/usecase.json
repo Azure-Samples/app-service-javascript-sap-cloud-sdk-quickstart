@@ -1,0 +1,78 @@
+{
+    "$schema": "https://raw.githubusercontent.com/SAP-samples/btp-setup-automator/main/libs/btpsa-usecase.json",
+    "aboutThisUseCase": {
+        "name": "SAP Cloud SDK Quickstart",
+        "description": "This usecase provides all necessary information to create and deploy a SAP Cloud SDK based Node.js app a SAP BTP account to Cloud Foundry.",
+        "author": "christian.lechner@sap.com",
+        "testStatus": "tested successfully",
+        "usageStatus": "READY TO BE USED",
+        "relatedLinks": [
+            "https://github.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart"
+        ]
+    },
+    "services": [
+        {
+            "name": "cloudfoundry",
+            "plan": "free",
+            "category": "ENVIRONMENT"
+        },
+        {
+            "name": "xsuaa",
+            "instancename": "xsuaaquickstart",
+            "plan": "application",
+            "category": "SERVICE"
+        },
+        {
+            "name": "destination",
+            "instancename": "destinationquickstart",
+            "plan": "lite",
+            "category": "SERVICE",
+            "parameters": {
+                "HTML5Runtime_enabled": "true",
+                "init_data": {
+                    "subaccount": {
+                        "existing_destinations_policy": "fail",
+                        "destinations": [
+                            {
+                                "Name": "S4HANACloudSandbox",
+                                "Description": "SAP S/4HANA Cloud Sandbox",
+                                "Type": "HTTP",
+                                "URL": "https://sandbox.api.sap.com/s4hanacloud",
+                                "Authentication": "BasicAuthentication",
+                                "ProxyType": "Internet",
+                                "User": "ODATA_USERNAME",
+                                "Password": "ODATA_USERPWD"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "category": "SERVICE",
+            "name": "privatelink",
+            "plan": "standard",
+            "entitleonly": true
+        }
+    ],
+    "executeAfterAccountSetup": [
+        {
+            "description": "Building application assets",
+            "command": "cd /workspaces/app-service-javascript-sap-cloud-sdk-quickstart/src/api && npm ci && npm run build "
+        },
+        {
+            "description": "Deploying the application",
+            "command": "cd /workspaces/app-service-javascript-sap-cloud-sdk-quickstart/src/api && cf push cloudsdkapp"
+        },
+        {
+            "description": "YOUR MANUAL TODO (Private Link Configuration)",
+            "command": "echo '- Create service instance for Private Link service'"
+        }
+    ],
+    "executeToPruneUseCase": [
+        {
+            "description": "Delete the application",
+            "command": "cf delete cloudsdkapp -r -f"
+        }
+    ]
+}

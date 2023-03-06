@@ -20,7 +20,6 @@ module api '../core_local/host/appservice.bicep' = {
     name: name
     location: location
     tags: union(tags, { 'azd-service-name': serviceName })
-    alwaysOn: false
     allowedOrigins: allowedOrigins
     appCommandLine: appCommandLine
     applicationInsightsName: applicationInsightsName

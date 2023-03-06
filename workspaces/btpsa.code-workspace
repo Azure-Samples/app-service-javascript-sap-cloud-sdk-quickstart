@@ -2,14 +2,18 @@
     "folders": [
         {
             "path": "../",
-            "name": "SAP Cloud SDK on Azure App Service Quickstart - Bicep"
+            "name": "SAP Cloud SDK Quickstart - SAP BTP"
         }
     ],
     "settings": {
         "files.exclude": {
+            "infra": true,
             "infra-terraform": true,
             "workspaces": true,
-            ".devcontainer/btpsa": true,
+            "azure.yaml": true,
+            ".azdo": true,
+            ".github": true,
+            ".devcontainer/azd-bicep": true,
             ".devcontainer/azd-terraform": true
         },
         "debug.internalConsoleOptions": "neverOpen"

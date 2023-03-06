@@ -1,0 +1,12 @@
+applications:
+  - name: cloudsdkapp
+    path: .
+    buildpacks:
+      - nodejs_buildpack
+    memory: 1G
+    command: npm run start:prod
+    random-route: true
+    build-parameters:
+      builder: custom
+      commands:
+        - npm run build
