@@ -21,7 +21,7 @@ In the following sections describe the points that need to be taken in to accoun
 To deploy the infrastructure via Terraform `azd` uses the [Azure Terraform Provider](https://github.com/hashicorp/terraform-provider-azurerm) under the hood. This provider (not `azd`) is using the Azure CLI login flow. As a consequence when using Terraform you must enforce `azd` to make use of this flow:
 
 * Configure `azd` to make use of the Azure CLI via the command `azd config set auth.useAzCliAuth true`.
-* If you are using the `devcontainer` or GitHub Codespaces, make sure to add the Azure CLI feature in the `devcontainer.json` file. We provide the corresponding template as [/templates/devcontainer.json.azcli](../templates/devcontainer.json.azcli) in this repository.
+* If you are using the `devcontainer` or GitHub Codespaces, make that you open the devcontainer "Azure Developer CLI (Terraform)" that contains all necessary prerequisites.
 
 ### Adjustment of manifest
 
