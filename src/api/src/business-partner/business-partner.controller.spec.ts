@@ -13,7 +13,7 @@ describe("BusinessPartnerController", () => {
 		}).compile();
 
 		controller = module.get<BusinessPartnerController>(
-			BusinessPartnerController
+			BusinessPartnerController,
 		);
 	});
 

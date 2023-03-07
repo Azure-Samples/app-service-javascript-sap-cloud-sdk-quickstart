@@ -9,7 +9,7 @@ import {
 	Post,
 	Put,
 	Headers,
-	Render
+	Render,
 } from "@nestjs/common";
 import {
 	BusinessPartner,
@@ -36,8 +36,8 @@ export class BusinessPartnerController {
 					error,
 				);
 			});
-			//console.log(JSON.stringify(businessPartners));
-		return { title: 'SAP Business Partners', bupas: businessPartners };
+		//console.log(JSON.stringify(businessPartners));
+		return { title: "SAP Business Partners", bupas: businessPartners };
 	}
 
 	@Get('/:id')
@@ -134,7 +134,8 @@ export class BusinessPartnerController {
 			statusCode = response.status;
 		} else {
 			//default error message
-			responseData = error.message;
+			responseData = error.message || "Internal server error!";
+			
 			statusCode = 500;
 		}
 
@@ -169,10 +170,8 @@ export class BusinessPartnerController {
 	 */
 	private isValidError(error: any): boolean {
 		return (
-			(error.cause?.cause?.response?.data !== undefined &&
-				error.cause.cause.response.status !== undefined) ||
-			(error.cause.response?.data !== undefined &&
-				error.cause.response.status !== undefined)
+			(error.hasOwnProperty('cause.cause.response.data') && error.hasOwnProperty('cause.cause.response.status')) ||
+			(error.hasOwnProperty('cause.response.data') && error.hasOwnProperty('cause.response.status'))
 		);
 	}
 }

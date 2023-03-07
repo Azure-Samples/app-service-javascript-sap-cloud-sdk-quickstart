@@ -1,0 +1,7 @@
+{
+  "service-specifications/ZAPI_BUSINESS_PARTNER.edmx": {
+    "packageName": "business-partner-service-1",
+    "directoryName": "business-partner-service-1",
+    "basePath": "/sap/opu/odata/sap/API_BUSINESS_PARTNER"
+  }
+}

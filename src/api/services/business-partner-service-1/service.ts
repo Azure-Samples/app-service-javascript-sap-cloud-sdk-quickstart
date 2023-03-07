@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+ * Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
  *
  * This is a generated file powered by the SAP Cloud SDK for JavaScript.
  */
@@ -125,9 +125,9 @@ class BusinessPartnerService1<
     this.deSerializers = deSerializers;
   }
 
-  private initApi(key: string, ctor: new (...args: any[]) => any): any {
+  private initApi(key: string, entityApi: any): any {
     if (!this.apis[key]) {
-      this.apis[key] = new ctor(this.deSerializers);
+      this.apis[key] = entityApi._privateFactory(this.deSerializers);
     }
     return this.apis[key];
   }
