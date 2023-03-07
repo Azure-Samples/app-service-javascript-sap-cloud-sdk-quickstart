@@ -164,7 +164,6 @@ export class BusinessPartnerService {
 			this.isValidString(process.env.ODATA_USERPWD)
 		) {
 			config = {
-				destinationName: "MY_ODATA_DESTINATION",
 				url: process.env.ODATA_URL,
 				username: process.env.ODATA_USERNAME,
 				password: process.env.ODATA_USERPWD,
