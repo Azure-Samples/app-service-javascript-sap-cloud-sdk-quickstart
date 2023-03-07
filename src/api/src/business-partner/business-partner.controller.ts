@@ -9,7 +9,7 @@ import {
 	Post,
 	Put,
 	Headers,
-	Render
+	Render,
 } from "@nestjs/common";
 import {
 	BusinessPartner,
@@ -36,8 +36,8 @@ export class BusinessPartnerController {
 					error,
 				);
 			});
-			//console.log(JSON.stringify(businessPartners));
-		return { title: 'SAP Business Partners', bupas: businessPartners };
+		//console.log(JSON.stringify(businessPartners));
+		return { title: "SAP Business Partners", bupas: businessPartners };
 	}
 
 	@Get('/:id')
