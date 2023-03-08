@@ -21,7 +21,7 @@ param keyVaultName string = ''
 param logAnalyticsName string = ''
 param resourceGroupName string = ''
 
-// Name of the SKU; default is F1 (Free)
+// Name of the SKU; default is F1 (Free), use B1 (Basic) for features like health checks and S1 (Standard) for production
 @description('Name of the SKU of the App Service Plan')
 param skuName string = 'F1'
 

@@ -22,6 +22,7 @@ export class AppService {
 	async checkServiceAvailability(): Promise<object> {
 		var response: HttpResponse;
 		var result: object;
+		
 		try {
 			response = await executeHttpRequestWithOrigin(
 				{
@@ -30,7 +31,7 @@ export class AppService {
 				{
 					method: "head",
 					headers: {
-						custom: { apiKey: process.env.APIKEY },
+						custom: {[process.env.APIKEY_HEADERNAME]: process.env.APIKEY},
 					},
 				},
 				{

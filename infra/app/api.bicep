@@ -27,7 +27,7 @@ module api '../core_local/host/appservice.bicep' = {
     appSettings: appSettings
     keyVaultName: keyVaultName
     runtimeName: 'node'
-    runtimeVersion: '16'
+    runtimeVersion: '18-lts'
     scmDoBuildDuringDeployment: true
     healthCheckPath: healthCheckPath
     use32BitWorkerProcess: use32BitWorkerProcess
