@@ -3,6 +3,7 @@ import {
 	executeHttpRequestWithOrigin,
 	HttpResponse,
 } from "@sap-cloud-sdk/http-client";
+import { createLogger } from "@sap-cloud-sdk/util";
 
 @Injectable()
 export class AppService {
@@ -20,9 +21,11 @@ export class AppService {
 	 * https://sap.github.io/cloud-sdk/api/v2/functions/sap_cloud_sdk_http_client.executeHttpRequest.html
 	 */
 	async checkServiceAvailability(): Promise<object> {
+		const logger = createLogger("health");
+
 		var response: HttpResponse;
 		var result: object;
-		
+
 		try {
 			response = await executeHttpRequestWithOrigin(
 				{
@@ -31,17 +34,35 @@ export class AppService {
 				{
 					method: "head",
 					headers: {
-						custom: {[process.env.APIKEY_HEADERNAME]: process.env.APIKEY},
+						custom: { [process.env.APIKEY_HEADERNAME]: process.env.APIKEY },
 					},
 				},
 				{
 					fetchCsrfToken: false,
 				},
 			);
-			result = { code: response.status, message: response.statusText };
+			logger.debug(response);
+
+			result = { code: response.status, statusText: response.statusText };
 		} catch (err) {
-			//console.log(err);
-			result = { message: err.message };
+			logger.error(err);
+
+			result = {
+				status: err.response?.status
+					? err.response?.status
+					: "No Status available",
+				statusText: err.response?.statusText
+					? err.response?.statusText
+					: "No Status Text available",
+				message: err.message,
+				cause: err.cause?.message ? err.cause?.message : "No Cause identified",
+				rootCause: err.rootCause?.message
+					? err.rootCause?.message
+					: "No Root Cause identified",
+				responseBody: err.rootCause?.response?.data
+					? err.rootCause?.response?.data
+					: "No Response Body available",
+			};
 		}
 
 		return result;
