@@ -16,6 +16,7 @@ import {
 	BusinessPartnerAddress,
 } from "../../services/business-partner-service-1";
 import { BusinessPartnerService } from "./business-partner.service";
+import { ErrorWithCause, createLogger } from "@sap-cloud-sdk/util";
 
 @Controller('business-partner')
 export class BusinessPartnerController {
@@ -23,12 +24,14 @@ export class BusinessPartnerController {
 		private readonly businessPartnerService: BusinessPartnerService,
 	) {}
 
+	private logger = createLogger("business-partner-api");
+
 	@Get()
 	@Render('bupa')
 	async getBusinessPartners(@Headers() headers): Promise<object> {
 		// retrieve X-MS-TOKEN-AAD-ACCESS-TOKEN token from request header
 		const token = headers["x-ms-token-aad-access-token"];
-		let businessPartners = await this.businessPartnerService
+		const businessPartners = await this.businessPartnerService
 			.getAllBusinessPartners(token)
 			.catch((error) => {
 				throw this.createHttpException(
@@ -36,7 +39,9 @@ export class BusinessPartnerController {
 					error,
 				);
 			});
-		//console.log(JSON.stringify(businessPartners));
+		this.logger.debug(
+			`List of business partners: ${JSON.stringify(businessPartners)}`,
+		);
 		return { title: "SAP Business Partners", bupas: businessPartners };
 	}
 
@@ -47,7 +52,7 @@ export class BusinessPartnerController {
 	): Promise<BusinessPartner> {
 		// retrieve X-MS-TOKEN-AAD-ACCESS-TOKEN token from request header
 		const token = headers["x-ms-token-aad-access-token"];
-		return await this.businessPartnerService
+		const businessPartner = await this.businessPartnerService
 			.getBusinessPartnerById(id, token)
 			.catch((error) => {
 				throw this.createHttpException(
@@ -55,6 +60,12 @@ export class BusinessPartnerController {
 					error,
 				);
 			});
+		this.logger.debug(
+			`Business Partner response for id ${id}: ${JSON.stringify(
+				businessPartner,
+			)}`,
+		);
+		return businessPartner;
 	}
 
 	@Post('/:id/address')
@@ -66,7 +77,7 @@ export class BusinessPartnerController {
 	): Promise<BusinessPartnerAddress> {
 		// retrieve X-MS-TOKEN-AAD-ACCESS-TOKEN token from request header
 		const token = headers["x-ms-token-aad-access-token"];
-		return await this.businessPartnerService
+		const bPAddress = await this.businessPartnerService
 			.createAddress(requestBody, id, token)
 			.catch((error) => {
 				throw this.createHttpException(
@@ -74,6 +85,10 @@ export class BusinessPartnerController {
 					error,
 				);
 			});
+		this.logger.debug(
+			`Created BP address response for id ${id}: ${JSON.stringify(bPAddress)}`,
+		);
+		return bPAddress;
 	}
 
 	@Put('/:businessPartnerId/address/:addressId')
@@ -85,7 +100,7 @@ export class BusinessPartnerController {
 	): Promise<BusinessPartnerAddress> {
 		// retrieve X-MS-TOKEN-AAD-ACCESS-TOKEN token from request header
 		const token = headers["x-ms-token-aad-access-token"];
-		return await this.businessPartnerService
+		const bPAddress = await this.businessPartnerService
 			.updateAddress(requestBody, businessPartnerId, addressId, token)
 			.catch((error) => {
 				throw this.createHttpException(
@@ -93,6 +108,12 @@ export class BusinessPartnerController {
 					error,
 				);
 			});
+		this.logger.debug(
+			`Updated BP address response for BP ID ${businessPartnerId} and address iD ${addressId}: ${JSON.stringify(
+				bPAddress,
+			)}`,
+		);
+		return bPAddress;
 	}
 
 	@Delete('/:businessPartnerId/address/:addressId')
@@ -104,7 +125,7 @@ export class BusinessPartnerController {
 	): Promise<void> {
 		// retrieve X-MS-TOKEN-AAD-ACCESS-TOKEN token from request header
 		const token = headers["x-ms-token-aad-access-token"];
-		return await this.businessPartnerService
+		const bPAddress = await this.businessPartnerService
 			.deleteAddress(businessPartnerId, addressId, token)
 			.catch((error) => {
 				throw this.createHttpException(
@@ -112,66 +133,56 @@ export class BusinessPartnerController {
 					error,
 				);
 			});
+		this.logger.debug(
+			`Deleted BP address response for BP ID ${businessPartnerId} and address iD ${addressId}: ${JSON.stringify(
+				bPAddress,
+			)}`,
+		);
+		return bPAddress;
 	}
 
 	/**
 	 * Create HttpException from error
 	 */
 	private createHttpException(msg: string, error): HttpException {
-		let responseData;
-		let response;
-		let trace = error.stack ? error.stack : "error.stack is undefined";
-		let statusCode = 500;
+		this.logger.error(`Message: ${msg} - Error: ${error}`);
 
-		if (this.isValidError(error)) {
-			if (error.cause.cause !== undefined) {
-				response = error.cause.cause.response;
-			} else {
-				response = error.cause.response;
-			}
-
-			responseData = this.getFaultString(response.data);
-			statusCode = response.status;
-		} else {
-			//default error message
-			responseData = error.message || "Internal server error!";
-			
-			statusCode = 500;
-		}
-
-		if (process.env.DEBUG === "true") {
-			return new HttpException(
-				`${msg}- ${responseData} - ${trace}`,
-				statusCode,
-			);
-		} else {
-			return new HttpException(`${msg}- ${responseData}`, statusCode);
+		switch (error.constructor) {
+			case ErrorWithCause:
+				return this.handleErrorWithCause(msg, error);
+			default:
+				return this.handleGenericError(msg, error);
 		}
 	}
 
 	/**
-	 * get fault string from error
+	 * Error from SAP Cloud SDK "ErrorWithCause"
 	 */
-	private getFaultString(data: any): string {
-		//handle SAP APIM / API Business Hub error messages
-		if (data.message !== undefined) {
-			return data.message;
-		} //handle Azure APIM error messages
-		else if (data.fault?.faultstring !== undefined) {
-			return data.fault.faultstring;
-		} //generic messages from SAP NetWeaver Gateway
-		else {
-			return data;
+	private handleErrorWithCause(msg: string, error): HttpException {
+		let exceptionMessage = `${msg} - ${error.cause.response.statusText}`;
+
+		if (process.env.DEBUG === "true" && error.stack) {
+			exceptionMessage += ` - ${error.stack}`;
 		}
+
+		return new HttpException(exceptionMessage, error.cause.response.status, {
+			cause: new Error(error.cause?.message || error.message),
+		});
 	}
 
 	/**
-	 * Does cause exist on error?
+	 * Generic error handling
 	 */
-	private isValidError(error: any): boolean {
-		return (
-			(error.hasOwnProperty('cause.cause.response.data') && error.hasOwnProperty('cause.cause.response.status')) ||
-			(error.hasOwnProperty('cause.response.data') && error.hasOwnProperty('cause.response.status'))
-		);
+	private handleGenericError(msg: string, error): HttpException {
+		const statusCode = 500;
+		let responseData = error.message || "Internal server error!";
+
+		let exceptionMessage = `${msg} - ${responseData}`;
+
+		if (process.env.DEBUG === "true" && error.stack) {
+			exceptionMessage += ` - ${error.stack}`;
+		}
+
+		return new HttpException(exceptionMessage, statusCode);
 	}
 }
