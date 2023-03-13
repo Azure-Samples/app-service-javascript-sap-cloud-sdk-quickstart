@@ -1,6 +1,6 @@
 # Azure DevOps Pipeline Configuration
 
-> **Note** - For your convenience this file is a copy from the official Azure Developer CLI repository describing the configuration of the Azure DevOps Pipeline. It is based on version [0.6.0-beta.2](https://github.com/Azure/azure-dev/releases/tag/azure-dev-cli_0.6.0-beta.2) of the CLI. In case you use a different version please check the corresponding version of the document [here](https://github.com/lechnerc77/app-service-javascript-sap-cloud-sdk-quickstart/tree/main/.azdo/pipelines) in the Azure Developer CLI GutHub repository.
+> **Note** - For your convenience this file is a copy from the official Azure Developer CLI repository describing the configuration of the Azure DevOps Pipeline. It is based on version [0.7.0-beta.1](https://github.com/Azure/azure-dev/releases/tag/azure-dev-cli_0.7.0-beta.1) of the CLI. In case you use a different version please check the corresponding version of the document [here](https://github.com/lechnerc77/app-service-javascript-sap-cloud-sdk-quickstart/tree/main/.azdo/pipelines) in the Azure Developer CLI GutHub repository.
 
 This document will show you how to configure an Azure DevOps pipeline that uses the Azure Developer CLI. This can be configured by running the  `azd pipeline config --provider azdo` command.
 
