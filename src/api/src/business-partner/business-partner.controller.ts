@@ -159,13 +159,22 @@ export class BusinessPartnerController {
 	 * Error from SAP Cloud SDK "ErrorWithCause"
 	 */
 	private handleErrorWithCause(msg: string, error): HttpException {
-		let exceptionMessage = `${msg} - ${error.cause.response.statusText}`;
+		let exceptionMessage = `${msg}`;
+		let responseStatus = 500;
 
-		if (process.env.DEBUG === "true" && error.stack) {
+		if (error.cause?.response?.statusText){
+			exceptionMessage += ` - ${error.cause.response.statusText}`;
+		}
+
+		if (process.env.DEBUG === "true" && error?.stack) {
 			exceptionMessage += ` - ${error.stack}`;
 		}
 
-		return new HttpException(exceptionMessage, error.cause.response.status, {
+		if (error.cause?.response?.status) {
+			responseStatus = error.cause.response.status;
+		}
+
+		return new HttpException(exceptionMessage, responseStatus, {
 			cause: new Error(error.cause?.message || error.message),
 		});
 	}
@@ -179,7 +188,7 @@ export class BusinessPartnerController {
 
 		let exceptionMessage = `${msg} - ${responseData}`;
 
-		if (process.env.DEBUG === "true" && error.stack) {
+		if (process.env.DEBUG === "true" && error?.stack) {
 			exceptionMessage += ` - ${error.stack}`;
 		}
 
