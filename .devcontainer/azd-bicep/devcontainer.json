@@ -35,7 +35,8 @@
 				"ms-vscode.vscode-node-azure-pack",
 				"ms-vscode.js-debug",
 				"eg2.vscode-npm-script",
-				"rome.rome"
+				"rome.rome",
+				"ms-azuretools.vscode-azureresourcegroups"
 			]
 		}
 	},
