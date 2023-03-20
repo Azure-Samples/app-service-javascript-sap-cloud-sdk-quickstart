@@ -8,6 +8,7 @@
     "settings": {
         "files.exclude": {
             "infra": true,
+            "infra-btpsa": true,
             "workspaces": true,
             ".devcontainer/azd-bicep": true,
             ".devcontainer/btpsa": true

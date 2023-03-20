@@ -8,6 +8,7 @@
     "settings": {
         "files.exclude": {
             "infra-terraform": true,
+            "infra-btpsa": true,
             "workspaces": true,
             ".devcontainer/btpsa": true,
             ".devcontainer/azd-terraform": true
