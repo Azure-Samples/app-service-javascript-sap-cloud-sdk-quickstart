@@ -4,11 +4,11 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
-			"IMAGE": "javascript-node:18"
+			"IMAGE": "typescript-node:18"
 		}
 	},
 	"features": {
-		"ghcr.io/devcontainers-contrib/features/nestjs-cli:1": {},
+		"ghcr.io/devcontainers-contrib/features/nestjs-cli:2": {},
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
 	},
 	"customizations": {
@@ -32,7 +32,7 @@
 		8080
 	],
 	"postCreateCommand": "cd src/api && npm install && cd ../..",
-	"remoteUser": "vscode",
+	"remoteUser": "node",
 	"hostRequirements": {
 		"memory": "8gb"
 	}
