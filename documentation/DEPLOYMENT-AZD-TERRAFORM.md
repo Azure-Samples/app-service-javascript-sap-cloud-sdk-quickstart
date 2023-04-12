@@ -1,10 +1,14 @@
 # Infrastructure Deployment via Azure Developer CLI for Terraform
 
+> **Warning** - with release 0.8.0-beta.1 of `azd` [feature stages](https://devblogs.microsoft.com/azure-sdk/azd-april-2023-release/#alpha-beta-and-stable-features) have been introduced. This provides insights into the maturity of the `azd` functionality. The provisioning of infrastructure via Terraform has been marked as an *alpha* feature, so it is not yet recommended for productive usage.
+
 > **Note** - there are known issues when using the Terraform provider in combination with GitHub Codespaces i.e., the login flow via the Azure CLI gets stuck in the callback. You find the details in this [issue](https://github.com/Azure/azure-dev/pull/1497) of the `azd` repository as well as in this [issue](https://github.com/Azure/azure-dev/pull/1496) in the Azure CLI repository. The described workaround in the second issue did not do the trick for us. Hence, we currently cannot support GitHub Codespaces in this type of infrastructure setup.
 
 ## Prerequisite
 
-To use the Azure Developer CLI (`azd`) you need to have it available in your setup. If you are using the dev container "Azure Developer CLI (Terraform)" defined in this repository or opened the repository via GitHub Codespaces you are ready to go.
+To use the Azure Developer CLI (`azd`) you need to have it available in your setup. If you are using the dev container "Azure Developer CLI (Terraform)" defined in this repository or opened the repository via GitHub Codespaces you are ready to go. We activated Terraform as alpha feature in the dev container.
+
+If you execute the `azd` commands locally, make sure that you have activated the alpha features via `azd config set alpha.terraform on`.
 
 ## Deployment with Terraform
 
@@ -34,6 +38,8 @@ infra:
 ```
 
 > **Note** - The default path is `infra`. As we already have our `.bicep` resources defined there, we use a different path that we have to explicitly specify in the manifest.
+
+> **Note** Probably due to the nature of an alpha feature the JSON schema backing the `azure.yaml` file does not contain `terraform` as a valid value for the `provider` key. As this behavior is confusing we opened an issue for that (see [[Issue] Azure.yaml - terraform is not a valid value](https://github.com/Azure/azure-dev/issues/1925)).
 
 ### Infrastructure setup
 
@@ -115,7 +121,7 @@ The purging is automatically done once you delete your infrastructure.
 
 ### Changes in the appservicenode module
 
-In order to enable you to deploy the Azure App Service in the SKU `F1` i.e., the free plan, we had to adjust some modules delivered by the `azd` team. One parameter available in the Bicep variant is missing in the Terraform setup, namely the `site configuration` `always_on`. This is set to `true` which prevents the deployment to a free plan. To enable this we made the following adjustements:
+In order to enable you to deploy the Azure App Service in the SKU `F1` i.e., the free plan, we had to adjust some modules delivered by the `azd` team. One parameter available in the Bicep variant is missing in the Terraform setup, namely the `site configuration` `always_on`. This is set to `true` which prevents the deployment to a free plan. To enable this we made the following adjustments:
 
 1. Introduction of the parameter as a variable in the `infra-terraform\modules\appservicenode\appservicenode_variables.tf`
 
