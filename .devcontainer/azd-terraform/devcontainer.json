@@ -35,7 +35,7 @@
 	"forwardPorts": [
 		8080
 	],
-	"postCreateCommand": "cd src/api && npm install && cd ../.. && azd config set alpha.terraform on",
+	"postCreateCommand": "cd src/api && npm install && cd ../.. && azd config set alpha.terraform on && azd config set auth.useAzCliAuth true",
 	"remoteUser": "node",
 	"hostRequirements": {
 		"memory": "8gb"
