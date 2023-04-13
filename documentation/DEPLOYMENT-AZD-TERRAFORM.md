@@ -2,7 +2,7 @@
 
 > **Warning** - with release 0.8.0-beta.1 of `azd` [feature stages](https://devblogs.microsoft.com/azure-sdk/azd-april-2023-release/#alpha-beta-and-stable-features) have been introduced. This provides insights into the maturity of the `azd` functionality. The provisioning of infrastructure via Terraform has been marked as an *alpha* feature, so it is not yet recommended for productive usage.
 
-> **Note** - there are known issues when using the Terraform provider in combination with GitHub Codespaces i.e., the login flow via the Azure CLI gets stuck in the callback. You find the details in this [issue](https://github.com/Azure/azure-dev/pull/1497) of the `azd` repository as well as in this [issue](https://github.com/Azure/azure-dev/pull/1496) in the Azure CLI repository. The described workaround in the second issue did not do the trick for us. Hence, we currently cannot support GitHub Codespaces in this type of infrastructure setup.
+> **Note** - there are known issues when using the Terraform provider in combination with GitHub Codespaces i.e., the login flow via the Azure CLI gets stuck in the callback. You find the details in this [issue](https://github.com/Azure/azure-dev/issues/1934) of the `azd` repository as well as in this [issue](https://github.com/Azure/azure-cli/issues/20315) in the Azure CLI repository. The described workaround in the second issue did not do the trick for us. Hence, we currently cannot support GitHub Codespaces in this type of infrastructure setup.
 
 ## Prerequisite
 
