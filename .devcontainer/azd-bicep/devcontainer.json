@@ -4,24 +4,12 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
-			"VARIANT": "bullseye"
+			"IMAGE": "typescript-node:18"
 		}
 	},
 	"features": {
-		"ghcr.io/devcontainers-contrib/features/nestjs-cli:1": {},
-		"ghcr.io/devcontainers/features/docker-from-docker:1": {
-			"version": "20.10"
-		},
-		"ghcr.io/devcontainers/features/github-cli:1": {
-			"version": "2"
-		},
-		"ghcr.io/devcontainers/features/node:1": {
-			"version": "18",
-			"nodeGypDependencies": false
-		},
-		"ghcr.io/devcontainers/features/python:1": {
-			"version": "os-provided"
-		}
+		"ghcr.io/devcontainers-contrib/features/nestjs-cli:2": {},
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
 	},
 	"customizations": {
 		"vscode": {
@@ -44,7 +32,7 @@
 		8080
 	],
 	"postCreateCommand": "cd src/api && npm install && cd ../..",
-	"remoteUser": "vscode",
+	"remoteUser": "node",
 	"hostRequirements": {
 		"memory": "8gb"
 	}

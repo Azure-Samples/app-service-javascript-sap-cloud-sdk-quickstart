@@ -4,26 +4,14 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
-			"VARIANT": "bullseye"
+			"IMAGE": "typescript-node:18"
 		}
 	},
 	"features": {
-		"ghcr.io/devcontainers-contrib/features/nestjs-cli:1": {},
+		"ghcr.io/devcontainers-contrib/features/nestjs-cli:2": {},
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
 		"ghcr.io/devcontainers/features/azure-cli:1": {
 			"version": "2.38"
-		},
-		"ghcr.io/devcontainers/features/docker-from-docker:1": {
-			"version": "20.10"
-		},
-		"ghcr.io/devcontainers/features/github-cli:1": {
-			"version": "2"
-		},
-		"ghcr.io/devcontainers/features/node:1": {
-			"version": "18",
-			"nodeGypDependencies": false
-		},
-		"ghcr.io/devcontainers/features/python:1": {
-			"version": "os-provided"
 		},
 		"ghcr.io/devcontainers/features/terraform:1": {
 			"version": "latest"
@@ -36,7 +24,6 @@
 				"ms-vscode.vscode-node-azure-pack",
 				"humao.rest-client",
 				"ms-azuretools.azure-dev",
-				"ms-azuretools.vscode-bicep",
 				"ms-azuretools.vscode-docker",
 				"ms-vscode.vscode-node-azure-pack",
 				"ms-vscode.js-debug",
@@ -48,8 +35,8 @@
 	"forwardPorts": [
 		8080
 	],
-	"postCreateCommand": "cd src/api && npm install && cd ../..",
-	"remoteUser": "vscode",
+	"postCreateCommand": "cd src/api && npm install && cd ../.. && azd config set alpha.terraform on && azd config set auth.useAzCliAuth true",
+	"remoteUser": "node",
 	"hostRequirements": {
 		"memory": "8gb"
 	}

@@ -1,8 +1,8 @@
 # Deployment via Azure Developer CLI
 
-> **Note** - The repository is compatible with version [0.7.0-beta.1](https://github.com/Azure/azure-dev/releases/tag/azure-dev-cli_0.7.0-beta.1) of the Azure Developer CLI. Make sure that you are using the same version to avoid incompatibilities due to different versions.
+> **Note** - The repository is compatible with version [0.8.0-beta.1](https://github.com/Azure/azure-dev/releases/tag/azure-dev-cli_0.8.0-beta.1) of the Azure Developer CLI. Make sure that you are using the same version to avoid incompatibilities due to different versions.
 
-In this example we use the [Azure Developer CLI](https://github.com/Azure/azure-dev) to deploy the project. Learn more about [this tool on Microsoft learn](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview)
+In this example we use the [Azure Developer CLI](https://github.com/Azure/azure-dev) to deploy the project. Learn more about this tool on [Microsoft Learn](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview)
 
 ## Prerequisite
 
@@ -28,7 +28,7 @@ The `azd` CLI will ask you to provide the following information:
 - Which Azure subscription should be used for the deployment?
 - Which region should be used for the deployment?
 
-> **Note** - In case you are not logged into an Azure account, you also need to execute the login via `azd login`.
+> **Note** - In case you are not logged into an Azure account, you also need to execute the login via `azd auth login`.
 
 > **Note** - The parameters around the OData service are contained in the `.bicep` template i.e., in the `infra/main.bicep` file. You can provide them in different ways. The easiest way is to add them to the `infra/main.parameters.json` as references to environment variables in analogy to the already existing parameters available in the file. You can also add them after the deployment in the Azure Portal as we have defaulted them in the templates.  
 
@@ -36,17 +36,19 @@ After a successful deployment browse your new app powered by the SAP Cloud SDK (
 
 ### The two-step approach
 
-The `azd up` command comprises two steps of the deployment:
+The `azd up` command comprises three steps of the deployment:
 
-1. Deployment of the infrastructure as defined in the `.bicep` files in the `infra` directory.
-2. Deployment of the code given in the `src` folder.
+1. Packaging of your application code. 
+2. Deployment of the infrastructure as defined in the `.bicep` files in the `infra` directory.
+3. Deployment of the code given in the `src` folder.
 
 To gain a bit more insight you can split your deployment accordingly via:
 
-1. Execution of `azd provision`: this will exclusively set up your infrastructure.
-2. Execution of `azd deploy`: this will deploy your application to the provisioned infrastructure.
+1. Execution of `azd package`: this will package your code artifacts
+2. Execution of `azd provision`: this will exclusively set up your infrastructure.
+3. Execution of `azd deploy`: this will deploy your application to the provisioned infrastructure.
 
-The result after the two steps is the same as when executing `azd up`.
+The result after the three steps is the same as when executing `azd up`.
 
 ## What is happening behind the scenes?
 
@@ -163,7 +165,7 @@ services:
 
 This is the minimum setup of the file. It provides some metadata around the app and specifies which service needs to be deployed (`sap-cloud-sdk-api:`), where the source code is located (`project: ./src/api`), which language the code is written in (`language: ts`) and which host should be used for the app (`host: appservice`).
 
-As you can see from the first line of the file, the manifest is backed by a language server with the schema located at <https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json>. Looking at the schema shows that other configurations are taken from the default namely:
+As you can see from the first line of the file, the manifest is backed by a language server with the schema located at <https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json>. The schema shows that other configurations are taken from the default namely:
 
 - The location of the infrastructure as code files (default: `infra`), their language (default: `.bicep`) and the name of the default module within the Azure provisioning templates (default: `main`).
 - The definition of continuous integration pipeline (default: `github`)
@@ -174,7 +176,7 @@ As you can see from the first line of the file, the manifest is backed by a lang
 
 We use `Bicep` as default option to describe the Infrastructure as code. This is a convenient way when dealing with Azure resources. You find more about `Bicep` in the [official documentation](https://learn.microsoft.com/azure/azure-resource-manager/bicep/).
 
-Besides `Bicep` the `azd` CLI also supports the definition of the infrastructure via [Terraform](https://www.terraform.io/). To give you the freedom of choice this repository also contains the infrastructure definition via Terraform modules. You find the instructions [here](./DEPLOYMENT-AZD-TERRAFORM.md)
+Besides `Bicep` the `azd` CLI also supports the definition of the infrastructure via [Terraform](https://www.terraform.io/) as an *alpha feature*. To give you the freedom of choice this repository also contains the infrastructure definition via Terraform modules. You find the instructions [here](./DEPLOYMENT-AZD-TERRAFORM.md).
 
 ## Cleanup
 

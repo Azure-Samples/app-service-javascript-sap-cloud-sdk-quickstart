@@ -53,25 +53,25 @@ Use any OData enabled SAP system:
 0. familiarize yourself with the [SAP Cloud SDK for JavaScript developer tutorial](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction)
 1. Run the following command to initialize the project.
 
-```bash
-azd init --template app-service-javascript-sap-cloud-sdk-quickstart
-```
+   ```bash
+   azd init --template app-service-javascript-sap-cloud-sdk-quickstart
+   ```
 
-This command will clone the code to your current folder and prompt you for the following information:
-
-- `Environment Name`: This will be used as a prefix for the resource group that will be created to hold all Azure resources. This name should be unique within your Azure subscription.
+   This command will clone the code to your current folder and prompt you for `Environment Name`. This will be used as a prefix for the resource group that will be created to hold all Azure resources. This name should be unique within your Azure subscription.
 
 2. Run the following command to package a deployable copy of your application, provision the template's infrastructure to Azure and also deploy the application code to those newly provisioned resources.
 
-```bash
-azd up
-```
+   ```bash
+   azd up
+   ```
 
 This command will prompt you for the following information:
+
 - `Azure Location`: The Azure location where your resources will be deployed.
 - `Azure Subscription`: The Azure Subscription where your resources will be deployed.
 
-> NOTE: This may take a while to complete as it executes three commands: `azd package` (packages a deployable copy of your application), `azd provision` (provisions Azure resources), and `azd deploy` (deploys application code). You will see a progress indicator as it packages, provisions and deploys your application.
+   > **Note** - This may take a while to complete as it executes three commands: `azd package` (packages a deployable copy of your application), `azd provision` (provisions Azure resources), and `azd deploy` (deploys application code). You will see a progress indicator as it packages, provisions and deploys your application.
+
 3. Select suitable [VS Code workspace](https://code.visualstudio.com/docs/editor/workspaces). We suggest [bicep](workspaces/azd-bicep.code-workspace) as it is the default for Azure Developer CLI.
 4. `cd app-service-javascript-sap-cloud-sdk-quickstart/src/api`
 5. `npm install`
@@ -80,25 +80,25 @@ This command will prompt you for the following information:
 8. maintain your SAP OData url with credentials in [.env](templates/.env) file (put in project root `app-service-javascript-sap-cloud-sdk-quickstart/src/api`) and restart the app if necessary
 9. browse to [http://localhost:8080/business-partner](http://localhost:8080/business-partner) for your first OData call and pick one of the business partners (examples below use ids from SAP mock server)
 
-> **Note** - SAP's examples for the business partner API for SAP S/4HANA Cloud mentioned in the tutorial **differ** to the SAP S/4HANA on-premises flavor. Add AddressUsage, otherwise you will see "Internal error when calling operation module BUA_CHECK_ADDRESS_VALIDITY_ALL; a check table is missing". Check SAP KBA's for more details.
+   > **Note** - SAP's examples for the business partner API for SAP S/4HANA Cloud mentioned in the tutorial **differ** to the SAP S/4HANA on-premises flavor. Add AddressUsage, otherwise you will see "Internal error when calling operation module BUA_CHECK_ADDRESS_VALIDITY_ALL; a check table is missing". Check SAP KBA's for more details.
 
 10. get that business partner by id: [http://localhost:8080/business-partner/1003764](http://localhost:8080/business-partner/1003764)
 
-![screenshot of successful business partner retrieval by id](assets/bupa-get-vsc-rest.png)
+   ![screenshot of successful business partner retrieval by id](assets/bupa-get-vsc-rest.png)
 
 11. update the address with a house number: [http://localhost:8080/business-partner/1003764/address/28238](http://localhost:8080/business-partner/1003764/address/28238).
 
-> **Note** - For your convenience we provide a [collection of REST calls](/templates/business-partner-requests.http) in the repos. Execute them with the [VS Code REST client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client).
+   > **Note** - For your convenience we provide a [collection of REST calls](/templates/business-partner-requests.http) in the repos. Execute them with the [VS Code REST client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client).
 
-![screenshot of business partner address update with request details](assets/bupa-update-vsc-rest.png)
+  ![screenshot of business partner address update with request details](assets/bupa-update-vsc-rest.png)
 
 12. delete the address: [http://localhost:8080/business-partner/1003764/address/28238](http://localhost:8080/business-partner/1003764/address/28238)
 
-![screenshot of business partner address delete](assets/bupa-delete-vsc-rest.png)
+   ![screenshot of business partner address delete](assets/bupa-delete-vsc-rest.png)
 
 13. add an address to your chosen business partner: [http://localhost:8080/business-partner/1003764/address](http://localhost:8080/business-partner/1003764/address)
 
-![screenshot of successful business partner address creation with request details](assets/bupa-create-vsc-rest.png)
+   ![screenshot of successful business partner address creation with request details](assets/bupa-create-vsc-rest.png)
 
 **Congratulations** 🥳, you have successfully consumed SAP OData with the SAP Cloud SDK for JavaScript running on Azure App Service!
 
@@ -109,7 +109,7 @@ There are multiple ways to deploy this project to Azure. We provide two options 
 1. via template deployment and VS Code extension. This approach allows an quick deployment to Azure but does not necessarily reflect the best practices. You find more information on this option [here](documentation/DEPLOYMENT-VSCODE.md).
 2. via [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview) using `azd up`. This approach enables a quick and easy deployment and already contains best practices. It serves as a perfect starting point for a production grade setup. You find more information on this option [here](documentation/DEPLOYMENT-AZD.md).
 
-> **Note** - If you choose to deploy to Azure via `azd` we provide two options to define the infrastructure as code, namely `Bicep` and `Terraform`. To make your life easier we provide two distinct [workspaces](https://code.visualstudio.com/docs/editor/workspaces#_multiroot-workspaces) for that to show you the relevant files and folders. If you want to go for `Bicep` you can open the workspace `workspaces/azd-bicep.code-workspace`, for Terraform go for the workspace `workspaces/azd-terraform.code-workspace`.
+> **Note** - If you choose to deploy to Azure via `azd` we provide two options to define the Infrastructure as Code, namely `Bicep` and `Terraform`. To make your life easier we provide two distinct [workspaces](https://code.visualstudio.com/docs/editor/workspaces#_multiroot-workspaces) for that to show you the relevant files and folders. If you want to go for `Bicep` you can open the workspace `workspaces/azd-bicep.code-workspace`, for Terraform go for the workspace `workspaces/azd-terraform.code-workspace`.
 
 ## Deploy to SAP BTP 🪂
 
