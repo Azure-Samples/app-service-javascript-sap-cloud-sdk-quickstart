@@ -25,6 +25,17 @@ export class AppService {
 
 		var response: HttpResponse;
 		var result: object;
+		var authHeader = { [process.env.APIKEY_HEADERNAME]: process.env.APIKEY };
+
+		//if odata username and password are set, add basic auth header
+		if(process.env.ODATA_USERNAME && process.env.ODATA_USERPWD){
+			authHeader = {
+				...authHeader,
+				Authorization: `Basic ${Buffer.from(
+					`${process.env.ODATA_USERNAME}:${process.env.ODATA_USERPWD}`,
+				).toString("base64")}`
+			};
+		}
 
 		try {
 			response = await executeHttpRequestWithOrigin(
@@ -34,7 +45,7 @@ export class AppService {
 				{
 					method: "head",
 					headers: {
-						custom: { [process.env.APIKEY_HEADERNAME]: process.env.APIKEY },
+						custom: authHeader,
 					},
 				},
 				{
