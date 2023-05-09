@@ -1,0 +1,19 @@
+<!-- Policy configuration for the API. Explore other sample policies at https://learn.microsoft.com/azure/api-management/policies/ -->
+<policies>
+    <inbound>
+        <base />
+        <!-- The rate-limit policy prevents API usage spikes on a per subscription basis by limiting the call rate
+             to a specified number per a specified time period. When the call rate is exceeded, the caller receives
+             a 429 Too Many Requests response status code.
+        -->
+        <rate-limit calls="20" renewal-period="90" remaining-calls-variable-name="remainingCallsPerSubscription"/>
+    </inbound>
+    <backend>
+    </backend>
+    <outbound>
+        <base />
+    </outbound>
+    <on-error>
+        <base />
+    </on-error>
+</policies>        <!-- Optional policy to handle errors. Learn more at https://learn.microsoft.com/azure/api-management/api-management-error-handling-policies -->

@@ -4,6 +4,8 @@
 
 * [SAP Cloud SDK documentation for JavaScript](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction)
 
+* [Access SAP Business Application Studio as a remote from Visual Studio Code / Codespaces](https://blogs.sap.com/2023/04/28/access-sap-business-application-studio-as-a-remote-from-visual-studio-code)
+
 * [SAP Cloud SDK repos for JavaScript](https://github.com/SAP/cloud-sdk-js)
 
 * [SAP Cloud SDK for JavaScript API documentation](https://sap.github.io/cloud-sdk/api/v2/index.html)

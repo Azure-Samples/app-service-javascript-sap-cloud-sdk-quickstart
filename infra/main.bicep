@@ -20,10 +20,15 @@ param appServicePlanName string = ''
 param keyVaultName string = ''
 param logAnalyticsName string = ''
 param resourceGroupName string = ''
+param apimResourceGroupName string = 'DEMO-NEU-SAP-PM1'
+param apimServiceName string = 'demo-sap-apim'
+
+@description('Flag to use Azure API Management to mediate the calls between the Web frontend and the SAP backend API')
+param useAPIM bool = true
 
 // Name of the SKU; default is F1 (Free), use B1 (Basic) for features like health checks and S1 (Standard) for production
 @description('Name of the SKU of the App Service Plan')
-param skuName string = 'F1'
+param skuName string = 'B1'
 
 @description('Id of the user or app to assign application roles')
 param principalId string = ''
@@ -55,6 +60,12 @@ resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   name: !empty(resourceGroupName) ? resourceGroupName : '${abbrs.resourcesResourceGroups}${environmentName}'
   location: location
   tags: tags
+}
+
+//Reference the existing API Management instance from another resource group but same subscription
+resource apimrg 'Microsoft.Resources/resourceGroups@2021-04-01' existing = {
+  name: apimResourceGroupName
+  scope: subscription()
 }
 
 // The application backend
@@ -153,11 +164,27 @@ module monitoring './core/monitor/monitoring.bicep' = {
   }
 }
 
+// Configures the API in the Azure API Management (APIM) service
+module apimApi './app/apim-api.bicep' = if (useAPIM) {
+  name: 'apim-api-deployment'
+  scope: apimrg
+  params: {
+    name: useAPIM ? apimServiceName : ''
+    apiName: 'api-business-partner'
+    apiDisplayName: 'API_BUSINESS_PARTNER'
+    apiDescription: 'Business Partner residing on SAP ERP exposed via OData'
+    apiPath: 'sdk/sap/opu/odata/sap/API_BUSINESS_PARTNER'
+    apiBackendUrl: api.outputs.SERVICE_API_URI
+    apiAppName: api.outputs.SERVICE_API_NAME
+  }
+}
+
 // App outputs
 output APPLICATIONINSIGHTS_CONNECTION_STRING string = monitoring.outputs.applicationInsightsConnectionString
 output AZURE_KEY_VAULT_ENDPOINT string = keyVault.outputs.endpoint
 output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output AZURE_LOCATION string = location
 output AZURE_TENANT_ID string = tenant().tenantId
-output SAP_CLOUD_SDK_API_URL string = api.outputs.SERVICE_API_URI
+output USE_APIM bool = useAPIM
+output SAP_CLOUD_SDK_API_URL array = useAPIM ? [ apimApi.outputs.SERVICE_API_URI, api.outputs.SERVICE_API_URI ]: []
 output SAP_CLOUD_SDK_API_APPLICATIONINSIGHTS_CONNECTION_STRING string = monitoring.outputs.applicationInsightsConnectionString
