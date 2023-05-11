@@ -20,8 +20,15 @@ param appServicePlanName string = ''
 param keyVaultName string = ''
 param logAnalyticsName string = ''
 param resourceGroupName string = ''
+
+@description('Resource Group containing the existing API Management instance')
 param apimResourceGroupName string = 'DEMO-NEU-SAP-PM1'
+
+@description('Name of the API Management service instance')
 param apimServiceName string = 'demo-sap-apim'
+
+@description('Target URL of the SAP backend API fronted by the existing API Management')
+param apimApiSAPBackendURL string = 'https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER'
 
 @description('Flag to use Azure API Management to mediate the calls between the Web frontend and the SAP backend API')
 param useAPIM bool = true
@@ -63,7 +70,7 @@ resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
 }
 
 //Reference the existing API Management instance from another resource group but same subscription
-resource apimrg 'Microsoft.Resources/resourceGroups@2021-04-01' existing = {
+resource apimrg 'Microsoft.Resources/resourceGroups@2021-04-01' existing = if (useAPIM){
   name: apimResourceGroupName
   scope: subscription()
 }
@@ -171,11 +178,13 @@ module apimApi './app/apim-api.bicep' = if (useAPIM) {
   params: {
     name: useAPIM ? apimServiceName : ''
     apiName: 'api-business-partner'
-    apiDisplayName: 'API_BUSINESS_PARTNER'
+    apiDisplayName: 'API_BUSINESS_PARTNER SAP'
     apiDescription: 'Business Partner residing on SAP ERP exposed via OData'
     apiPath: 'sdk/sap/opu/odata/sap/API_BUSINESS_PARTNER'
-    apiBackendUrl: api.outputs.SERVICE_API_URI
-    apiAppName: api.outputs.SERVICE_API_NAME
+    apiBackendUrl: apimApiSAPBackendURL
+    applicationInsightsName: monitoring.outputs.applicationInsightsName
+    applicationInsightsRG: rg.name
+    //apiAppName: api.outputs.SERVICE_API_NAME
   }
 }
 
@@ -186,5 +195,5 @@ output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output AZURE_LOCATION string = location
 output AZURE_TENANT_ID string = tenant().tenantId
 output USE_APIM bool = useAPIM
-output SAP_CLOUD_SDK_API_URL array = useAPIM ? [ apimApi.outputs.SERVICE_API_URI, api.outputs.SERVICE_API_URI ]: []
+output SAP_CLOUD_SDK_API_URL array = useAPIM ? [ apimApi.outputs.SERVICE_API_URI, api.outputs.SERVICE_API_URI ]: [api.outputs.SERVICE_API_URI]
 output SAP_CLOUD_SDK_API_APPLICATIONINSIGHTS_CONNECTION_STRING string = monitoring.outputs.applicationInsightsConnectionString

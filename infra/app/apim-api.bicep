@@ -1,4 +1,6 @@
 param name string
+param applicationInsightsName string
+param applicationInsightsRG string
 
 @description('Resource name to uniquely identify this API within the API Management service instance')
 @minLength(1)
@@ -17,16 +19,13 @@ param apiDescription string
 @minLength(1)
 param apiPath string
 
-//@description('Absolute URL of the web frontend')
-//param webFrontendUrl string
-
 @description('Absolute URL of the backend service implementing this API.')
 param apiBackendUrl string
 
 @description('Resource name for backend Web App or Function App')
 param apiAppName string = ''
 
-//var apiPolicyContent = replace(loadTextContent('apim-api-policy.xml'), '{origin}', webFrontendUrl)
+var apiPolicyContent = loadTextContent('apim-api-policy.xml')
 
 resource restApi 'Microsoft.ApiManagement/service/apis@2021-12-01-preview' = {
   name: apiName
@@ -44,7 +43,7 @@ resource restApi 'Microsoft.ApiManagement/service/apis@2021-12-01-preview' = {
   }
 }
 
-/*resource apiPolicy 'Microsoft.ApiManagement/service/apis/policies@2021-12-01-preview' = {
+resource apiPolicy 'Microsoft.ApiManagement/service/apis/policies@2021-12-01-preview' = {
   name: 'policy'
   parent: restApi
   properties: {
@@ -53,46 +52,34 @@ resource restApi 'Microsoft.ApiManagement/service/apis@2021-12-01-preview' = {
   }
 }
 
-resource apiDiagnostics 'Microsoft.ApiManagement/service/apis/diagnostics@2021-12-01-preview' = {
-  name: 'applicationinsights'
-  parent: restApi
+resource appInsightsApim 'Microsoft.Insights/components@2020-02-02' existing = if (!empty(applicationInsightsName)) {
+  name: applicationInsightsName
+  scope: resourceGroup(applicationInsightsRG)
+}
+
+/*resource namedValueAppInsightsKey 'Microsoft.ApiManagement/service/namedValues@2020-06-01-preview' = {
+  parent: apimService
+  name: 'instrumentationKey'
   properties: {
-    alwaysLog: 'allErrors'
-    backend: {
-      request: {
-        body: {
-          bytes: 1024
-        }
-      }
-      response: {
-        body: {
-          bytes: 1024
-        }
-      }
-    }
-    frontend: {
-      request: {
-        body: {
-          bytes: 1024
-        }
-      }
-      response: {
-        body: {
-          bytes: 1024
-        }
-      }
-    }
-    httpCorrelationProtocol: 'W3C'
-    logClientIp: true
-    loggerId: apimLogger.id
-    metrics: true
-    sampling: {
-      percentage: 100
-      samplingType: 'fixed'
-    }
-    verbosity: 'verbose'
+    tags: []
+    secret: false
+    displayName: 'instrumentationKey'
+    value: appInsightsApim.properties.InstrumentationKey
   }
 }*/
+
+resource apimLogger 'Microsoft.ApiManagement/service/loggers@2021-04-01-preview' = {
+  parent: apimService
+  name: 'apimlogger'
+  properties:{
+    resourceId: appInsightsApim.id
+    description: 'Application Insights for APIM'
+    loggerType: 'applicationInsights'
+    credentials:{
+      instrumentationKey: appInsightsApim.properties.InstrumentationKey
+    }
+  }
+}
 
 resource apimService 'Microsoft.ApiManagement/service@2021-08-01' existing = {
   name: name
@@ -111,10 +98,5 @@ resource apiAppProperties 'Microsoft.Web/sites/config@2022-03-01' = if (!empty(a
       }
   }
 }
-
-/*resource apimLogger 'Microsoft.ApiManagement/service/loggers@2021-12-01-preview' existing = {
-  name: 'app-insights-logger'
-  parent: apimService
-}*/
 
 output SERVICE_API_URI string = '${apimService.properties.gatewayUrl}/${apiPath}'
