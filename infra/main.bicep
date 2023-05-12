@@ -31,7 +31,7 @@ param apimServiceName string = 'demo-sap-apim'
 param apimApiSAPBackendURL string = 'https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER'
 
 @description('Flag to use Azure API Management to mediate the calls between the Web frontend and the SAP backend API')
-param useAPIM bool = true
+param useAPIM bool = false
 
 // Name of the SKU; default is F1 (Free), use B1 (Basic) for features like health checks and S1 (Standard) for production
 @description('Name of the SKU of the App Service Plan')
