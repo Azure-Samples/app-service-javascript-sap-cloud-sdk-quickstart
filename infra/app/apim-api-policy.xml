@@ -12,8 +12,45 @@
     </backend>
     <outbound>
         <base />
+        <!-- OPTIONAL: Ensure that APIM domain, port and path are reflected on the OData response from SAP
+             Otherwise deferred items like /toSalesOrders are represented by SAP known host and port. Example:
+             https://10.10.10.10:44300/sap/opu/odata/iwbep/gwsample_basic/BusinessPartnerSet('0100000000')/ToSalesOrders vs.
+             https://demo-sap-apim.azure-api.net:443/my-prefix/sap/opu/odata/iwbep/gwsample_basic/BusinessPartnerSet('0100000000')/ToSalesOrders
+
+             URL rewrite in body required for returned OData paths.
+
+             - Consider adding "/" + "context.Api.Version" to reflect your versioning scheme: https://learn.microsoft.com/azure/api-management/api-management-versions
+             - Consider Using expression "ToString().ToUpper()" to cater for upper case SAP host names. See SAP Note 129997 and 611361 that discuss the SAP ABAP settings for case sensive host names for reference.
+
+               context.Api.ServiceUrl.Host.ToString().ToUpper()
+        -->
+        <find-and-replace from="@(context.Api.ServiceUrl.Host +":"+ context.Api.ServiceUrl.Port)" to="@(context.Request.OriginalUrl.Host + ":" + context.Request.OriginalUrl.Port + context.Api.Path)" />
     </outbound>
     <on-error>
         <base />
+        <set-header name="ErrorSource" exists-action="override">
+            <value>@(context.LastError.Source)</value>
+        </set-header>
+        <set-header name="ErrorReason" exists-action="override">
+            <value>@(context.LastError.Reason)</value>
+        </set-header>
+        <set-header name="ErrorMessage" exists-action="override">
+            <value>@(context.LastError.Message)</value>
+        </set-header>
+        <set-header name="ErrorScope" exists-action="override">
+            <value>@(context.LastError.Scope)</value>
+        </set-header>
+        <set-header name="ErrorSection" exists-action="override">
+            <value>@(context.LastError.Section)</value>
+        </set-header>
+        <set-header name="ErrorPath" exists-action="override">
+            <value>@(context.LastError.Path)</value>
+        </set-header>
+        <set-header name="ErrorPolicyId" exists-action="override">
+            <value>@(context.LastError.PolicyId)</value>
+        </set-header>
+        <set-header name="ErrorStatusCode" exists-action="override">
+            <value>@(context.Response.StatusCode.ToString())</value>
+        </set-header>
     </on-error>
 </policies>        <!-- Optional policy to handle errors. Learn more at https://learn.microsoft.com/azure/api-management/api-management-error-handling-policies -->
