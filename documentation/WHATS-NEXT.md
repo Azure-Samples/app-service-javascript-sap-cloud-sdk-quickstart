@@ -26,6 +26,7 @@ SAP backends on Azure typically run in fully isolated virtual networks. There ar
 
 * Integrate your App Service with an Azure virtual network (VNet). [Learn more](https://learn.microsoft.com/azure/app-service/configure-vnet-integration-enable).
 * Private Endpoints for Azure App Service. [Learn more](https://learn.microsoft.com/azure/app-service/networking/private-endpoint?source=recommendations)
+* Adapt the azd bicep templates to add VNet integration out of the box. Learn more from [this](https://github.com/Azure-Samples/virtual-network-integration-recipes) Azure repos.
 * User Azure API Management for OData with SAP Principal Propagation. [Learn more](https://learn.microsoft.com/azure/api-management/sap-api#production-considerations)
 
 VNet integration enables your app to securely access resources in your VNet, such as your SAP Gateway, but doesn't block public access to your App Service. To achieve full private connectivity for the app service too, look into private endpoints.
