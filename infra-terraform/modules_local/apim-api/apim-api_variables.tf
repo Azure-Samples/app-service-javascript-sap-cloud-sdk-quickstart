@@ -38,3 +38,9 @@ variable "application_insights_name" {
   description = "Azure Application Insights Name."
   type        = string
 }
+
+variable "api_app_name" {
+  description = "Resource name for backend Web App or Function App"
+  type        = string
+  default     = ""
+}

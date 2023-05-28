@@ -11,6 +11,10 @@ terraform {
   }
 }
 
+locals {
+  appNameforAppProperties = var.api_app_name != "" ? var.api_app_name : "placeholdername"
+}
+
 # ------------------------------------------------------------------------------------------------------
 # Read existing resources from different resource groups 
 # ------------------------------------------------------------------------------------------------------
@@ -62,4 +66,16 @@ resource "azurerm_api_management_logger" "apimLogger" {
   application_insights {
     instrumentation_key = data.azurerm_application_insights.instrumentation_key
   }
+}
+
+resource "azapi_resource" "api_app_properties" {
+  name      = "${local.appNameforAppProperties}/web"
+  parent_id = data.azurerm_api_management.apim.id
+  body = jsonencode({
+    properties = {
+      apiManagementConfig = {
+        id = "${data.azurerm_api_management.apim.id}/apis/${var.api_name}"
+      }
+    }
+  })
 }
