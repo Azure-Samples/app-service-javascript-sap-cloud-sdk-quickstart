@@ -112,3 +112,20 @@ module "api" {
     type = "SystemAssigned"
   }]
 }
+
+# ------------------------------------------------------------------------------------------------------
+# Configures the API in the Azure API Management (APIM) service
+# ------------------------------------------------------------------------------------------------------
+module "apim" {
+  source                    = "./modules_local/apim-api"
+  count                     = var.useAPIM ? 1 : 0
+  name                      = var.apimServiceName
+  rg_name_apim              = var.apimResourceGroupName
+  rg_name_app               = azurerm_resource_group.rg.name
+  api_name                  = "api-business-partner"
+  api_display_name          = "API_BUSINESS_PARTNER SAP"
+  api_description           = "Business Partner residing on SAP ERP exposed via OData"
+  api_path                  = "sdk/sap/opu/odata/sap/API_BUSINESS_PARTNER"
+  api_backend_url           = var.apimApiSAPBackendURL
+  application_insights_name = module.applicationinsights.APPLICATIONINSIGHTS_NAME
+}

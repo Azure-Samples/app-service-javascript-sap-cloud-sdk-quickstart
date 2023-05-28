@@ -59,3 +59,27 @@ variable "ApiKeyHeaderName" {
   type        = string
   default     = "APIKey"
 }
+
+variable "useAPIM" {
+  description = "Flag to use Azure API Management to mediate the calls between the Web frontend and the SAP backend API"
+  type        = bool
+  default     = false
+}
+
+variable "apimResourceGroupName" {
+  description = "Resource Group containing the existing API Management instance"
+  type        = string
+  default     = "DEMO-NEU-SAP-PM1"
+}
+
+variable "apimServiceName" {
+  description = "Name of the existing API Management instance"
+  type        = string
+  default     = "demo-sap-apim"
+}
+
+variable "apimApiSAPBackendURL" {
+  description = "Target URL of the SAP backend API fronted by the existing API Management"
+  type        = string
+  default     = "https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER"
+}
