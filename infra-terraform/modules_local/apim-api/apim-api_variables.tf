@@ -19,11 +19,15 @@ variable "api_name" {
 }
 
 variable "api_display_name" {
-
   description = "The Display Name of the API"
   type        = string
 }
 
+variable "api_description" {
+  description = "Description of the API. May include HTML formatting tags."
+  type        = string
+}
+  
 variable "api_path" {
   description = "Relative URL uniquely identifying this API and all of its resource paths within the API Management service instance. It is appended to the API endpoint base URL specified during the service instance creation to form a public URL for this API."
   type        = string

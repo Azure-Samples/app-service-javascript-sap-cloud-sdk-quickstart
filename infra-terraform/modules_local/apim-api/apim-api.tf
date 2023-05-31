@@ -8,6 +8,10 @@ terraform {
       source  = "aztfmod/azurecaf"
       version = "~>1.2.15"
     }
+    azapi = {
+      source  = "Azure/azapi"
+      version = "~>1.6.0"
+    }
   }
 }
 
@@ -42,10 +46,11 @@ resource "azurerm_api_management_api" "api" {
   service_url           = var.api_backend_url
   subscription_required = false
   api_type              = "http"
+  description           = var.api_description
 
   import {
     content_format = "openapi"
-    content_value  = file("${path.module}/../../src/api/API_BUSINESS_PARTNER.openapi.json")
+    content_value  = file("${path.module}/../../../src/api/API_BUSINESS_PARTNER.openapi.json")
   }
 }
 
@@ -64,11 +69,12 @@ resource "azurerm_api_management_logger" "apimLogger" {
   resource_id         = data.azurerm_application_insights.appinsights.id
 
   application_insights {
-    instrumentation_key = data.azurerm_application_insights.instrumentation_key
+    instrumentation_key = data.azurerm_application_insights.appinsights.instrumentation_key
   }
 }
 
 resource "azapi_resource" "api_app_properties" {
+  type      = "Microsoft.Web/sites/config@2022-03-01"
   name      = "${local.appNameforAppProperties}/web"
   parent_id = data.azurerm_api_management.apim.id
   body = jsonencode({
