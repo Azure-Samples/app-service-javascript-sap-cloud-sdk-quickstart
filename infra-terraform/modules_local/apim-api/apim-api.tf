@@ -8,10 +8,10 @@ terraform {
       source  = "aztfmod/azurecaf"
       version = "~>1.2.15"
     }
-    azapi = {
-      source  = "Azure/azapi"
-      version = "~>1.6.0"
-    }
+#    azapi = {
+#      source  = "Azure/azapi"
+#      version = "~>1.6.0"
+#    }
   }
 }
 
@@ -64,7 +64,7 @@ resource "azurerm_api_management_api_policy" "policies" {
 
 resource "azurerm_api_management_logger" "apimLogger" {
   name                = "apimlogger"
-  api_management_name = data.azurerm_api_management.apim.id
+  api_management_name = data.azurerm_api_management.apim.name
   resource_group_name = var.rg_name_apim
   resource_id         = data.azurerm_application_insights.appinsights.id
 
@@ -73,15 +73,15 @@ resource "azurerm_api_management_logger" "apimLogger" {
   }
 }
 
-resource "azapi_resource" "api_app_properties" {
-  type      = "Microsoft.Web/sites/config@2022-03-01"
-  name      = "${local.appNameforAppProperties}/web"
-  parent_id = data.azurerm_api_management.apim.id
-  body = jsonencode({
-    properties = {
-      apiManagementConfig = {
-        id = "${data.azurerm_api_management.apim.id}/apis/${var.api_name}"
-      }
-    }
-  })
-}
+#resource "azapi_resource" "api_app_properties" {
+#  type      = "Microsoft.Web/sites/config@2022-03-01"
+#  name      = "${local.appNameforAppProperties}/web"
+#  parent_id = data.azurerm_api_management.apim.id
+#  body = jsonencode({
+#    properties = {
+#      apiManagementConfig = {
+#        id = "${data.azurerm_api_management.apim.id}/apis/${var.api_name}"
+#      }
+#    }
+#  })
+#}
