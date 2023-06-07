@@ -21,7 +21,7 @@ Implementations using the approach described by this repos expand the [feature s
 > **Note** - When deployed on Azure App Services instead of SAP Business Technology Platform, Cloud Foundry specific features like the destination service or XSUAA are not available.
 
 * One code base to run on both Azure App Service and SAP Business Technology Platform
-* Built in [resiliency](https://learn.microsoft.com/azure/architecture/reference-architectures/app-service-web-app/multi-region) and [caching patterns](https://learn.microsoft.com/azure/architecture/reference-architectures/app-service-web-app/scalable-web-app)
+* Built in [resiliency](https://learn.microsoft.com/azure/architecture/reference-architectures/app-service-web-app/multi-region) and caching patterns
 * Native [Azure authentication and token handling](https://learn.microsoft.com/azure/app-service/configure-authentication-provider-aad) with Azure AD without any coding effort
 * Configurable Azure API Management integration for SAP APIs including policy enforcement for use cases like request throttling, SAP token caching, etc.
 * Native [Azure virtual network integration](https://learn.microsoft.com/azure/app-service/configure-vnet-integration-enable) next to the SAP workload
