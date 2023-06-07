@@ -132,10 +132,7 @@ You find more information on `azd` and GitHub Actions [here](https://learn.micro
 
 ## Azure DevOps
 
-We provided the basic setup for Azure DevOps in the `.azdo` directory of the repository. However, we configured the app for the default process via GitHub Actions.
-
-If you want to setup Azure DevOps you should be able to do the necessary configuration based on the information provided in the [README.md](../.azdo/pipelines/README.md) contained in the `.azdo` directory.
-Also keep in mind to adjust the `azure.yaml` file with the following information:
+We provided the basic setup for Azure DevOps in the `.azdo` directory of the repository. However, we configured the app for the default process via GitHub Actions. Keep in mind to adjust the `azure.yaml` file with the following information:
 
 ```yaml
 pipeline:
