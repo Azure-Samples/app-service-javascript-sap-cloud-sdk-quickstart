@@ -128,4 +128,6 @@ module "apim" {
   api_path                  = "sdk/sap/opu/odata/sap/API_BUSINESS_PARTNER"
   api_backend_url           = var.apimApiSAPBackendURL
   application_insights_name = module.applicationinsights.APPLICATIONINSIGHTS_NAME
+  api_app_id                = module.api.APPSERVICE_ID
+  api_app_name              = module.api.APPSERVICE_NAME
 }

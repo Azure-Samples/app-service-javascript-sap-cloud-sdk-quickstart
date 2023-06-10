@@ -8,10 +8,10 @@ terraform {
       source  = "aztfmod/azurecaf"
       version = "~>1.2.15"
     }
-#    azapi = {
-#      source  = "Azure/azapi"
-#      version = "~>1.6.0"
-#    }
+    azapi = {
+      source  = "Azure/azapi"
+      version = "~>1.6.0"
+    }
   }
 }
 
@@ -73,15 +73,15 @@ resource "azurerm_api_management_logger" "apimLogger" {
   }
 }
 
-#resource "azapi_resource" "api_app_properties" {
-#  type      = "Microsoft.Web/sites/config@2022-03-01"
-#  name      = "${local.appNameforAppProperties}/web"
-#  parent_id = data.azurerm_api_management.apim.id
-#  body = jsonencode({
-#    properties = {
-#      apiManagementConfig = {
-#        id = "${data.azurerm_api_management.apim.id}/apis/${var.api_name}"
-#      }
-#    }
-#  })
-#}
+resource "azapi_resource" "api_app_properties" {
+  type      = "Microsoft.Web/sites/config@2022-03-01"
+  name      = "${local.appNameforAppProperties}/web"
+  parent_id = var.api_app_id
+  body = jsonencode({
+    properties = {
+      apiManagementConfig = {
+        id = "${data.azurerm_api_management.apim.id}/apis/${var.api_name}"
+      }
+    }
+  })
+}

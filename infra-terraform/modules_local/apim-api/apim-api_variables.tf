@@ -48,3 +48,9 @@ variable "api_app_name" {
   type        = string
   default     = ""
 }
+
+variable "api_app_id" {
+  description = "ID of backend Web App or Function App"
+  type        = string
+  default     = ""
+}
