@@ -9,6 +9,7 @@
         <rate-limit calls="20" renewal-period="90" remaining-calls-variable-name="remainingCallsPerSubscription"/>
     </inbound>
     <backend>
+        <base />
     </backend>
     <outbound>
         <base />
