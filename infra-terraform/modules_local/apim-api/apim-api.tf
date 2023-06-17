@@ -15,10 +15,6 @@ terraform {
   }
 }
 
-locals {
-  appNameforAppProperties = var.api_app_name != "" ? var.api_app_name : "placeholdername"
-}
-
 # ------------------------------------------------------------------------------------------------------
 # Read existing resources from different resource groups 
 # ------------------------------------------------------------------------------------------------------
@@ -75,7 +71,7 @@ resource "azurerm_api_management_logger" "apimLogger" {
 
 resource "azapi_resource" "api_app_properties" {
   type      = "Microsoft.Web/sites/config@2022-03-01"
-  name      = "${local.appNameforAppProperties}/web"
+  name      = "web"
   parent_id = var.api_app_id
   body = jsonencode({
     properties = {
