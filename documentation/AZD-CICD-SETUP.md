@@ -39,8 +39,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/azure-dev-cli-apps:latest
     env:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
@@ -50,6 +48,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+     - name: Install azd
+        uses: Azure/setup-azd@v0.1.0  
 
       - name: Log in with Azure (Federated Credentials)
         if: ${{ env.AZURE_CLIENT_ID != '' }}
