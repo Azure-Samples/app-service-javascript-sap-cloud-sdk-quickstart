@@ -1,4 +1,5 @@
 // For format details, see https://aka.ms/devcontainer.json.
+// Making Bicep flavor default container to cater for easier GitHub Codespace generation UI flow. Choose container config screen to switch to other containers.
 {
 	"name": "Azure Developer CLI (Bicep)",
 	"build": {
