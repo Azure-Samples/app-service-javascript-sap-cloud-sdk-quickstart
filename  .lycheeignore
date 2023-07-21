@@ -1,2 +1,1 @@
-https?://localhost.*
-https?://portal.azure.com/#create/Microsoft.Template/uri*
+https://portal.azure.com/#create/Microsoft.Template/uri*
