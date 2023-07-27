@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "@sap-cloud-sdk/util": "^3.2.0"
+    "@sap-cloud-sdk/util": "^3.3.0"
   }
 }
