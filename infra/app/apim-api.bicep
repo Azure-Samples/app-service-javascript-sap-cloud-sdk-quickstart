@@ -27,7 +27,8 @@ param apiAppName string = ''
 
 var apiPolicyContent = loadTextContent('apim-api-policy.xml')
 
-resource restApi 'Microsoft.ApiManagement/service/apis@2021-12-01-preview' = {
+/* OpenAPI import configuration. Uncomment to use. Drop OData import configuration.
+  resource restApi 'Microsoft.ApiManagement/service/apis@2021-12-01-preview' = {
   name: apiName
   parent: apimService
   properties: {
@@ -40,6 +41,29 @@ resource restApi 'Microsoft.ApiManagement/service/apis@2021-12-01-preview' = {
     format: 'openapi'
     serviceUrl: apiBackendUrl
     value: string(loadJsonContent('../../src/api/API_BUSINESS_PARTNER.openapi.json'))
+  }
+}*/
+
+/* Create SAP OData API in Azure APIM via EDMX metadata doc.
+   For large docs use odata-link and supply resolvable URL to metadata file.
+   Alternatively use json definition for OData v4.  */
+resource restApi 'Microsoft.ApiManagement/service/apis@2023-03-01-preview' = {
+  name: apiName
+  parent: apimService
+  properties: {
+    description: apiDescription
+    displayName: apiDisplayName
+    path: apiPath
+    protocols: [ 'https' ]
+    subscriptionRequired: false
+    type: 'odata'
+    /*format: 'odata'*/
+    format: 'odata-link'
+    serviceUrl: apiBackendUrl
+    /* Use with smaller metadata XML documents using loadTextContent()*/
+    /* or supply as OData v4 metadata JSON definition. Generate from EDMX here: https://aka.ms/ODataOpenAPI */
+    /*value: string(loadTextContent('../../src/api/API_BUSINESS_PARTNER.edmx'))*/
+    value: 'https://raw.githubusercontent.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart/main/src/api/API_BUSINESS_PARTNER.edmx'
   }
 }
 
