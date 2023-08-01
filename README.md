@@ -1,28 +1,30 @@
-# SAP Cloud SDK on Azure App Service Quickstart 🚀
+# SAP Cloud SDK on Azure Functions Quickstart (Experimental) 🚀
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=576207479)[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fapp-service-javascript-sap-cloud-sdk-quickstart%2Fmain%2Ftemplates%2Fazuredeploy.json)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=576207479)
 
-This repos serves as quick-start project showcasing [SAP Cloud SDK for JavaScript](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction) OData consumption running on [Azure App Services](https://learn.microsoft.com/azure/app-service/overview). Its primary purpose is to set you up for success for your SAP extension project on Azure and reduce the lead time to your first successful deployment as much as possible with developer friendly commands.
+This repos serves as quick-start project showcasing [SAP Cloud SDK for JavaScript](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction) OData consumption running on [Azure Functions](https://learn.microsoft.com/azure/azure-functions/functions-overview?pivots=programming-language-javascript). Its primary purpose is to set you up for success for your SAP extension project on Azure and reduce the lead time to your first successful deployment as much as possible with developer friendly commands.
 
 It uses the [Business Partner OData v2 API](https://api.sap.com/api/OP_API_BUSINESS_PARTNER_SRV/overview) for SAP S/4HANA as an example.
 
 The project is setup as per the best practices advocated by the [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview) and referenced as [official awesome azd template](https://azure.github.io/awesome-azd/?tags=sapcloudsdk).
 
-![Illustration of app setup in Azure](assets/project-overview-azd-style.png)
+Looking for Azure App Service instead of Functions?🤔 Here you [go](https://github.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart).
+
+![Illustration of app setup in Azure](assets/project-overview-azd-style-functions.png)
 
 > **Warning** - Verify latest [SAP's open-source license](https://sap.github.io/cloud-sdk/docs/overview/overview-cloud-sdk#license) for the Cloud SDK for your reference.
 
 > **Note** - In case you need to translate between OData versions and metadata specification use our converter [here](https://aka.ms/ODataOpenAPI).
 
-> **Note** - In case you prefer an implementation without 3rd party library dependencies, have a look at [this sister project](https://github.com/Azure/azure-sdk-for-sap-odata) deploying to Azure Functions.
+> **Note** - In case you prefer an implementation without 3rd party library dependencies, have a look at [this sister project](https://github.com/Azure/azure-sdk-for-sap-odata).
 
 ## Features ⚙️
 
 Implementations using the approach described by this repos expand the [feature scope](https://sap.github.io/cloud-sdk/docs/overview/cloud-sdk-feature-matrix) of SAP's Cloud SDK for JavaScript to Azure PaaS apps.
 
-> **Note** - When deployed on Azure App Services instead of SAP Business Technology Platform, Cloud Foundry specific features like the destination service or XSUAA are not available.
+> **Note** - When deployed on Azure Functions instead of SAP Business Technology Platform, Cloud Foundry specific features like the destination service or XSUAA are not available.
 
-* One code base to run on both Azure App Service and SAP Business Technology Platform
+* One code base to run on both Azure Functions and SAP Business Technology Platform
 * Built in [resiliency](https://learn.microsoft.com/azure/architecture/reference-architectures/app-service-web-app/multi-region) and caching patterns
 * Native [Azure authentication and token handling](https://learn.microsoft.com/azure/app-service/configure-authentication-provider-aad) with Azure AD without any coding effort
 * Configurable Azure API Management integration for SAP APIs including policy enforcement for use cases like request throttling, SAP token caching, etc.
@@ -31,7 +33,7 @@ Implementations using the approach described by this repos expand the [feature s
 * OData v2 and v4 + entity and client generator managed by SAP
 * OpenAPI + client generator managed by SAP
 
-Example uses [pug engine](https://pugjs.org/api/getting-started.html) for rendering the UI. Learn more about template engines [here](https://docs.nestjs.com/techniques/mvc).
+Example uses the NEST framework module [azure-func-http](https://github.com/nestjs/azure-func-http) compatible with Azure Functions runtime v3.
 
 ## Getting Started 🛫
 
@@ -78,32 +80,32 @@ This command will prompt you for the following information:
 3. Select suitable [VS Code workspace](https://code.visualstudio.com/docs/editor/workspaces). We suggest [bicep](workspaces/azd-bicep.code-workspace) as it is the default for Azure Developer CLI.
 4. `cd app-service-javascript-sap-cloud-sdk-quickstart/src/api`
 5. `npm install`
-6. `npm run start:dev`
-7. browse to [http://localhost:8080](http://localhost:8080) for your "hello world"
+6. `npm run start:azure`
+7. browse to [http://localhost:8080/api/](http://localhost:8080/api/) for your "hello world"
 8. maintain your SAP OData url with credentials in [.env](templates/.env) file (put in project root `app-service-javascript-sap-cloud-sdk-quickstart/src/api`) and restart the app if necessary
-9. browse to [http://localhost:8080/business-partner](http://localhost:8080/business-partner) for your first OData call and pick one of the business partners (examples below use ids from SAP mock server)
+9. browse to [http://localhost:8080/api/business-partner](http://localhost:8080/api/business-partner) for your first OData call and pick one of the business partners (examples below use ids from SAP mock server)
 
    > **Note** - SAP's examples for the business partner API for SAP S/4HANA Cloud mentioned in the tutorial **differ** to the SAP S/4HANA on-premises flavor. Add AddressUsage, otherwise you will see "Internal error when calling operation module BUA_CHECK_ADDRESS_VALIDITY_ALL; a check table is missing". Check SAP KBA's for more details.
 
-10. get that business partner by id: [http://localhost:8080/business-partner/1003764](http://localhost:8080/business-partner/1003764)
+10. get that business partner by id: [http://localhost:8080/api/business-partner/1003764](http://localhost:8080/api/business-partner/1003764)
 
    ![screenshot of successful business partner retrieval by id](assets/bupa-get-vsc-rest.png)
 
-11. update the address with a house number: [http://localhost:8080/business-partner/1003764/address/28238](http://localhost:8080/business-partner/1003764/address/28238).
+11. update the address with a house number: [http://localhost:8080/api/business-partner/1003764/address/28238](http://localhost:8080/api/business-partner/1003764/address/28238).
 
    > **Note** - For your convenience we provide a [collection of REST calls](/templates/business-partner-requests.http) in the repos. Execute them with the [VS Code REST client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client).
 
   ![screenshot of business partner address update with request details](assets/bupa-update-vsc-rest.png)
 
-12. delete the address: [http://localhost:8080/business-partner/1003764/address/28238](http://localhost:8080/business-partner/1003764/address/28238)
+12. delete the address: [http://localhost:8080/api/business-partner/1003764/address/28238](http://localhost:8080/api/business-partner/1003764/address/28238)
 
    ![screenshot of business partner address delete](assets/bupa-delete-vsc-rest.png)
 
-13. add an address to your chosen business partner: [http://localhost:8080/business-partner/1003764/address](http://localhost:8080/business-partner/1003764/address)
+13. add an address to your chosen business partner: [http://localhost:8080/api/business-partner/1003764/address](http://localhost:8080/api/business-partner/1003764/address)
 
    ![screenshot of successful business partner address creation with request details](assets/bupa-create-vsc-rest.png)
 
-**Congratulations** 🥳, you have successfully consumed SAP OData with the SAP Cloud SDK for JavaScript running on Azure App Service!
+**Congratulations** 🥳, you have successfully consumed SAP OData with the SAP Cloud SDK for JavaScript running on Azure Functions!
 
 ## Deploy to Azure 🪂
 
@@ -127,8 +129,8 @@ You can do a lot more once the app is deployed. Curious? We go you covered with 
 Sometimes things do not work as expected. Here are some resources that support you in finding and fixing the issue:
 
 * [Access SAP Gateway logs in /IWFND/ERROR_LOG](https://wiki.scn.sap.com/wiki/display/ABAPConn/SAP+Gateway+Error+Log)
-* [Azure App Service diagnostics](https://docs.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
-* Use [Kudu SSH console](https://learn.microsoft.com/azure/app-service/resources-kudu) from VNet integrated App Service to check connectivity to SAP Gateway with `curl https://<your domain>:<your https port>/sap/opu/odata/sap/API_BUSINESS_PARTNER -u "<user>:<password>"`
+* [Azure Functions diagnostics](https://learn.microsoft.com/azure/azure-functions/functions-diagnostics)
+* Use [Kudu SSH console](https://learn.microsoft.com/azure/app-service/resources-kudu) from VNet integrated Functions to check connectivity to SAP Gateway with `curl https://<your domain>:<your https port>/sap/opu/odata/sap/API_BUSINESS_PARTNER -u "<user>:<password>"`
 * [Azure API Management Request tracing](https://learn.microsoft.com/azure/api-management/api-management-howto-api-inspector)
 * [Azure API Management Gateway logs](https://learn.microsoft.com/azure/api-management/api-management-howto-use-azure-monitor#view-diagnostic-data-in-azure-monitor)
 

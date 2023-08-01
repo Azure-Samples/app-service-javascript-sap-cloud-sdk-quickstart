@@ -9,8 +9,8 @@ import { createLogger } from "@sap-cloud-sdk/util";
 export class AppService {
 	async getHello(): Promise<object> {
 		return {
-			title: "SAP Cloud SDK on Azure",
-			message: "Hello Azure! Greetings from the",
+			title: "Hello World",
+			message: "Greetings from the SAP Cloud SDK on Azure Functions",
 		};
 	}
 

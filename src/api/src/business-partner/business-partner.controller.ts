@@ -8,8 +8,7 @@ import {
 	HttpCode,
 	Post,
 	Put,
-	Headers,
-	Render,
+	Headers
 } from "@nestjs/common";
 import {
 	BusinessPartner,
@@ -27,7 +26,6 @@ export class BusinessPartnerController {
 	private logger = createLogger("business-partner-api");
 
 	@Get()
-	@Render('bupa')
 	async getBusinessPartners(@Headers() headers): Promise<object> {
 		// retrieve X-MS-TOKEN-AAD-ACCESS-TOKEN token from request header
 		const token = headers["x-ms-token-aad-access-token"];
@@ -42,7 +40,7 @@ export class BusinessPartnerController {
 		this.logger.debug(
 			`List of business partners: ${JSON.stringify(businessPartners)}`,
 		);
-		return { title: "SAP Business Partners", bupas: businessPartners };
+		return businessPartners;
 	}
 
 	@Get('/:id')

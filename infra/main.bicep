@@ -20,6 +20,7 @@ param appServicePlanName string = ''
 param keyVaultName string = ''
 param logAnalyticsName string = ''
 param resourceGroupName string = ''
+param storageAccountName string = ''
 
 @description('Resource Group containing the existing API Management instance')
 param apimResourceGroupName string = 'DEMO-NEU-SAP-PM1'
@@ -86,15 +87,26 @@ module api './app/api.bicep' = {
     applicationInsightsName: monitoring.outputs.applicationInsightsName
     appServicePlanId: appServicePlan.outputs.id
     keyVaultName: keyVault.outputs.name
+    storageAccountName: storage.outputs.name
     appSettings: {
       ODATA_URL: oDataUrl
       ODATA_USERNAME: oDataUsername
       ODATA_USERPWD: '@Microsoft.KeyVault(SecretUri=${keyVault.outputs.endpoint}secrets/${abbrs.keyVaultVaults}secret-odata-password)'
       APIKEY: '@Microsoft.KeyVault(SecretUri=${keyVault.outputs.endpoint}secrets/${abbrs.keyVaultVaults}secret-apikey)'
       APIKEY_HEADERNAME: ApiKeyHeaderName
+      WEBSITE_RUN_FROM_PACKAGE: 1
     }
-    use32BitWorkerProcess: skuName == 'F1' || skuName == 'FREE' || skuName == 'SHARED' ? true : false
-    alwaysOn: skuName == 'F1' || skuName == 'FREE' || skuName == 'SHARED' ? false : true
+  }
+}
+
+// Backing storage for Azure Functions
+module storage './core/storage/storage-account.bicep' = {
+  name: 'storage'
+  scope: rg
+  params: {
+    name: !empty(storageAccountName) ? storageAccountName : '${abbrs.storageStorageAccounts}${resourceToken}'
+    location: location
+    tags: tags
   }
 }
 
