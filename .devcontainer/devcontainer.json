@@ -1,5 +1,4 @@
 // For format details, see https://aka.ms/devcontainer.json.
-// Making Bicep flavor default container to cater for easier GitHub Codespace generation UI flow. Choose container config screen to switch to other containers.
 {
 	"name": "Azure Developer CLI (Bicep)",
 	"build": {
@@ -10,12 +9,13 @@
 	},
 	"features": {
 		"ghcr.io/devcontainers-contrib/features/nestjs-cli:2": {},
-		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
+		"ghcr.io/jlaundry/devcontainer-features/azure-functions-core-tools:1": {}
 	},
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"ms-azuretools.vscode-azureappservice",
+				"ms-azuretools.vscode-azurefunctions",
 				"ms-vscode.vscode-node-azure-pack",
 				"humao.rest-client",
 				"ms-azuretools.azure-dev",
