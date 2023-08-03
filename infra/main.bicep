@@ -36,7 +36,10 @@ param useAPIM bool = false
 
 // Name of the SKU; default is F1 (Free), use B1 (Basic) for features like health checks and S1 (Standard) for production
 @description('Name of the SKU of the App Service Plan')
-param skuName string = 'B1'
+param skuName string = 'Y1'
+
+@description('Name of the tier of the App Service Plan')
+param skuTier string = 'Dynamic'
 
 @description('Id of the user or app to assign application roles')
 param principalId string = ''
@@ -94,7 +97,6 @@ module api './app/api.bicep' = {
       ODATA_USERPWD: '@Microsoft.KeyVault(SecretUri=${keyVault.outputs.endpoint}secrets/${abbrs.keyVaultVaults}secret-odata-password)'
       APIKEY: '@Microsoft.KeyVault(SecretUri=${keyVault.outputs.endpoint}secrets/${abbrs.keyVaultVaults}secret-apikey)'
       APIKEY_HEADERNAME: ApiKeyHeaderName
-      WEBSITE_RUN_FROM_PACKAGE: 1
     }
   }
 }
@@ -130,6 +132,7 @@ module appServicePlan './core/host/appserviceplan.bicep' = {
     tags: tags
     sku: {
       name: skuName
+      tier: skuTier
     }
   }
 }

@@ -9,7 +9,7 @@ services:
   sap-cloud-sdk-api:
     project: ./src/api
     language: ts
-    host: appservice  
+    host: function
 # Remove the comments from the lines below to enable the deployment of the infrastructure via Terraform
 #infra:
 #  provider: terraform

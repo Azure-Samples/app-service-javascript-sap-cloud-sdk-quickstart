@@ -10,10 +10,9 @@ param appSettings object = {}
 param keyVaultName string
 param storageAccountName string
 param serviceName string = 'sap-cloud-sdk-api'
-param healthCheckPath string = '/health'
-param use32BitWorkerProcess bool = false
+//param healthCheckPath string = '/health'
 
-param alwaysOn bool = true
+param alwaysOn bool = false
 
 module api '../core/host/functions.bicep' = {
   name: '${name}-function-node-module'
@@ -22,15 +21,15 @@ module api '../core/host/functions.bicep' = {
     location: location
     tags: union(tags, { 'azd-service-name': serviceName })
     allowedOrigins: allowedOrigins
+    alwaysOn: alwaysOn
     appCommandLine: appCommandLine
     applicationInsightsName: applicationInsightsName
     appServicePlanId: appServicePlanId
     appSettings: appSettings
     keyVaultName: keyVaultName
     runtimeName: 'node'
-    runtimeVersion: '18-lts'
+    runtimeVersion: '18'
     storageAccountName: storageAccountName
-    scmDoBuildDuringDeployment: true
   }
 }
 
