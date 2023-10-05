@@ -5,11 +5,18 @@ metadata:
   template: app-service-javascript-sap-cloud-sdk-quickstart
 requiredVersions:
   azd: ">= 1.0.1"
+hooks:
+  postup:
+    posix:
+      shell: sh
+      run: ./hooks/fireworks.sh
+      continueOnError: true
+      interactive: true
 services:
   sap-cloud-sdk-api:
     project: ./src/api
     language: ts
-    host: appservice  
+    host: appservice
 # Remove the comments from the lines below to enable the deployment of the infrastructure via Terraform
 #infra:
 #  provider: terraform
