@@ -1,15 +1,14 @@
 // For format details, see https://aka.ms/devcontainer.json.
 {
 	"name": "Azure Developer CLI (Bicep)",
-	"build": {
-		"dockerfile": "Dockerfile",
-		"args": {
-			"IMAGE": "typescript-node:18"
-		}
-	},
+	"image": "mcr.microsoft.com/devcontainers/typescript-node:18-bullseye",
 	"features": {
 		"ghcr.io/devcontainers-contrib/features/nestjs-cli:2": {},
-		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
+		"ghcr.io/azure/azure-dev/azd:latest": {},
+		"ghcr.io/devcontainers/features/github-cli:1": {
+			"version": "2"
+		}
 	},
 	"customizations": {
 		"vscode": {
