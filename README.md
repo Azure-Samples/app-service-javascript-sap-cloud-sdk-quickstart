@@ -8,7 +8,7 @@ It uses the [Business Partner OData v2 API](https://api.sap.com/api/OP_API_BUSIN
 
 The project is setup as per the best practices advocated by the [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview) and referenced as [official awesome azd template](https://azure.github.io/awesome-azd/?tags=sapcloudsdk).
 
-Looking for [**Azure Functions**](https://learn.microsoft.com/azure/azure-functions/functions-overview?pivots=programming-language-javascript) instead? [Here](https://github.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart/tree/az-function-quickstart) you go.
+Looking for [**Azure Functions**](https://learn.microsoft.com/azure/azure-functions/functions-overview?pivots=programming-language-javascript) instead? [Here](https://github.com/Azure-Samples/functions-javascript-sap-cloud-sdk-quickstart) you go.
 
 ![Illustration of app setup in Azure](assets/project-overview-azd-style.png)
 
