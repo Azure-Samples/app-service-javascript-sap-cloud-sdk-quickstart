@@ -4,7 +4,7 @@ name: app-service-javascript-sap-cloud-sdk-quickstart
 metadata:
   template: app-service-javascript-sap-cloud-sdk-quickstart
 requiredVersions:
-  azd: ">= 1.0.1"
+  azd: ">= 1.4.0"
 hooks:
   postup:
     posix:

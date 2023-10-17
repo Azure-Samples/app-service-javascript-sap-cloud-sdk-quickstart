@@ -176,7 +176,7 @@ As you can see from the first line of the file, the manifest is backed by a lang
 
 We use `Bicep` as default option to describe the Infrastructure as code. This is a convenient way when dealing with Azure resources. You find more about `Bicep` in the [official documentation](https://learn.microsoft.com/azure/azure-resource-manager/bicep/).
 
-Besides `Bicep` the `azd` CLI also supports the definition of the infrastructure via [Terraform](https://www.terraform.io/) as an *alpha feature*. To give you the freedom of choice this repository also contains the infrastructure definition via Terraform modules. You find the instructions [here](./DEPLOYMENT-AZD-TERRAFORM.md).
+Besides `Bicep` the `azd` CLI also supports the definition of the infrastructure via [Terraform](https://www.terraform.io/) as an *beta feature*. To give you the freedom of choice this repository also contains the infrastructure definition via Terraform modules. You find the instructions [here](./DEPLOYMENT-AZD-TERRAFORM.md).
 
 ## Cleanup
 
