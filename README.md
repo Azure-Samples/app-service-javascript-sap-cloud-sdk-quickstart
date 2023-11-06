@@ -18,6 +18,8 @@ Looking for [**Azure Functions**](https://learn.microsoft.com/azure/azure-functi
 
 > **Note** - In case you prefer an implementation without 3rd party library dependencies, have a look at [this sister project](https://github.com/Azure/azure-sdk-for-sap-odata) deploying to Azure Functions.
 
+> **Note** - Looking for SAP Cloud SDK for Java? See [this annoucement](https://blogs.sap.com/2023/11/02/sap-btp-innovations-for-an-optimized-development-experience-teched-2023/) by SAP on the open-sourcing schedule in Q4/2023.
+
 ## Features ⚙️
 
 Implementations using the approach described by this repos expand the [feature scope](https://sap.github.io/cloud-sdk/docs/overview/cloud-sdk-feature-matrix) of SAP's Cloud SDK for JavaScript to Azure PaaS apps.
