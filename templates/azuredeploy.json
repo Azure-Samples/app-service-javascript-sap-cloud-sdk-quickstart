@@ -19,7 +19,7 @@
       },
       "sku": {
         "type": "string",
-        "defaultValue": "FREE",
+        "defaultValue": "F1",
         "metadata": {
           "description": "The SKU of App Service Plan "
         }
