@@ -33,6 +33,9 @@ param apimApiSAPBackendURL string = 'https://sandbox.api.sap.com/s4hanacloud/sap
 @description('Flag to use Azure API Management to mediate the calls between the Web frontend and the SAP backend API')
 param useAPIM bool = false
 
+@description('Flag to use Entra ID authentication feature of Azure App Service')
+param useEntraIDAuthentication bool = false
+
 // Name of the SKU; default is F1 (Free), use B1 (Basic) for features like health checks and S1 (Standard) for production
 @description('Name of the SKU of the App Service Plan')
 param skuName string = 'B1'
@@ -58,6 +61,9 @@ param _APIKey string = ''
 @description('API Key Header Name')
 param ApiKeyHeaderName string = 'APIKey'
 
+@description('Ignore Entra ID flag. Needed for API key only scenarios with Entra ID authentication enabled. True for the default S/4HANA Cloud sandbox scenario for instance.')
+param _Ignore_Entra_ID_Token bool = true
+
 var abbrs = loadJsonContent('./abbreviations.json')
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 var tags = { 'azd-env-name': environmentName }
@@ -75,6 +81,51 @@ resource apimrg 'Microsoft.Resources/resourceGroups@2021-04-01' existing = if (u
   scope: subscription()
 }
 
+var myAppAuthSettings = (useEntraIDAuthentication) ? {
+  globalValidation: {
+    requireAuthentication: true
+    redirectToProvider: 'azureActiveDirectory'
+    unauthenticatedClientAction: 'RedirectToLoginPage'
+  }
+  identityProviders: {
+    azureActiveDirectory:{
+      enabled: true
+      registration: {
+        clientId: '9b3cde27-da94-445a-affa-cc08d7e46212'
+        //clientSecretCertificateIssuer: 'string'
+        //clientSecretCertificateSubjectAlternativeName: 'string'
+        //clientSecretCertificateThumbprint: 'string'
+        clientSecretSettingName: 'AAD_APPSETTING_SECRET'
+        // make sure to maintain 'accessTokenAcceptedVersion' on the Entra ID app registration manifest to 2. Otherwise, the token validation will fail.
+        // For AAD v1 endpoints use 'https://sts.windows.net/${subscription().tenantId}/v2.0' instead
+        openIdIssuer: '${environment().authentication.loginEndpoint}${subscription().tenantId}/v2.0'
+      }
+      //validation: {
+      //  allowedAudiences: ['api://${adApiAppClientId}']
+      //}
+    }
+  }
+  login: {
+    tokenStore: {
+      enabled: true
+      //tokenRefreshExtensionHours: 72
+    }
+  }
+  platform: {
+    enabled: true
+  }
+} : {}
+
+var myAppSettings = {
+  ODATA_URL: oDataUrl
+  ODATA_USERNAME: oDataUsername
+  ODATA_USERPWD: '@Microsoft.KeyVault(SecretUri=${keyVault.outputs.endpoint}secrets/${abbrs.keyVaultVaults}secret-odata-password)'
+  APIKEY: '@Microsoft.KeyVault(SecretUri=${keyVault.outputs.endpoint}secrets/${abbrs.keyVaultVaults}secret-apikey)'
+  APIKEY_HEADERNAME: ApiKeyHeaderName
+  IGNORE_ENTRA_ID_TOKEN: _Ignore_Entra_ID_Token
+  AAD_APPSETTING_SECRET: '@Microsoft.KeyVault(SecretUri=${keyVault.outputs.endpoint}secrets/${abbrs.keyVaultVaults}secret-aad-appsetting-secret)'
+}
+
 // The application backend
 module api './app/api.bicep' = {
   name: 'api'
@@ -86,13 +137,9 @@ module api './app/api.bicep' = {
     applicationInsightsName: monitoring.outputs.applicationInsightsName
     appServicePlanId: appServicePlan.outputs.id
     keyVaultName: keyVault.outputs.name
-    appSettings: {
-      ODATA_URL: oDataUrl
-      ODATA_USERNAME: oDataUsername
-      ODATA_USERPWD: '@Microsoft.KeyVault(SecretUri=${keyVault.outputs.endpoint}secrets/${abbrs.keyVaultVaults}secret-odata-password)'
-      APIKEY: '@Microsoft.KeyVault(SecretUri=${keyVault.outputs.endpoint}secrets/${abbrs.keyVaultVaults}secret-apikey)'
-      APIKEY_HEADERNAME: ApiKeyHeaderName
-    }
+    useAuthSettingsv2: useEntraIDAuthentication
+    appSettings: myAppSettings
+    appAuthSettingsV2: myAppAuthSettings
     use32BitWorkerProcess: skuName == 'F1' || skuName == 'FREE' || skuName == 'SHARED' ? true : false
     alwaysOn: skuName == 'F1' || skuName == 'FREE' || skuName == 'SHARED' ? false : true
   }
@@ -146,6 +193,18 @@ module oDataPassword './core/security/keyvault-secret.bicep' = {
   }
 }
 
+// Store Entra ID app secret
+module aadAppRegistrationSecret './core/security/keyvault-secret.bicep' = {
+  name: 'aadappregsecret'
+  scope: rg
+  params: {
+    name: '${abbrs.keyVaultVaults}secret-aad-appsetting-secret'
+    keyVaultName: keyVault.outputs.name
+    tags: tags
+    secretValue: ''
+  }
+}
+
 // Store API key in KeyVault
 module ApiKey './core/security/keyvault-secret.bicep' = {
   name: 'apikey'
@@ -189,6 +248,7 @@ module apimApi './app/apim-api.bicep' = if (useAPIM) {
 }
 
 // App outputs
+output AZURE_RESOURCE_GROUP string = rg.name
 output APPLICATIONINSIGHTS_CONNECTION_STRING string = monitoring.outputs.applicationInsightsConnectionString
 output AZURE_KEY_VAULT_ENDPOINT string = keyVault.outputs.endpoint
 output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name

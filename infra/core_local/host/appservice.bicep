@@ -7,6 +7,8 @@ param applicationInsightsName string = ''
 param appServicePlanId string
 param keyVaultName string = ''
 param managedIdentity bool = !empty(keyVaultName)
+param useAuthSettingsv2 bool = false
+param authSettingsV2 object = {}
 
 // Runtime Properties
 @allowed([
@@ -36,7 +38,7 @@ param use32BitWorkerProcess bool = false
 // Additional parameters for app service - not part of azd core
 param healthCheckPath string = ''
 
-resource appService 'Microsoft.Web/sites@2022-03-01' = {
+resource appService 'Microsoft.Web/sites@2022-09-01' = {
   name: name
   location: location
   tags: tags
@@ -72,6 +74,11 @@ resource appService 'Microsoft.Web/sites@2022-03-01' = {
       },
       !empty(applicationInsightsName) ? { APPLICATIONINSIGHTS_CONNECTION_STRING: applicationInsights.properties.ConnectionString } : {},
       !empty(keyVaultName) ? { AZURE_KEY_VAULT_ENDPOINT: keyVault.properties.vaultUri } : {})
+  }
+
+  resource configAppAuthSettings 'config' = if (useAuthSettingsv2) {
+    name: 'authsettingsV2'
+    properties: authSettingsV2
   }
 
   resource configLogs 'config' = {

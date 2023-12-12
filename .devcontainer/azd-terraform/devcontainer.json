@@ -22,7 +22,6 @@
 				"ms-vscode.js-debug",
 				"ms-vscode.vscode-node-azure-pack",
 				"humao.rest-client",
-				"eg2.vscode-npm-script",
 				"rome.rome"
 			]
 		}

@@ -155,7 +155,7 @@ export class BusinessPartnerService {
 			req.addCustomHeaders({ [apiTraceHeaderName]: activate });
 		}
 		// in case AAD token is available
-		if (this.isValidString(token)) {
+		if (this.isValidString(token) && process.env.IGNORE_ENTRA_ID_TOKEN === "false") {
 			req.addCustomHeaders({ Authorization: `Bearer ${token}` });
 			config = { url: process.env.ODATA_URL };
 		} // in case basic auth shall be used
