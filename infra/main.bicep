@@ -81,41 +81,6 @@ resource apimrg 'Microsoft.Resources/resourceGroups@2021-04-01' existing = if (u
   scope: subscription()
 }
 
-var myAppAuthSettings = (useEntraIDAuthentication) ? {
-  globalValidation: {
-    requireAuthentication: true
-    redirectToProvider: 'azureActiveDirectory'
-    unauthenticatedClientAction: 'RedirectToLoginPage'
-  }
-  identityProviders: {
-    azureActiveDirectory:{
-      enabled: true
-      registration: {
-        clientId: '9b3cde27-da94-445a-affa-cc08d7e46212'
-        //clientSecretCertificateIssuer: 'string'
-        //clientSecretCertificateSubjectAlternativeName: 'string'
-        //clientSecretCertificateThumbprint: 'string'
-        clientSecretSettingName: 'AAD_APPSETTING_SECRET'
-        // make sure to maintain 'accessTokenAcceptedVersion' on the Entra ID app registration manifest to 2. Otherwise, the token validation will fail.
-        // For AAD v1 endpoints use 'https://sts.windows.net/${subscription().tenantId}/v2.0' instead
-        openIdIssuer: '${environment().authentication.loginEndpoint}${subscription().tenantId}/v2.0'
-      }
-      //validation: {
-      //  allowedAudiences: ['api://${adApiAppClientId}']
-      //}
-    }
-  }
-  login: {
-    tokenStore: {
-      enabled: true
-      //tokenRefreshExtensionHours: 72
-    }
-  }
-  platform: {
-    enabled: true
-  }
-} : {}
-
 var myAppSettings = {
   ODATA_URL: oDataUrl
   ODATA_USERNAME: oDataUsername
@@ -123,7 +88,7 @@ var myAppSettings = {
   APIKEY: '@Microsoft.KeyVault(SecretUri=${keyVault.outputs.endpoint}secrets/${abbrs.keyVaultVaults}secret-apikey)'
   APIKEY_HEADERNAME: ApiKeyHeaderName
   IGNORE_ENTRA_ID_TOKEN: _Ignore_Entra_ID_Token
-  AAD_APPSETTING_SECRET: '@Microsoft.KeyVault(SecretUri=${keyVault.outputs.endpoint}secrets/${abbrs.keyVaultVaults}secret-aad-appsetting-secret)'
+  AADAPPSETTINGSECRET: '@Microsoft.KeyVault(SecretUri=${keyVault.outputs.endpoint}secrets/${abbrs.keyVaultVaults}secret-aad-appsetting-secret)'
 }
 
 // The application backend
@@ -137,9 +102,8 @@ module api './app/api.bicep' = {
     applicationInsightsName: monitoring.outputs.applicationInsightsName
     appServicePlanId: appServicePlan.outputs.id
     keyVaultName: keyVault.outputs.name
-    useAuthSettingsv2: useEntraIDAuthentication
     appSettings: myAppSettings
-    appAuthSettingsV2: myAppAuthSettings
+    useAuthSettingsv2: useEntraIDAuthentication
     use32BitWorkerProcess: skuName == 'F1' || skuName == 'FREE' || skuName == 'SHARED' ? true : false
     alwaysOn: skuName == 'F1' || skuName == 'FREE' || skuName == 'SHARED' ? false : true
   }
@@ -255,5 +219,8 @@ output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output AZURE_LOCATION string = location
 output AZURE_TENANT_ID string = tenant().tenantId
 output USE_APIM bool = useAPIM
+output USE_EntraIDAuthentication bool = useEntraIDAuthentication
+output AAD_KV_SECRET_NAME string = '${abbrs.keyVaultVaults}secret-aad-appsetting-secret'
+output WEB_APP_NAME string = api.outputs.SERVICE_API_NAME
 output SAP_CLOUD_SDK_API_URL array = useAPIM ? [ apimApi.outputs.SERVICE_API_URI, api.outputs.SERVICE_API_URI ]: [api.outputs.SERVICE_API_URI]
 output SAP_CLOUD_SDK_API_APPLICATIONINSIGHTS_CONNECTION_STRING string = monitoring.outputs.applicationInsightsConnectionString

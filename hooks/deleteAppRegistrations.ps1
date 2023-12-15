@@ -15,23 +15,21 @@
 # but is not covered by the guidance in this content.
 
 # Using Azure CLI command to create an app registration on Entra ID: https://learn.microsoft.com/cli/azure/ad/app?view=azure-cli-latest
-# ToDo: pass azd generated app object id via script parameter
-if [[$env:USE_EntraIDAuthentication -eq "false"]]
-then
+if ($env:USE_EntraIDAuthentication -eq "false") {
 
-    echo "Skipping app registration delete because USE_EntraIDAuthentication is set to false"
+    Write-Output "Skipping app registration delete because USE_EntraIDAuthentication is set to false"
     exit 0
 
-else
+}
 
-    echo "Deleting app registration for web app using object id"
+Write-Output "Deleting app registration for web app using object id"
+
+# Get Object ID of app registration
 
 ###### Figure out how to get the object id of the app registration when AZD clears the .ENV file before this script runs
-    # Get Object ID of app registration
-    #OBJECT_ID=$(az ad app list --display-name $env:WEB_APP_NAME --query "[].{id:id}" -o tsv)
-    #az ad app delete --id $OBJECT_ID
+#$APP_METADATA = az ad app list --display-name $env:WEB_APP_NAME | ConvertFrom-Json
+#$OBJECT_ID = $APP_METADATA.id
+#az ad app delete --id $OBJECT_ID
 
-    # all done
-    exit 0
-
-fi
+# all done
+exit 0

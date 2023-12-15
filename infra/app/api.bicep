@@ -7,12 +7,11 @@ param appCommandLine string = ''
 param applicationInsightsName string = ''
 param appServicePlanId string
 param appSettings object = {}
-param appAuthSettingsV2 object = {}
+param useAuthSettingsv2 bool = false
 param keyVaultName string
 param serviceName string = 'sap-cloud-sdk-api'
 param healthCheckPath string = '/health'
 param use32BitWorkerProcess bool = false
-param useAuthSettingsv2 bool = true
 
 param alwaysOn bool = true
 
@@ -26,9 +25,8 @@ module api '../core_local/host/appservice.bicep' = {
     appCommandLine: appCommandLine
     applicationInsightsName: applicationInsightsName
     appServicePlanId: appServicePlanId
-    useAuthSettingsv2: useAuthSettingsv2
-    authSettingsV2: appAuthSettingsV2
     appSettings: appSettings
+    useAuthSettingsv2: useAuthSettingsv2
     keyVaultName: keyVaultName
     runtimeName: 'node'
     runtimeVersion: '18-lts'

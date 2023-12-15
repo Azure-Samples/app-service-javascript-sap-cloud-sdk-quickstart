@@ -12,18 +12,28 @@ hooks:
       run: ./hooks/fireworks.sh
       continueOnError: true
       interactive: true
-  #postprovision:
-  #  posix:
-  #    shell: sh
-  #    run: ./hooks/createAppRegistrations.sh
-  #    continueOnError: false
-  #    interactive: true
+  postprovision:
+    #posix:
+    #  shell: sh
+    #  run: ./hooks/createAppRegistrations.sh
+    #  continueOnError: false
+    #  interactive: true
+    windows:
+      shell: pwsh
+      run: ./hooks/createAppRegistrations.ps1
+      continueOnError: false
+      interactive: true
   #postdown:
-  #  posix:
-  #    shell: sh
-  #    run: ./hooks/deleteAppRegistrations.sh
-  #    continueOnError: true
-  #    interactive: true
+    #posix:
+    #  shell: sh
+    #  run: ./hooks/deleteAppRegistrations.sh
+    #  continueOnError: true
+    #  interactive: true
+    #windows:
+    #  shell: pwsh
+    #  run: ./hooks/deleteAppRegistrations.ps1
+    #  continueOnError: false
+    #  interactive: true
 services:
   sap-cloud-sdk-api:
     project: ./src/api
