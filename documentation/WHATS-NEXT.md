@@ -16,7 +16,11 @@ This repos automatically sets up the Azure App Service health endpoint pinging y
 
 [Configure](https://learn.microsoft.com/azure/app-service/configure-authentication-provider-aad) your App Service or Azure Functions app to use Entra ID login. Use standard variable `X-MS-TOKEN-AAD-ACCESS-TOKEN` to retrieve the access token from the request header. Simply switch on the Microsoft Entra ID for your App Service on the AZD config [here](infra/main.bicep) using variable `useEntraIDAuthentication`.
 
-Mind the differences of your webapp auth config-version. You may check via `az webapp auth config-version show --name <app-name> --resource-group <rg name>`. The default is v1. Above mentioned switch activates v2 during deployment. Latest Entra ID authentication requires v2. [Learn more about upgrading from v1 to v2 here](https://learn.microsoft.com/cli/azure/webapp/auth/config-version?view=azure-cli-latest#az-webapp-auth-config-version-upgrade)
+Mind the differences of your webapp auth config-version. You may check via
+
+`az webapp auth config-version show --name <app-name> --resource-group <rg name>`
+
+The default is v1. Above mentioned switch activates v2 during bicep deployment. Latest Entra ID authentication requires v2. Note that the Azure portal authentication provider add-experience also creates v2 configuration. [Learn more about upgrading from v1 to v2](https://learn.microsoft.com/cli/azure/webapp/auth/config-version?view=azure-cli-latest#az-webapp-auth-config-version-upgrade)
 
 [Learn more about retrieving tokens](https://learn.microsoft.com/azure/app-service/configure-authentication-oauth-tokens#retrieve-tokens-in-app-code)
 
