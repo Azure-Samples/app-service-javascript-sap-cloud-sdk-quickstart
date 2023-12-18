@@ -33,6 +33,9 @@ param apimApiSAPBackendURL string = 'https://sandbox.api.sap.com/s4hanacloud/sap
 @description('Flag to use Azure API Management to mediate the calls between the Web frontend and the SAP backend API')
 param useAPIM bool = false
 
+@description('Entra ID Application ID registered for Azure API Management. Needed to automatically assign API executing rights to Azure App Service.')
+param apimEntraIdAppId string = '********-****-****-****-************'
+
 @description('Flag to use Entra ID authentication feature of Azure App Service')
 param useEntraIDAuthentication bool = false
 
@@ -219,7 +222,9 @@ output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output AZURE_LOCATION string = location
 output AZURE_TENANT_ID string = tenant().tenantId
 output USE_APIM bool = useAPIM
+output AZURE_APIM_NAME string = apimServiceName
 output USE_EntraIDAuthentication bool = useEntraIDAuthentication
+output AZURE_APIM_APP_ID string = apimEntraIdAppId
 output AAD_KV_SECRET_NAME string = '${abbrs.keyVaultVaults}secret-aad-appsetting-secret'
 output WEB_APP_NAME string = api.outputs.SERVICE_API_NAME
 output SAP_CLOUD_SDK_API_URL array = useAPIM ? [ apimApi.outputs.SERVICE_API_URI, api.outputs.SERVICE_API_URI ]: [api.outputs.SERVICE_API_URI]
