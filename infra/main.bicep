@@ -160,12 +160,13 @@ module oDataPassword './core/security/keyvault-secret.bicep' = {
   }
 }
 
-// Store Entra ID app secret
-module aadAppRegistrationSecret './core/security/keyvault-secret.bicep' = {
+var appSecretSettingName = '${abbrs.keyVaultVaults}secret-aad-appsetting-secret'
+// Create value for Entra ID app secret that gets filled via azd postprovision hook
+module aadAppRegistrationSecret './core/security/keyvault-secret.bicep' = if (useEntraIDAuthentication) {
   name: 'aadappregsecret'
   scope: rg
   params: {
-    name: '${abbrs.keyVaultVaults}secret-aad-appsetting-secret'
+    name: appSecretSettingName
     keyVaultName: keyVault.outputs.name
     tags: tags
     secretValue: ''
@@ -225,7 +226,7 @@ output USE_APIM bool = useAPIM
 output AZURE_APIM_NAME string = apimServiceName
 output USE_EntraIDAuthentication bool = useEntraIDAuthentication
 output AZURE_APIM_APP_ID string = apimEntraIdAppId
-output AAD_KV_SECRET_NAME string = '${abbrs.keyVaultVaults}secret-aad-appsetting-secret'
+output AAD_KV_SECRET_NAME string = appSecretSettingName
 output WEB_APP_NAME string = api.outputs.SERVICE_API_NAME
 output SAP_CLOUD_SDK_API_URL array = useAPIM ? [ apimApi.outputs.SERVICE_API_URI, api.outputs.SERVICE_API_URI ]: [api.outputs.SERVICE_API_URI]
 output SAP_CLOUD_SDK_API_APPLICATIONINSIGHTS_CONNECTION_STRING string = monitoring.outputs.applicationInsightsConnectionString
