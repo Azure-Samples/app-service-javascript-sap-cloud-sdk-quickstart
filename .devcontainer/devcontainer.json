@@ -30,7 +30,7 @@
 	"forwardPorts": [
 		8080
 	],
-	"postCreateCommand": "cd src/api && npm install && cd ../.. && chmod a+x /workspaces/app-service-javascript-sap-cloud-sdk-quickstart/hooks/*.sh",
+	"postCreateCommand": "cd src/api && npm install && cd ../.. && chmod -R a+x /workspaces/app-service-javascript-sap-cloud-sdk-quickstart/hooks",
 	"remoteUser": "node",
 	"hostRequirements": {
 		"memory": "8gb"
