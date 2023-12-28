@@ -1,6 +1,7 @@
 # Deployment via Azure Developer CLI
 
-> **Note** - The repository is compatible with version [1.0.1](https://github.com/Azure/azure-dev/releases/tag/azure-dev-cli_1.0.1) of the Azure Developer CLI. Make sure that you are using the same version to avoid incompatibilities due to different versions.
+> [!NOTE]
+> The repository is compatible with version [1.0.1 and higher](https://github.com/Azure/azure-dev/releases/tag/azure-dev-cli_1.0.1) of the Azure Developer CLI. Make sure that you are using the same version to avoid incompatibilities due to different versions.
 
 In this example we use the [Azure Developer CLI](https://github.com/Azure/azure-dev) to deploy the project. Learn more about this tool on [Microsoft Learn](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview)
 
@@ -12,7 +13,8 @@ If you are not using one of these option you need to install the `azd` locally o
 
 ## Deployment
 
-> **Note** - To follow along your local experience, the following steps assume that you access the OData API of the SAP S/4HANA system via user name and password. This assumption is reflected in the parameterization of the infrastructure. While this is a valid approach to get things started, we discourage to use this setup in a productive scenario. Instead you should switch to a SAP Principal Propagation for your authentication scenario (see also ["What's next?"](./WHATS-NEXT.md))
+> [!NOTE]
+> To follow along your local experience, the following steps assume that you access the OData API of the SAP S/4HANA system via user name and password. This assumption is reflected in the parameterization of the infrastructure. While this is a valid approach to get things started, we discourage to use this setup in a productive scenario. Instead you should switch to a SAP Principal Propagation for your authentication scenario (see also ["What's next?"](./WHATS-NEXT.md))
 
 ### The easy way
 
@@ -28,9 +30,11 @@ The `azd` CLI will ask you to provide the following information:
 - Which Azure subscription should be used for the deployment?
 - Which region should be used for the deployment?
 
-> **Note** - In case you are not logged into an Azure account, you also need to execute the login via `azd auth login`.
+> [!NOTE]
+> In case you are not logged into an Azure account, you also need to execute the login via `azd auth login`.
 
-> **Note** - The parameters around the OData service are contained in the `.bicep` template i.e., in the `infra/main.bicep` file. You can provide them in different ways. The easiest way is to add them to the `infra/main.parameters.json` as references to environment variables in analogy to the already existing parameters available in the file. You can also add them after the deployment in the Azure Portal as we have defaulted them in the templates.  
+> [!NOTE]
+> The parameters around the OData service are contained in the `.bicep` template i.e., in the `infra/main.bicep` file. You can provide them in different ways. The easiest way is to add them to the `infra/main.parameters.json` as references to environment variables in analogy to the already existing parameters available in the file. You can also add them after the deployment in the Azure Portal as we have defaulted them in the templates.  
 
 After a successful deployment browse your new app powered by the SAP Cloud SDK (it takes a while the first time ☕).
 
@@ -102,7 +106,8 @@ module api './app/api.bicep' = {
 }
 ```
 
-> **Note** - Azure Key Vault does not come with a free tier, so costs arise when using it.
+> [!NOTE]
+> Azure Key Vault does not come with a free tier, so costs arise when using it.
 
 If you want to get rid of the Azure Key Vault in your setup, remove the following modules from the `/infra/main.bicep` file:
 
@@ -144,7 +149,8 @@ module oDataPassword './core/security/keyvault-secret.bicep' = {
 
 In addition remove the app setting referencing the Azure Key Vault as mentioned above.
 
-> **Note** - Azure Key Vault is created by default with [soft delete](https://learn.microsoft.com/azure/key-vault/general/soft-delete-overview#soft-delete-behavior) enabled. So even after deleting the Azure Key Vault it is retained for a specified period (90 days by default) to avoid potential data loss. You can purge it as described [here](https://learn.microsoft.com/azure/key-vault/general/key-vault-recovery?tabs=azure-portal#list-recover-or-purge-a-soft-deleted-key-vault).
+> [!NOTE]
+> Azure Key Vault is created by default with [soft delete](https://learn.microsoft.com/azure/key-vault/general/soft-delete-overview#soft-delete-behavior) enabled. So even after deleting the Azure Key Vault it is retained for a specified period (90 days by default) to avoid potential data loss. You can purge it as described [here](https://learn.microsoft.com/azure/key-vault/general/key-vault-recovery?tabs=azure-portal#list-recover-or-purge-a-soft-deleted-key-vault).
 
 ## How are the things wired together?
 
@@ -182,4 +188,5 @@ Besides `Bicep` the `azd` CLI also supports the definition of the infrastructure
 
 If you want to clean up your deployment execute the command `azd down` which will delete your deployment and your resources.
 
-> **Note** - The CLI will ask for your confirmation to purge the Azure Key Vault. You should do so if you want to permanently remove it.
+> [!NOTE]
+> The CLI will ask for your confirmation to purge the Azure Key Vault. You should do so if you want to permanently remove it.
