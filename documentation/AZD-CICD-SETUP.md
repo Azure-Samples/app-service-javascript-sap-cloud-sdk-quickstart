@@ -5,7 +5,8 @@ The compliance of the project to the Azure Developer CLI also gives you a head s
 1. GitHub Actions (default)
 2. Azure DevOps
 
-> **Note** - As for the basic deployment we kept the story line of accessing the SAP S/4HANA API via user name and password. This is reflected in the corresponding templates. We want to stress that his is not recommended for productive usage.
+> [!NOTE]
+> As for the basic deployment we kept the story line of accessing the SAP S/4HANA API via user name and password. This is reflected in the corresponding templates. We want to stress that his is not recommended for productive usage.
 
 ## GitHub Actions
 
@@ -15,7 +16,8 @@ To start the setup you need to enter the command `azd pipeline config` in the ro
 
 You must supply some the requested GitHub information and confirm that the code should be pushed to the new repository.
 
-> **Note** - Be aware that there are limitations for GitHub Actions in private repositories which can cause [billing](https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions). For trying things out it therefore makes sense to make the repository public.
+> [!NOTE]
+> Be aware that there are limitations for GitHub Actions in private repositories which can cause [billing](https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions). For trying things out it therefore makes sense to make the repository public.
 
 The GitHub Action that serves as template is located in the repository as `.github/workflows/azure-dev.yml`. It contains the following code:
 
@@ -126,7 +128,8 @@ on:
      - main
 ```
 
-> **Note** - The provided workflow should serve as a first template. You probably want to adjust it as you maybe want to split the setup of the infrastructure from the deployment of the app.
+> [!NOTE]
+> The provided workflow should serve as a first template. You probably want to adjust it as you maybe want to split the setup of the infrastructure from the deployment of the app.
 
 You find more information on `azd` and GitHub Actions [here](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline?tabs=GitHub).
 
