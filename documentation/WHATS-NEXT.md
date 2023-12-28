@@ -10,7 +10,8 @@ Clear `service-specifications` folder and maintain `service-mapping.json`.
 
 This repos automatically sets up the Azure App Service health endpoint pinging your target OData service every minute using HEAD operation. [Learn more](https://learn.microsoft.com/azure/app-service/monitor-instances-health-check?tabs=dotnet#configuration) how to fine tune it to your needs on the Microsoft docs.
 
-> **Warning** - Be aware that the trial instance of the [Business Partner API](https://api.sap.com/api/API_BUSINESS_PARTNER/overview) throttles easily.
+> [!WARNING]
+> Be aware that the trial instance of the [Business Partner API](https://api.sap.com/api/API_BUSINESS_PARTNER/overview) throttles easily.
 
 ## Connectivity to SAP backends and secure virtual network access 🔌
 
