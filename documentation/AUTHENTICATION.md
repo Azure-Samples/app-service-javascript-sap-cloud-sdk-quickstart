@@ -28,7 +28,7 @@ Consider SAP Principal Propagation for your authentication scenario handled by [
 
 People have routines and therefore tend to create clusters of logins at similar times. SAP's OAuth server can become a bottleneck during such periods. We recommend to adjust the default token lifetimes on the SAP OAuth server and implement a random back off delay parameter. That parameter ensures that your cached user tokens don't expire all at the same time even though your users tend to login in waves (monday morning for instance). The provided [APIM policy](https://github.com/Azure/api-management-policy-snippets/blob/master/examples/Request%20OAuth2%20access%20token%20from%20SAP%20using%20AAD%20JWT%20token.xml) supports that approach. See below an example to illustrate the process:
 
-![token lifetime illustration](/apim-backoff-delay.png)
+![token lifetime illustration](../assets/apim-backoff-delay.png)
 
 Of course on the very first day of your implementation when no tokens are cached yet, you are still in trouble ;-) It is recommend to rely on an [APIM throttling policy](https://docs.microsoft.com/azure/api-management/api-management-sample-flexible-throttling) in such cases. Likely you will need to experiment a bit with the parameters to find your individual optimal fit.
 
