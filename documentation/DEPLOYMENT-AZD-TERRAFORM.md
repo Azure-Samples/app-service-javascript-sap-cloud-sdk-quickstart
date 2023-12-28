@@ -1,6 +1,7 @@
 # Infrastructure Deployment via Azure Developer CLI for Terraform
 
-> **Note** - there are known issues when using the Terraform provider in combination with GitHub Codespaces i.e., the login flow via the Azure CLI gets stuck in the callback. You find the details in this [issue](https://github.com/Azure/azure-dev/issues/1934) of the `azd` repository as well as in this [issue](https://github.com/Azure/azure-cli/issues/20315) in the Azure CLI repository. The described workaround in the second issue did not do the trick for us. Hence, we currently cannot support GitHub Codespaces in this type of infrastructure setup.
+> [!IMPORTANT]
+> There are known issues when using the Terraform provider in combination with GitHub Codespaces i.e., the login flow via the Azure CLI gets stuck in the callback. You find the details in this [issue](https://github.com/Azure/azure-dev/issues/1934) of the `azd` repository as well as in this [issue](https://github.com/Azure/azure-cli/issues/20315) in the Azure CLI repository. The described workaround in the second issue did not do the trick for us. Hence, we currently cannot support GitHub Codespaces in this type of infrastructure setup.
 
 ## Prerequisite
 
@@ -33,7 +34,8 @@ infra:
   path: ./infra-terraform
 ```
 
-> **Note** - The default path is `infra`. As we already have our `.bicep` resources defined there, we use a different path that we have to explicitly specify in the manifest.
+> [!NOTE]
+> The default path is `infra`. As we already have our `.bicep` resources defined there, we use a different path that we have to explicitly specify in the manifest.
 
 ### Infrastructure setup
 
@@ -111,7 +113,8 @@ key_vault {
 
 The purging is automatically done once you delete your infrastructure.
 
-> **Note** - We do not recommend the automatic purging of the Azure Key Vault in a productive environment
+> [!NOTE]
+> We do not recommend the automatic purging of the Azure Key Vault in a productive environment
 
 ### Changes in the appservicenode module
 
