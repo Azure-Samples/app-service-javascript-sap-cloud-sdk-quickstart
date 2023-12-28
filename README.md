@@ -12,19 +12,20 @@ Looking for [**Azure Functions**](https://learn.microsoft.com/azure/azure-functi
 
 ![Illustration of app setup in Azure](assets/project-overview-azd-style.png)
 
-> **Warning** - Verify latest [SAP's open-source license](https://sap.github.io/cloud-sdk/docs/overview/overview-cloud-sdk#license) for the Cloud SDK for your reference.
+> [!WARNING]
+> Verify latest [SAP's open-source license](https://sap.github.io/cloud-sdk/docs/overview/overview-cloud-sdk#license) for the Cloud SDK for your reference.
 
-> **Note** - In case you need to translate between OData versions and metadata specification use our converter [here](https://aka.ms/ODataOpenAPI).
-
-> **Note** - In case you prefer an implementation without 3rd party library dependencies, have a look at [this sister project](https://github.com/Azure/azure-sdk-for-sap-odata) deploying to Azure Functions.
-
-> **Note** - Looking for SAP Cloud SDK for Java? See [this annoucement](https://blogs.sap.com/2023/11/02/sap-btp-innovations-for-an-optimized-development-experience-teched-2023/) by SAP on the open-sourcing schedule in Q4/2023.
+> [!TIP]
+> - In case you need to translate between OData versions and metadata specification use our converter [here](https://aka.ms/ODataOpenAPI).
+> - In case you prefer an implementation without 3rd party library dependencies, have a look at [this sister project](https://github.com/Azure/azure-sdk-for-sap-odata) deploying to Azure Functions.
+> - Looking for SAP Cloud SDK for Java? See [this annoucement](https://blogs.sap.com/2023/11/02/sap-btp-innovations-for-an-optimized-development-experience-teched-2023/) by SAP on the open-sourcing schedule in Q4/2023.
 
 ## Features ⚙️
 
 Implementations using the approach described by this repos expand the [feature scope](https://sap.github.io/cloud-sdk/docs/overview/cloud-sdk-feature-matrix) of SAP's Cloud SDK for JavaScript to Azure PaaS apps.
 
-> **Note** - When deployed on Azure App Services instead of SAP Business Technology Platform, Cloud Foundry specific features like the destination service or XSUAA are not available.
+> [!IMPORTANT]
+> When deployed on Azure App Services instead of SAP Business Technology Platform, Cloud Foundry specific features like the destination service or XSUAA are not available.
 
 * One code base to run on both Azure App Service and SAP Business Technology Platform
 * Built in [resiliency](https://learn.microsoft.com/azure/architecture/reference-architectures/app-service-web-app/multi-region) and caching patterns
@@ -51,7 +52,8 @@ Use any OData enabled SAP system:
 * S/4HANA Fully-Activated Appliance from [SAP Cloud Appliance Library](https://cal.sap.com/) or
 * your own available in-house SAP system.
 
-> **Note** - Be aware that SAP's mock server is anticipating the S4 Cloud version of the Business Partner API. So, you might need to adapt the mock server to your needs. During our testing at the time of release there were no discrepancies discovered. You may expose the mock server running locally for testing with the cloud services to the internet using [ngrok](https://ngrok.com/) or similar tools.
+> [!IMPORTANT]
+> Be aware that SAP's mock server is anticipating the S4 Cloud version of the Business Partner API. So, you might need to adapt the mock server to your needs. During our testing at the time of release there were no discrepancies discovered. You may expose the mock server running locally for testing with the cloud services to the internet using [ngrok](https://ngrok.com/) or similar tools.
 
 [![GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=576207479) to hit the ground running with our tailored image and avoid installing anything on your local machine and continue with step 6.
 
@@ -77,7 +79,8 @@ This command will prompt you for the following information:
 - `Azure Location`: The Azure location where your resources will be deployed.
 - `Azure Subscription`: The Azure Subscription where your resources will be deployed.
 
-   > **Note** - This may take a while to complete as it executes three commands: `azd package` (packages a deployable copy of your application), `azd provision` (provisions Azure resources), and `azd deploy` (deploys application code). You will see a progress indicator as it packages, provisions and deploys your application.
+> [!NOTE]
+> This may take a while to complete as it executes three commands: `azd package` (packages a deployable copy of your application), `azd provision` (provisions Azure resources), and `azd deploy` (deploys application code). You will see a progress indicator as it packages, provisions and deploys your application.
 
 3. Select suitable [VS Code workspace](https://code.visualstudio.com/docs/editor/workspaces). We suggest [bicep](workspaces/azd-bicep.code-workspace) as it is the default for Azure Developer CLI.
 4. `cd app-service-javascript-sap-cloud-sdk-quickstart/src/api`
@@ -87,7 +90,8 @@ This command will prompt you for the following information:
 8. maintain your SAP OData url with credentials in [.env](templates/.env) file (put in project root `app-service-javascript-sap-cloud-sdk-quickstart/src/api`) and restart the app if necessary
 9. browse to [http://localhost:8080/business-partner](http://localhost:8080/business-partner) for your first OData call and pick one of the business partners (examples below use ids from SAP mock server)
 
-   > **Note** - SAP's examples for the business partner API for SAP S/4HANA Cloud mentioned in the tutorial **differ** to the SAP S/4HANA on-premises flavor. Add AddressUsage, otherwise you will see "Internal error when calling operation module BUA_CHECK_ADDRESS_VALIDITY_ALL; a check table is missing". Check SAP KBA's for more details.
+> [!IMPORTANT]
+> SAP's examples for the business partner API for SAP S/4HANA Cloud mentioned in the tutorial **differ** to the SAP S/4HANA on-premises flavor. Add AddressUsage, otherwise you will see "Internal error when calling operation module BUA_CHECK_ADDRESS_VALIDITY_ALL; a check table is missing". Check SAP KBA's for more details.
 
 10. get that business partner by id: [http://localhost:8080/business-partner/1003764](http://localhost:8080/business-partner/1003764)
 
@@ -95,7 +99,8 @@ This command will prompt you for the following information:
 
 11. update the address with a house number: [http://localhost:8080/business-partner/1003764/address/28238](http://localhost:8080/business-partner/1003764/address/28238).
 
-   > **Note** - For your convenience we provide a [collection of REST calls](/templates/business-partner-requests.http) in the repos. Execute them with the [VS Code REST client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client).
+> [!NOTE]
+> For your convenience we provide a [collection of REST calls](/templates/business-partner-requests.http) in the repos. Execute them with the [VS Code REST client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client).
 
   ![screenshot of business partner address update with request details](assets/bupa-update-vsc-rest.png)
 
@@ -116,7 +121,8 @@ There are multiple ways to deploy this project to Azure. We provide two options 
 1. via template deployment and VS Code extension. This approach allows an quick deployment to Azure but does not necessarily reflect the best practices. You find more information on this option [here](documentation/DEPLOYMENT-VSCODE.md).
 2. via [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview) using `azd up`. This approach enables a quick and easy deployment and already contains best practices. It serves as a perfect starting point for a production grade setup. You find more information on this option [here](documentation/DEPLOYMENT-AZD.md).
 
-> **Note** - If you choose to deploy to Azure via `azd` we provide two options to define the Infrastructure as Code, namely `Bicep` and `Terraform`. To make your life easier we provide two distinct [workspaces](https://code.visualstudio.com/docs/editor/workspaces#_multiroot-workspaces) for that to show you the relevant files and folders. If you want to go for `Bicep` you can open the workspace `workspaces/azd-bicep.code-workspace`, for Terraform go for the workspace `workspaces/azd-terraform.code-workspace`.
+> [!IMPORTANT]
+> If you choose to deploy to Azure via `azd` we provide two options to define the Infrastructure as Code, namely `Bicep` and `Terraform`. To make your life easier we provide two distinct [workspaces](https://code.visualstudio.com/docs/editor/workspaces#_multiroot-workspaces) for that to show you the relevant files and folders. If you want to go for `Bicep` you can open the workspace `workspaces/azd-bicep.code-workspace`, for Terraform go for the workspace `workspaces/azd-terraform.code-workspace`.
 
 ## Deploy to SAP BTP 🪂
 
