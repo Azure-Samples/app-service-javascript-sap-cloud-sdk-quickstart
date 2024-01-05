@@ -141,6 +141,7 @@ Sometimes things do not work as expected. Here are some resources that support y
 * Use [Kudu SSH console](https://learn.microsoft.com/azure/app-service/resources-kudu) from VNet integrated App Service to check connectivity to SAP Gateway with `curl https://<your domain>:<your https port>/sap/opu/odata/sap/API_BUSINESS_PARTNER -u "<user>:<password>"`
 * [Azure API Management Request tracing](https://learn.microsoft.com/azure/api-management/api-management-howto-api-inspector)
 * [Azure API Management Gateway logs](https://learn.microsoft.com/azure/api-management/api-management-howto-use-azure-monitor#view-diagnostic-data-in-azure-monitor)
+* [SAP Cloud SDK Troubleshooting guide](https://sap.github.io/cloud-sdk/docs/js/troubleshooting)
 
 ## Additional resources
 
