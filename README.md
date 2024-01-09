@@ -130,7 +130,7 @@ We provide the necessary configurations for the deployment to SAP BTP leveraging
 
 ## What's next?
 
-You can do a lot more once the app is deployed. Curious? We go you covered with some more information on out-of-the-box **Entra ID (formerly Azure AD) authentication** [here](documentation/AUTHENTICATION.md), insights into networking, OpenUI5 for frontend design and DevOps [here](documentation/WHATS-NEXT.md).
+You can do a lot more once the app is deployed. Curious? We got you covered with some more information on out-of-the-box **Entra ID (formerly Azure AD) authentication** [here](documentation/AUTHENTICATION.md), insights into networking, OpenUI5 for frontend design and DevOps [here](documentation/WHATS-NEXT.md).
 
 ## Troubleshooting 🩺
 
