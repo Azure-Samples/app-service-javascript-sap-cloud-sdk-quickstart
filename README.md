@@ -59,7 +59,15 @@ Use any OData enabled SAP system:
 
 ### Quickstart 🚀
 
-0. familiarize yourself with the [SAP Cloud SDK for JavaScript developer tutorial](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction)
+Familiarize yourself with the [SAP Cloud SDK for JavaScript developer tutorial](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction)
+
+#### Deploy time
+
+0. Run `azd auth login`.
+
+> [!IMPORTANT]
+> Add `az login` if using the Entra ID option to authenticate with Azure and Azure Developer CLI (AZD). Azure CLI login is only required for the Entra ID deployment and configuration. See [here](hooks/createAppRegistrations.ps1) for reference.
+
 1. Run the following command to initialize the project.
 
    ```bash
@@ -81,6 +89,8 @@ This command will prompt you for the following information:
 
 > [!NOTE]
 > This may take a while to complete as it executes three commands: `azd package` (packages a deployable copy of your application), `azd provision` (provisions Azure resources), and `azd deploy` (deploys application code). You will see a progress indicator as it packages, provisions and deploys your application.
+
+#### Dev time
 
 3. Select suitable [VS Code workspace](https://code.visualstudio.com/docs/editor/workspaces). We suggest [bicep](workspaces/azd-bicep.code-workspace) as it is the default for Azure Developer CLI.
 4. `cd app-service-javascript-sap-cloud-sdk-quickstart/src/api`
