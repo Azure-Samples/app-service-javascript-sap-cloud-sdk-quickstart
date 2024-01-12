@@ -5,6 +5,9 @@
 
 In this example we use the [Azure Developer CLI](https://github.com/Azure/azure-dev) to deploy the project. Learn more about this tool on [Microsoft Learn](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview)
 
+> [!IMPORTANT]
+> The optional Entra ID specific features in this repos require the classic Azure CLI in addition to the azd.
+
 ## Prerequisite
 
 To use the Azure Developer CLI (`azd`) you need to have it available in your setup. If you are using the dev container "Azure Developer CLI (Bicep)" defined in this repository or opened the repository via GitHub Codespaces you are ready to go.

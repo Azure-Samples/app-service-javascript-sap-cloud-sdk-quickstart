@@ -18,7 +18,7 @@ Looking for [**Azure Functions**](https://learn.microsoft.com/azure/azure-functi
 > [!TIP]
 > - In case you need to translate between OData versions and metadata specification use our converter [here](https://aka.ms/ODataOpenAPI).
 > - In case you prefer an implementation without 3rd party library dependencies, have a look at [this sister project](https://github.com/Azure/azure-sdk-for-sap-odata) deploying to Azure Functions.
-> - Looking for SAP Cloud SDK for Java? See [this annoucement](https://blogs.sap.com/2023/11/02/sap-btp-innovations-for-an-optimized-development-experience-teched-2023/) by SAP on the open-sourcing schedule in Q4/2023.
+> - Looking for SAP Cloud SDK for Java? See this [SAP repos](https://github.com/SAP/cloud-sdk-java).
 
 ## Features ⚙️
 
@@ -140,7 +140,7 @@ We provide the necessary configurations for the deployment to SAP BTP leveraging
 
 ## What's next?
 
-You can do a lot more once the app is deployed. Curious? We go you covered with some more information on out-of-the-box **Entra ID (formerly Azure AD) authentication** [here](documentation/AUTHENTICATION.md), insights into networking, OpenUI5 for frontend design and DevOps [here](documentation/WHATS-NEXT.md).
+You can do a lot more once the app is deployed. Curious? We got you covered with some more information on out-of-the-box **Entra ID (formerly Azure AD) authentication** [here](documentation/AUTHENTICATION.md), insights into networking, OpenUI5 for frontend design and DevOps [here](documentation/WHATS-NEXT.md).
 
 ## Troubleshooting 🩺
 
@@ -151,6 +151,7 @@ Sometimes things do not work as expected. Here are some resources that support y
 * Use [Kudu SSH console](https://learn.microsoft.com/azure/app-service/resources-kudu) from VNet integrated App Service to check connectivity to SAP Gateway with `curl https://<your domain>:<your https port>/sap/opu/odata/sap/API_BUSINESS_PARTNER -u "<user>:<password>"`
 * [Azure API Management Request tracing](https://learn.microsoft.com/azure/api-management/api-management-howto-api-inspector)
 * [Azure API Management Gateway logs](https://learn.microsoft.com/azure/api-management/api-management-howto-use-azure-monitor#view-diagnostic-data-in-azure-monitor)
+* [SAP Cloud SDK Troubleshooting guide](https://sap.github.io/cloud-sdk/docs/js/troubleshooting)
 
 ## Additional resources
 
