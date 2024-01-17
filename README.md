@@ -10,6 +10,8 @@ products:
 - azure
 - azure-application-insights
 - azure-key-vault
+- azure-app-service
+- azure-api-management
 urlFragment: app-service-javascript-sap-cloud-sdk-quickstart
 name: SAP Cloud SDK on Azure App Service Quickstart (TypeScript)
 description: This repos serves as quick-start project showcasing SAP Cloud SDK for JavaScript OData consumption running on Azure App Services. Its primary purpose is to set you up for success for your SAP extension project on Azure and reduce the lead time to your first successful deployment as much as possible with developer friendly commands.
