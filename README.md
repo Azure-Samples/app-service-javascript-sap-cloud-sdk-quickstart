@@ -8,7 +8,7 @@ languages:
 - powershell
 products:
 - azure
-- azure-application-insights
+- azure-monitor
 - azure-key-vault
 - azure-app-service
 - azure-api-management
