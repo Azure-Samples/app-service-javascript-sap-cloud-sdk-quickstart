@@ -36,6 +36,7 @@ Looking for [**Azure Functions**](https://learn.microsoft.com/azure/azure-functi
 > Verify latest [SAP's open-source license](https://sap.github.io/cloud-sdk/docs/overview/overview-cloud-sdk#license) for the Cloud SDK for your reference.
 
 > [!TIP]
+> - Looking for [SAP Cloud Application Programming model](https://cap.cloud.sap/docs/) instead of plain SAP Cloud SDK? See [this sister project](https://github.com/Azure-Samples/app-service-javascript-sap-cap-quickstart).
 > - In case you need to translate between OData versions and metadata specification use our converter [here](https://aka.ms/ODataOpenAPI).
 > - In case you prefer an implementation without 3rd party library dependencies, have a look at [this sister project](https://github.com/Azure/azure-sdk-for-sap-odata) deploying to Azure Functions.
 > - Looking for SAP Cloud SDK for Java? See this [SAP repos](https://github.com/SAP/cloud-sdk-java).
