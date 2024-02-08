@@ -65,6 +65,8 @@ Example uses [pug engine](https://pugjs.org/api/getting-started.html) for render
 
 Follow the [SAP Cloud SDK documentation for JavaScript](https://sap.github.io/cloud-sdk/docs/js/tutorials/getting-started/introduction) for your project setup.
 
+Use the devcontainer (with GitHub Codespaces for instance) or install the [Azure Developer CLI](https://aka.ms/azd-install) in your environment.
+
 Use any OData enabled SAP system:
 
 * SAP's [mock server](https://github.com/SAP-archive/cloud-s4-sdk-book/tree/mock-server) (used in screenshots below),
@@ -115,11 +117,12 @@ This command will prompt you for the following information:
 
 3. Select suitable [VS Code workspace](https://code.visualstudio.com/docs/editor/workspaces). We suggest [bicep](workspaces/azd-bicep.code-workspace) as it is the default for Azure Developer CLI.
 4. `cd app-service-javascript-sap-cloud-sdk-quickstart/src/api`
-5. `npm install`
-6. `npm run start:dev`
-7. browse to [http://localhost:8080](http://localhost:8080) for your "hello world"
-8. maintain your SAP OData url with credentials in [.env](templates/.env) file (put in project root `app-service-javascript-sap-cloud-sdk-quickstart/src/api`) and restart the app if necessary
-9. browse to [http://localhost:8080/business-partner](http://localhost:8080/business-partner) for your first OData call and pick one of the business partners (examples below use ids from SAP mock server)
+5. `cp ../../templates/.env ./.env` and maintain your OData url including credentials
+6. `npm install`
+7. `npm run start:dev`
+8. browse to [http://localhost:8080](http://localhost:8080) for your "hello world"
+9. maintain your SAP OData url with credentials in [.env](templates/.env) file (put in project root `app-service-javascript-sap-cloud-sdk-quickstart/src/api`) and restart the app if necessary
+10. browse to [http://localhost:8080/business-partner](http://localhost:8080/business-partner) for your first OData call and pick one of the business partners (examples below use ids from SAP mock server)
 
 > [!IMPORTANT]
 > SAP's examples for the business partner API for SAP S/4HANA Cloud mentioned in the tutorial **differ** to the SAP S/4HANA on-premises flavor. Add AddressUsage, otherwise you will see "Internal error when calling operation module BUA_CHECK_ADDRESS_VALIDITY_ALL; a check table is missing". Check SAP KBA's for more details.
