@@ -1,6 +1,5 @@
 version: 2
 updates:
-
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
@@ -10,6 +9,10 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      # Check for updates to GitHub Actions once a week on Monday
       interval: "weekly"
-      day: "monday"    
+      day: "monday"
+  - package-ecosystem: "devcontainers"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
