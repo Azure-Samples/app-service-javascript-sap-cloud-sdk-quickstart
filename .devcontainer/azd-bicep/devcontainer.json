@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json.
 {
 	"name": "Azure Developer CLI (Bicep)",
-	"image": "mcr.microsoft.com/devcontainers/typescript-node:18-bullseye",
+	"image": "mcr.microsoft.com/devcontainers/typescript-node:20-bullseye",
 	"features": {
 		"ghcr.io/devcontainers-contrib/features/nestjs-cli:2": {},
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
