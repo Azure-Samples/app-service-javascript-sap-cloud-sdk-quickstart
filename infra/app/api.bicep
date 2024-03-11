@@ -29,7 +29,7 @@ module api '../core_local/host/appservice.bicep' = {
     useAuthSettingsv2: useAuthSettingsv2
     keyVaultName: keyVaultName
     runtimeName: 'node'
-    runtimeVersion: '18-lts'
+    runtimeVersion: '20-lts'
     scmDoBuildDuringDeployment: true
     healthCheckPath: healthCheckPath
     use32BitWorkerProcess: use32BitWorkerProcess
