@@ -1,4 +1,4 @@
-metadata description = 'Creates an Azure Database for PostgreSQL - Flexible Server.'
+metadata description = 'Creates an Azure Database for MySQL - Flexible Server.'
 param name string
 param location string = resourceGroup().location
 param tags object = {}
@@ -8,16 +8,16 @@ param storage object
 param administratorLogin string
 @secure()
 param administratorLoginPassword string
+param highAvailabilityMode string = 'Disabled'
 param databaseNames array = []
 param allowAzureIPsFirewall bool = false
 param allowAllIPsFirewall bool = false
 param allowedSingleIPs array = []
 
-// PostgreSQL version
+// MySQL version
 param version string
 
-// Latest official version 2022-12-01 does not have Bicep types available
-resource postgresServer 'Microsoft.DBforPostgreSQL/flexibleServers@2022-12-01' = {
+resource mysqlServer 'Microsoft.DBforMySQL/flexibleServers@2023-06-30' = {
   location: location
   tags: tags
   name: name
@@ -28,7 +28,7 @@ resource postgresServer 'Microsoft.DBforPostgreSQL/flexibleServers@2022-12-01' =
     administratorLoginPassword: administratorLoginPassword
     storage: storage
     highAvailability: {
-      mode: 'Disabled'
+      mode: highAvailabilityMode
     }
   }
 
@@ -62,4 +62,4 @@ resource postgresServer 'Microsoft.DBforPostgreSQL/flexibleServers@2022-12-01' =
 
 }
 
-output POSTGRES_DOMAIN_NAME string = postgresServer.properties.fullyQualifiedDomainName
+output MYSQL_DOMAIN_NAME string = mysqlServer.properties.fullyQualifiedDomainName

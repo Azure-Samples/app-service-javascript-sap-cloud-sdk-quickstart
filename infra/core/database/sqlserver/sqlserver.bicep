@@ -1,3 +1,4 @@
+metadata description = 'Creates an Azure SQL Server instance.'
 param name string
 param location string = resourceGroup().location
 param tags object = {}
@@ -33,7 +34,7 @@ resource sqlServer 'Microsoft.Sql/servers@2022-05-01-preview' = {
   resource firewall 'firewallRules' = {
     name: 'Azure Services'
     properties: {
-      // Allow all clients 
+      // Allow all clients
       // Note: range [0.0.0.0-0.0.0.0] means "allow all Azure-hosted clients only".
       // This is not sufficient, because we also want to allow direct access from developer machine, for debugging purposes.
       startIpAddress: '0.0.0.1'
@@ -83,7 +84,7 @@ wget https://github.com/microsoft/go-sqlcmd/releases/download/v0.8.1/sqlcmd-v0.8
 tar x -f sqlcmd-v0.8.1-linux-x64.tar.bz2 -C .
 
 cat <<SCRIPT_END > ./initDb.sql
-drop user ${APPUSERNAME}
+drop user if exists ${APPUSERNAME}
 go
 create user ${APPUSERNAME} with password = '${APPUSERPASSWORD}'
 go

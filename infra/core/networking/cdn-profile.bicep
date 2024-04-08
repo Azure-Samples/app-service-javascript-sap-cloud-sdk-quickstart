@@ -1,10 +1,11 @@
+metadata description = 'Creates an Azure CDN profile.'
 param name string
 param location string = resourceGroup().location
 param tags object = {}
 
 @description('The pricing tier of this CDN profile')
 @allowed([
-	'Custom_Verizon'
+  'Custom_Verizon'
   'Premium_AzureFrontDoor'
   'Premium_Verizon'
   'StandardPlus_955BandWidth_ChinaCdn'
