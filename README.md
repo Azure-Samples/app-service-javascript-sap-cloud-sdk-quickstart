@@ -69,10 +69,11 @@ Use the devcontainer (with GitHub Codespaces for instance) or install the [Azure
 
 Use any OData enabled SAP system:
 
+* SAP's [ABAP Platform Trial image](https://hub.docker.com/r/sapse/abap-cloud-developer-trial),
 * SAP's [mock server](https://github.com/SAP-archive/cloud-s4-sdk-book/tree/mock-server) (used in screenshots below),
-* SAP API Business Hub [S/4HANA Cloud sandbox with APIKey](https://api.sap.com/api/API_BUSINESS_PARTNER/tryout) (⚠️read-only)
+* SAP API Business Hub [S/4HANA Cloud sandbox with APIKey](https://api.sap.com/api/API_BUSINESS_PARTNER/tryout) (⚠️read-only),
 * SAP's [public demo system ES5](https://developers.sap.com/tutorials/gateway-demo-signup.html) (⚠️Business Partner API not activated!),
-* S/4HANA Fully-Activated Appliance from [SAP Cloud Appliance Library](https://cal.sap.com/) or
+* S/4HANA Fully-Activated Appliance from [SAP Cloud Appliance Library](https://cal.sap.com/), or
 * your own available in-house SAP system.
 
 > [!IMPORTANT]
