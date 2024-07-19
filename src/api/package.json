@@ -28,7 +28,7 @@
     "@nestjs/platform-express": "^10.3.7",
     "@sap-cloud-sdk/http-client": "^3.0.1",
     "@sap-cloud-sdk/odata-v2": "^3.0.1",
-    "pug": "^3.0.2",
+    "pug": "^3.0.3",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^4.3.1",
     "rxjs": "^7.8.0"
