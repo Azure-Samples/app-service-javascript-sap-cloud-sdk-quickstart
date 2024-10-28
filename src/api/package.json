@@ -34,7 +34,7 @@
     "rxjs": "^7.8.0"
   },
   "devDependencies": {
-    "@nestjs/cli": "^9.3.0",
+    "@nestjs/cli": "^10.4.5",
     "@nestjs/schematics": "^9.0.4",
     "@nestjs/testing": "^10.3.7",
     "@sap-cloud-sdk/generator": "^3.0.1",
