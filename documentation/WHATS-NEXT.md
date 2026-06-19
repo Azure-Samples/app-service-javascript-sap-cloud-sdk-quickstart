@@ -26,7 +26,7 @@ VNet integration enables your app to securely access resources in your VNet, suc
 
 ## Frontend 📱
 
-You may consider SAP OpenUI5 for a seamless look and feel of your app when integrated with other SAP apps like [Fiori Launchpad](https://experience.sap.com/fiori-design-web/launchpad/) or similar. [Learn more](https://openui5.hana.ondemand.com/)
+You may consider SAP OpenUI5 for a seamless look and feel of your app when integrated with other SAP apps like [Fiori Launchpad](https://www.sap.com/design-system/fiori-design-web/v1-148/foundations/integration-and-services/sap-fiori-launchpad/launchpad) or similar. [Learn more](https://openui5.hana.ondemand.com/)
 
 Alternatively frameworks like React, Angular, Pug or Vue.js are popular options to build a frontend for your app.
 
