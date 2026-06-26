@@ -10,7 +10,7 @@
 		"ghcr.io/devcontainers/features/github-cli:1": {
 			"version": "2"
 		},
-		"ghcr.io/devcontainers/features/powershell:1": {}
+		"ghcr.io/devcontainers/features/powershell:2": {}
 	},
 	"customizations": {
 		"vscode": {
