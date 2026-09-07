@@ -6,6 +6,8 @@ updates:
       # Check for updates to GitHub Actions once a week on Monday
       interval: "weekly"
       day: "monday"
+    cooldown:
+      default-days: 7
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
